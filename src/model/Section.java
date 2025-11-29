@@ -7,14 +7,32 @@ public class Section {
     private LinkedHashMap<String,Student> students;
     private LinkedHashMap<String,Teacher> teachers;
 
-    public void addStudent(String studentID, Student student){
-        if(!students.containsKey(studentID)){
-            students.put(studentID,student);
-        }else{
-
-        }
-        // TO DO!
+    private Section section;
+    public Section(ClassNames name) {
+        this.name = name;
     }
 
+    public ClassNames getName() {
+        return name;
+    }
 
+    public void setName(ClassNames name) {
+        this.name = name;
+    }
+
+    public LinkedHashMap<String, Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(LinkedHashMap<String, Student> students) {
+        this.students = students;
+    }
+
+    public LinkedHashMap<String, Teacher> getTeachers() {
+        return teachers;
+    }
+
+    public void setTeachers(LinkedHashMap<String, Teacher> teachers) {
+        this.teachers = teachers;
+    }
 }

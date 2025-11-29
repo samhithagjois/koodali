@@ -4,15 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Student extends Person{
-    public Section getSection() {
-        return section;
-    }
 
-    public void setSection(Section section) {
-        this.section = section;
-    }
-
-    private Section section;
+    private ClassNames section;
 
     public List<Assignment> getPendingAssignments() {
         return pendingAssignments;
@@ -26,37 +19,11 @@ public class Student extends Person{
 
     private final List<Assignment> gradedAssignments;
 
-    public Student(String personID, String firstName, String lastName) {
+    public Student(String personID, String firstName, String lastName, ClassNames section) {
         super(personID, firstName, lastName);
         pendingAssignments = new ArrayList<>();
         gradedAssignments = new ArrayList<>();
+        this.section = section;
     }
 
-    public void submitAssignment(Assignment assignment){
-        //TO DO!
-    }
-
-    public void viewPendingAssignments(){
-        //TO DO !!
-    }
-
-    public void viewGradedAssignments(){
-        //TO DO
-    }
-
-    public void addAssignmentToPendingAssignments(Assignment assignment){
-        pendingAssignments.add(assignment);
-    }
-
-    public void removeAssignmentFromPendingAssignments(Assignment assignment){
-        pendingAssignments.remove(assignment);
-    }
-
-    public void addAssignmentToGradedAssignments(Assignment assignment){
-        gradedAssignments.add(assignment);
-    }
-
-    public void removeAssignmentToGradedAssignments(Assignment assignment){
-        gradedAssignments.add(assignment);
-    }
-}
+   }

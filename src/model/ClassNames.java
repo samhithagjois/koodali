@@ -6,6 +6,7 @@ public enum ClassNames {
     IN_BEG,IN_I_1,IN_I_2,IN_I_3,IN_ADV,
     ER_BEG,ER_I_1,ER_I_2,ER_I_3,ER_ADV,
     EU_I_1,EU_I_2,EU_I_3,EU_ADV,
-    EU_BEG_PL,EU_BEG_NL,EU_BEG_LX,EU_BEG_BG
+    EU_BEG_PL,EU_BEG_NL,EU_BEG_LX,EU_BEG_BG,
+    UNASSIGNED
 
 }
