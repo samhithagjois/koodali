@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Teacher extends Person{
+
+    private ClassNames section;
+    private final List<Assignment> ungradedAssignments;
+    private final List<Assignment> gradedAssignments;
+    private final List<Student> studentOverview;
     public List<Assignment> getUngradedAssignments() {
         return ungradedAssignments;
     }
@@ -20,15 +25,13 @@ public class Teacher extends Person{
         this.section = section;
     }
 
-    private ClassNames section;
-    private final List<Assignment> ungradedAssignments;
-    private final List<Assignment> gradedAssignments;
+
 
     public List<Student> getStudentOverview() {
         return studentOverview;
     }
 
-    private final List<Student> studentOverview;
+
 
 
 

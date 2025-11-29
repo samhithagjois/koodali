@@ -8,20 +8,26 @@ public class Assignment {
     private String name;
    private String description;
    private Date submissionDeadline;
+
+
+    private Date assignedOn;
    private File attachment;
    private Section forClass;
    private boolean graded;
    private String feedback;
-   private boolean read;
 
-   public Assignment(String name, Section forClass, Date submissionDeadline){
+
+    private AssignmentStatus assignmentStatus;
+
+   public Assignment(String name, Section forClass, Date submissionDeadline, Date assignedOn){
        this.name = name;
        this.forClass = forClass;
        this.submissionDeadline = submissionDeadline;
+       this.assignedOn = assignedOn;
        this.description = "";
        this.attachment = null;
        this.graded = false;
-       this.read = false;
+       this.assignmentStatus = AssignmentStatus.NOT_READ;
        this.feedback = "";
 
    }
@@ -83,14 +89,23 @@ public class Assignment {
         this.feedback = feedback;
     }
 
-    public boolean isRead() {
-        return read;
+
+    public Date getAssignedOn() {
+        return assignedOn;
     }
 
-    public void setRead(boolean read) {
-        this.read = read;
+    public void setAssignedOn(Date assignedOn) {
+        this.assignedOn = assignedOn;
     }
 
+
+    public AssignmentStatus getAssignmentStatus() {
+        return assignmentStatus;
+    }
+
+    public void setAssignmentStatus(AssignmentStatus assignmentStatus) {
+        this.assignmentStatus = assignmentStatus;
+    }
 
 
 
