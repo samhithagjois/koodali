@@ -35,29 +35,6 @@ public class StudentController {
     // once check box is checked, the assignment is marked as "graded and received" in the status box.
     // GET /student/assignments/{id}/graded
 
-    /*
-    @PostMapping("/cars")
-    public Car createCar(@RequestBody Car newCar) {
-        newCar.setId("5");
-        return newCar;
-    }
-
-    @PutMapping("/cars")
-    public Car updateCar(@RequestBody Car updatedCar) {
-        return updatedCar;
-    }
-
-    @DeleteMapping("/cars/{id}")
-    public Car deleteCar(@PathVariable String id) {
-        return new Car(id, "black", "Opel", 60);
-    }
-
-      @GetMapping("/cars")
-    public List<Car> getAllCars() {
-        return CARS;
-    }
-
-    */
 
 
 
