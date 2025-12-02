@@ -18,6 +18,18 @@ public final class SectionRepository {
     }
 
     /**
+     * contains helper functions.
+     * to be used in the service to throw up gang sig- oops, exceptions
+     * */
+    public static boolean containsSection(Section section){
+        return sections.containsValue(section);
+    }
+
+    public static boolean containsSection(String className){
+        return sections.containsKey(ClassNames.valueOf(className));
+    }
+
+    /**
      * finds the section by it's name. The name is a className as String
      * When you call this in the SectionService, throw following exceptions :
      * InvalidArgumentException for if the class name is invalid
@@ -30,7 +42,7 @@ public final class SectionRepository {
      */
 
     public static Optional<Section> findSectionByName(String className) {
-        return Optional.of(sections.get(ClassNames.valueOf(className)));
+        return Optional.ofNullable(sections.get(ClassNames.valueOf(className)));
     }
 
     /**
@@ -48,9 +60,9 @@ public final class SectionRepository {
      * deletes a section.
      * DELETE mapping sections/{name}
      */
-    public static void deleteSection(String className) {
+    public static Section deleteSection(String className) {
 
-        sections.remove(ClassNames.valueOf(className));
+        return sections.remove(ClassNames.valueOf(className));
 
     }
     //addSection
@@ -64,12 +76,7 @@ public final class SectionRepository {
      * @param className as String
      * @param section   Section
      */
-    public static void addSection(String className, Section section) {
 
-        ClassNames name = ClassNames.valueOf(className);
-        sections.put(name, section);
-
-    }
     ///updateSection
     /**
      * updates the sections map with a section that has changed, for example if a new teacher/student was added to the section
@@ -78,8 +85,14 @@ public final class SectionRepository {
      * PUT mapping /sections with RequestBody Section updatedSection;
      * */
 
-    public static void updateSection(Section section) {
-        sections.put(section.getName(), section);
+    public static Section updateSection(Section section) {
+       return sections.put(section.getName(), section);
     }
+
+
+    public static void setSections(HashMap<ClassNames, Section> sections) {
+        SectionRepository.sections = sections;
+    }
+
 
 }

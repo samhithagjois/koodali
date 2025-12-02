@@ -1,6 +1,11 @@
 package controller;
 
+import model.Assignment;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 public class StudentController {
@@ -35,7 +40,10 @@ public class StudentController {
     // once check box is checked, the assignment is marked as "graded and received" in the status box.
     // GET /student/assignments/{id}/graded
 
-
+    /*@GetMapping("students/{studentId}/pending")
+    public List<Assignment> getPendingAssignmentsByStudent(@PathVariable String studentId){
+        return List.of(null);
+    }*/
 
 
 
