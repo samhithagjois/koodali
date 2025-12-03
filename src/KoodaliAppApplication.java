@@ -8,6 +8,7 @@ public class KoodaliAppApplication {
 
     public static void main(String[] args) {
 
+
         SpringApplication.run(KoodaliAppApplication.class, args);
     }
 

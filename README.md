@@ -25,6 +25,14 @@ Sooo here is the plan :
     -> This triggers the following actions : a) delete A from teachers' View Ungraded Assignment b) add graded A to student's View Graded Assignments c)Student Overview, which now shows "graded"
     -> The student can download it and/or mark the grading as read, which triggers the teachers Student Overview yet again and changes the status to "graded and recieved".
 
+
+
 7. The student overview lets teachers see a list of their students that they teach and/or Co-teach
 8. Only the administrator(s) can add and remove students/teachers to their respective section. 
+
+Malte tipps : 
+Input sanitization
+Safety (DDOS protection) (injection protection)
+IPV6
+
 
