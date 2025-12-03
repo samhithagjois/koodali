@@ -11,7 +11,7 @@ import java.util.Optional;
 @Component
 public final class SectionRepository {
 
-    private static HashMap<ClassNames, Section> sections;
+    private HashMap<ClassNames, Section> sections;
 
     public SectionRepository() {
 
@@ -21,11 +21,11 @@ public final class SectionRepository {
      * contains helper functions.
      * to be used in the service to throw up gang sig- oops, exceptions
      * */
-    public static boolean containsSection(Section section){
+    public boolean containsSection(Section section){
         return sections.containsValue(section);
     }
 
-    public static boolean containsSection(String className){
+    public boolean containsSection(String className){
         return sections.containsKey(ClassNames.valueOf(className));
     }
 
@@ -41,7 +41,7 @@ public final class SectionRepository {
      * @return Section that was found, or throw Exception
      */
 
-    public static Optional<Section> findSectionByName(String className) {
+    public Optional<Section> findSectionByName(String className) {
         return Optional.ofNullable(sections.get(ClassNames.valueOf(className)));
     }
 
@@ -51,7 +51,7 @@ public final class SectionRepository {
      *
      * @return list of sections
      */
-    public static List<Section> getAllSections() {
+    public List<Section> getAllSections() {
         return sections.values().stream().sorted().toList();
     }
     //deleteSection
@@ -62,7 +62,7 @@ public final class SectionRepository {
      * @param className as String
      * @return Section
      */
-    public static Section deleteSection(String className) {
+    public Section deleteSection(String className) {
 
         return sections.remove(ClassNames.valueOf(className));
 
@@ -78,13 +78,13 @@ public final class SectionRepository {
      *  @return Section
      * */
 
-    public static Section updateSection(Section section) {
+    public Section updateSection(Section section) {
        return sections.put(section.getName(), section);
     }
 
 
-    public static void setSections(HashMap<ClassNames, Section> sections) {
-        SectionRepository.sections = sections;
+    public void setSections(HashMap<ClassNames, Section> sections) {
+        this.sections = sections;
     }
 
 

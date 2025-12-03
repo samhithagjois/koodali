@@ -25,7 +25,7 @@ public class SectionService {
      * gets all sections
      * */
     public List<Section> getAllSections(){
-        return SectionRepository.getAllSections();
+        return sectionRepository.getAllSections();
     }
 
     public SectionRepository getSectionRepository() {
@@ -39,7 +39,7 @@ public class SectionService {
      * @throws SectionNotFoundException "didn't find section"
      * */
     public Section getSectionByID(String classId) throws SectionNotFoundException {
-        Optional<Section> optionalSection = SectionRepository.findSectionByName(classId);
+        Optional<Section> optionalSection = sectionRepository.findSectionByName(classId);
         if(optionalSection.isEmpty()){
             throw new SectionNotFoundException();
         }else{
@@ -53,7 +53,7 @@ public class SectionService {
      * since we do not add a class externally, if you want to add a new section, please talk to Samhitha
      * */
     public Section updateSection(Section section){
-        return SectionRepository.updateSection(section);
+        return sectionRepository.updateSection(section);
     }
 
 
@@ -71,8 +71,8 @@ public class SectionService {
     }
 
     public Section deleteSectionbyId(String sectionName) throws SectionNotFoundException {
-        if (SectionRepository.containsSection(sectionName)) {
-            return SectionRepository.deleteSection(sectionName);
+        if (sectionRepository.containsSection(sectionName)) {
+            return sectionRepository.deleteSection(sectionName);
         }else{
             throw new SectionNotFoundException();
         }
