@@ -4,34 +4,28 @@ import model.ClassNames;
 import model.Section;
 import model.Student;
 import org.springframework.stereotype.Component;
-import service.StudentNotFoundException;
 
 import java.util.HashMap;
 import java.util.Optional;
 
 
 @Component
-public class StudentRepository {
+public class StudentRepository extends PersonRepository<Student>{
 
-    private static HashMap<String, Student> students;
+    private HashMap<String, Student> students;
 
 
     public StudentRepository(){
+        super();
+        students = new HashMap<>();
 
     }
 
-    public boolean containsStudent(Student student){
-        return students.containsValue(student);
+    public HashMap<String, Student> getStudents() {
+        return students;
     }
 
-    public boolean containsSection(String studentID){
-        return students.containsKey(studentID);
+    public void setStudents(HashMap<String, Student> students) {
+        this.students = students;
     }
-
-
-    public static Optional<Student> findByStudentID(String studentID) {
-        Optional<String> first = students.keySet().stream().filter(s -> s.equals(studentID)).findFirst();
-        return first.map(s -> students.get(s));
-    }
-
 }

@@ -13,16 +13,19 @@ public class StudentService {
         this.repository = repository;
     }
 
-    //createStudent ->
+    //createStudent
     //createStudentsFromList
     //updateStudent
-    //reassignStudent -> find existing student, remove from existing section, add to new section (in service!), StudentRepository.save
+
    //findStudentByID
    //listStudentsInSection
     //markAsRead(studentID, assignmentID)
     //getPendingAssignments
     //submitAssignment(id, uploadedFile)
-    //
+
+
+    //-> find existing student, remove from existing section, add to new section (in service!), StudentRepository.save
+
 
 
 }

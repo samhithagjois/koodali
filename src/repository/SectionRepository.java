@@ -59,6 +59,8 @@ public final class SectionRepository {
     /**
      * deletes a section.
      * DELETE mapping sections/{name}
+     * @param className as String
+     * @return Section
      */
     public static Section deleteSection(String className) {
 
@@ -66,23 +68,14 @@ public final class SectionRepository {
 
     }
     //addSection
-
-    /**
-     * adds a section with its key, the class name, to the map
-     * check beforehand with following regex  if(className.matches("[BDEILMNPX][ELNRUX]_[BIAN][UE_D][LG123V]")){
-     * if the string is invalid and throw an IllegalArgumentException
-     * POST mapping /sections with RequestBody Student student
-     *
-     * @param className as String
-     * @param section   Section
-     */
-
     ///updateSection
     /**
      * updates the sections map with a section that has changed, for example if a new teacher/student was added to the section
      * as we have a constant amount of sections, the key stays the name of the section,
      * and so all we have to do is "put".
      * PUT mapping /sections with RequestBody Section updatedSection;
+     * @param section Section
+     *  @return Section
      * */
 
     public static Section updateSection(Section section) {
