@@ -1,13 +1,13 @@
 package model;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 public class Section {
     private ClassNames name;
-    private LinkedHashMap<String,Student> students;
-    private LinkedHashMap<String,Teacher> teachers;
+    private HashMap<String, Student> students;
+    private HashMap<String, Teacher> teachers;
 
-    private Section section;
     public Section(ClassNames name) {
         this.name = name;
     }
@@ -20,7 +20,7 @@ public class Section {
         this.name = name;
     }
 
-    public LinkedHashMap<String, Student> getStudents() {
+    public HashMap<String, Student> getStudents() {
         return students;
     }
 
@@ -28,7 +28,7 @@ public class Section {
         this.students = students;
     }
 
-    public LinkedHashMap<String, Teacher> getTeachers() {
+    public HashMap<String, Teacher> getTeachers() {
         return teachers;
     }
 

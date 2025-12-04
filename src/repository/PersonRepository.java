@@ -10,26 +10,26 @@ public abstract class PersonRepository<T extends Person> {
     protected final HashMap<String, T> persons = new HashMap<>();
 
 
-    public boolean containsPerson(T Person){
+    public boolean contains(T Person){
         return persons.containsValue(Person);
     }
 
-    public boolean containsPerson(String PersonID){
+    public boolean contains(String PersonID){
         return persons.containsKey(PersonID);
     }
 
 
-    public Optional<Person> findByPersonID(String personID) {
+    public Optional<Person> findByID(String personID) {
         Optional<String> first = persons.keySet().stream().filter(s -> s.equals(personID)).findFirst();
         return first.map(persons::get);
     }
 
-    public T deletePerson(String personID){
+    public T delete(String personID){
         return persons
                 .remove(personID);
     }
 
-    public T addPerson(T person){
+    public T add(T person){
         return persons
                 .put(person.getID(),person);
     }
