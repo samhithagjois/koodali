@@ -1,8 +1,8 @@
 package service;
 
-import model.ClassNames;
 import model.Section;
 import repository.SectionRepository;
+import service.exceptions.SectionNotFoundException;
 
 import java.util.List;
 import java.util.Optional;

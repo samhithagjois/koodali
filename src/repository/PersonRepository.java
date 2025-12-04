@@ -37,4 +37,9 @@ public abstract class PersonRepository<T extends Person> {
     public List<T> getAll(){
         return persons.values().stream().toList();
     }
+
+    public T update(T person){
+        return persons
+                .put(person.getID(),person);
+    }
 }

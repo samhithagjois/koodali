@@ -5,6 +5,14 @@ import java.util.List;
 
 public class Student extends Person{
 
+    public ClassNames getSection() {
+        return section;
+    }
+
+    public void setSection(ClassNames section) {
+        this.section = section;
+    }
+
     private ClassNames section;
 
     public List<Assignment> getPendingAssignments() {

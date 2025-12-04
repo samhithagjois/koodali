@@ -19,9 +19,7 @@ public class StudentService {
 
    //findStudentByID
    //listStudentsInSection
-    //markAsRead(studentID, assignmentID)
-    //getPendingAssignments
-    //submitAssignment(id, uploadedFile)
+
 
 
     //-> find existing student, remove from existing section, add to new section (in service!), StudentRepository.save

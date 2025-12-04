@@ -1,0 +1,8 @@
+package service.exceptions;
+
+public class AdminNotFoundException extends Exception{
+
+    public AdminNotFoundException() {
+        super("This admin was not found. Please check if you are logged in LOL");
+    }
+}

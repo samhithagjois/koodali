@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Teacher extends Person{
 
-    private ClassNames section;
+    private Section section;
     private final List<Assignment> ungradedAssignments;
     private final List<Assignment> gradedAssignments;
     private final List<Student> studentOverview;
@@ -17,11 +17,11 @@ public class Teacher extends Person{
         return gradedAssignments;
     }
 
-    public ClassNames getSection() {
+    public Section getSection() {
         return section;
     }
 
-    public void setSection(ClassNames section) {
+    public void setSection(Section section) {
         this.section = section;
     }
 
@@ -35,7 +35,7 @@ public class Teacher extends Person{
 
 
 
-    public Teacher(String personID, String firstName, String lastName, ClassNames section) {
+    public Teacher(String personID, String firstName, String lastName, Section section) {
         super(personID, firstName, lastName);
         ungradedAssignments = new ArrayList<>();
         gradedAssignments = new ArrayList<>();

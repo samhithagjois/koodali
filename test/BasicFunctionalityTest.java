@@ -24,8 +24,8 @@ public class BasicFunctionalityTest {
     Section mu_adv = new Section(MU_ADV);
     Section mu_beg = new Section(MU_BEG);
 
-    Teacher savitri = new Teacher("NKS_T_001", "Savitri", "", MU_BEG);
-    Teacher anita = new Teacher("NKS_T_002", "Anita", "", MU_ADV);
+    Teacher savitri = new Teacher("NKS_T_001", "Savitri", "", mu_beg);
+    Teacher anita = new Teacher("NKS_T_002", "Anita", "", mu_adv);
 
     static Administrator samhitha = new Administrator("NKS_AD_001", "Samhitha", "Jois");
 
