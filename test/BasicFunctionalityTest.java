@@ -29,10 +29,7 @@ public class BasicFunctionalityTest {
 
     static Administrator samhitha = new Administrator("NKS_AD_001", "Samhitha", "Jois");
 
-    StudentRepository studentRepo = new StudentRepository();
-    TeacherRepository teacherRepo = new TeacherRepository();
-    AdminRepository adminRepo = new AdminRepository();
-    SectionRepository sectionRepo = new SectionRepository();
+
 
     @BeforeAll
     public static void adminRights() {
@@ -42,10 +39,6 @@ public class BasicFunctionalityTest {
 
     @Test
     public void addStudents() {
-       studentRepo.add(sushruth);
-       studentRepo.add(riddhi);
-       studentRepo.add(dhriti);
-       studentRepo.add(parineeta);
 
     }
 }

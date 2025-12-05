@@ -123,17 +123,8 @@ public class AdminOperationService {
 
     public Student reassignStudentToSection(String adminID, String studentID, String sectionID) throws IllegalAdminActionException {
         try {
-            Student student = findStudent(studentID);
-            Administrator admin = findAdmin(adminID);
+            Student student = deleteStudentFromSection(adminID, studentID, sectionID);
             Section section = findSection(sectionID);
-
-            if (checkPermissionToModify(admin, section)) {
-                throw new IllegalAdminActionException();
-            }
-            //remove student from old section
-            sectionRepo
-                    .findSectionByName(student.getSection().name())
-                    .ifPresent(section1 -> section1.getStudents().remove(studentID, student));
             //change the section in the student
             student.setSection(section.getName());
             //add student to new class
@@ -142,7 +133,7 @@ public class AdminOperationService {
             sectionRepo.updateSection(section);
             //update student in studentRepo and return
             return studentRepo.update(student);
-        } catch (StudentNotFoundException | AdminNotFoundException | SectionNotFoundException se) {
+        } catch (SectionNotFoundException se) {
             throw new RuntimeException(se);
         }
     }
@@ -171,11 +162,55 @@ public class AdminOperationService {
         return teacherRepo.delete(teacherID);
     }
 
+    public Student deleteStudentFromSection(String adminID, String studentID, String sectionID) {
+        try {
+            Student student = findStudent(studentID);
+            Administrator admin = findAdmin(adminID);
+            Section section = findSection(sectionID);
 
-    //deleteStudentFromSection(Student student, Section section)
+            if (checkPermissionToModify(admin, section)) {
+                throw new IllegalAdminActionException();
+            }
+            //remove student from old section
+            sectionRepo
+                    .findSectionByName(student.getSection().name())
+                    .ifPresent(section1 -> section1.getStudents().remove(studentID, student));
+            student.setSection(null);
+            return student;
 
 
-    //addCoTeacherToSection(Teacher teacher, Section section)
-    //deleteTeacherFromSection(Teacher teacher, Section section)
+        } catch (AdminNotFoundException | SectionNotFoundException | StudentNotFoundException |
+                 IllegalAdminActionException e) {
+            throw new RuntimeException(e);
+        }
 
+
+    }
+
+
+
+    public Teacher deleteTeacherFromSection(String adminID, String teacherID, String sectionID) {
+        try {
+            Teacher teacher = findTeacher(teacherID);
+            Administrator admin = findAdmin(adminID);
+            Section section = findSection(sectionID);
+
+            if (checkPermissionToModify(admin, section)) {
+                throw new IllegalAdminActionException();
+            }
+            //remove student from old section
+            sectionRepo
+                    .findSectionByName(teacher.getSection().getName().toString())
+                    .ifPresent(section1 -> section1.getTeachers().remove(teacherID, teacher));
+            teacher.setSection(null);
+            return teacher;
+
+
+        } catch (AdminNotFoundException | SectionNotFoundException  |
+                 IllegalAdminActionException | TeacherNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+
+    }
 }

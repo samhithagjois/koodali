@@ -36,3 +36,5 @@ Safety (DDOS protection) (injection protection)
 IPV6
 
 
+@RestController
+@RequestMapping(path = "/server")

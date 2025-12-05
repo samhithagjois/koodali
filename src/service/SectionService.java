@@ -15,11 +15,6 @@ public class SectionService {
 
     }
 
-    //getAllSections
-    //updateSection
-    //deleteSection
-    //addNewSection
-
     /**
      * Get mapping
      * gets all sections
@@ -73,6 +68,7 @@ public class SectionService {
     public Section deleteSectionbyId(String sectionName) throws SectionNotFoundException {
         if (sectionRepository.containsSection(sectionName)) {
             return sectionRepository.deleteSection(sectionName);
+
         }else{
             throw new SectionNotFoundException();
         }
