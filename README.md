@@ -1,5 +1,5 @@
 # koodali
-My project for the NKS kids so they don't have to submit their stuff on whatsapp anymore. The name is inspired by "Moodle" and is the name of a city in Karnataka where the Tunga and the Bhadra merge, and also means "Merge". 
+My project for the NKS kids so they don't have to submit their stuff on whatsapp anymore. The name is inspired by "Moodle" and is the name of a village in Karnataka where the two rivers Tunga and the Bhadra merge into the Tungabhadra, and also where there are many historically important temples andashrams. Read more about Koodali, the vilage, [here](https://en.wikipedia.org/wiki/Koodli)! 
 
 Sooo here is the plan : 
 1. It will be something like moodle but very very simple. The login is done with the student/teachers's ID and the password will be a combination of the country, birth date, the name of the class they are teaching/assigned to/ or Administration and a special emoji combo of their liking so something like DE13327102004Sharavati<3, NL00105052016Tunga_@_, or DE10007121987Admin&&.
