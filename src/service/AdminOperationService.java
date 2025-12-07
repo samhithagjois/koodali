@@ -188,8 +188,12 @@ public class AdminOperationService {
     public Student removeStudentFromSystem(String adminID, String studentID) {
         try {
             Administrator admin = findAdmin(adminID);
+           Student student = findStudent(studentID);
+           Section section = findSection(student.getSection().toString());
+           checkPermissionToModify(admin,section);
 
-        } catch (AdminNotFoundException e) {
+        } catch (AdminNotFoundException | StudentNotFoundException | SectionNotFoundException |
+                 IllegalAdminActionException e) {
             throw new RuntimeException(e);
         }
 
@@ -200,11 +204,15 @@ public class AdminOperationService {
     public Teacher removeTeacherFromSystem(String adminID, String teacherID) {
 
         try {
-            findAdmin(adminID);
-        } catch (AdminNotFoundException e) {
+            Administrator admin = findAdmin(adminID);
+            Teacher teacher = findTeacher(teacherID);
+            Section section = findSection(teacher.getSection().toString());
+            checkPermissionToModify(admin,section);
+
+        } catch (AdminNotFoundException | SectionNotFoundException |
+                 IllegalAdminActionException | TeacherNotFoundException e) {
             throw new RuntimeException(e);
         }
-
 
         return teacherRepo.delete(teacherID);
     }

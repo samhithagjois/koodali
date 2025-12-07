@@ -9,6 +9,8 @@ import repository.StudentRepository;
 import service.exceptions.SectionNotFoundException;
 import service.exceptions.StudentNotFoundException;
 
+import java.util.List;
+
 @Service
 public class StudentService {
 
@@ -21,7 +23,7 @@ public class StudentService {
 
     }
 
-    private Student findStudent(String studentID) throws StudentNotFoundException {
+    private Student findStudentbyID(String studentID) throws StudentNotFoundException {
         Person student = studentRepo
                 .findByID(studentID)
                 .orElseThrow(StudentNotFoundException::new);
@@ -34,7 +36,6 @@ public class StudentService {
                 .orElseThrow(SectionNotFoundException::new);
     }
 
-    //String personID, String firstName, String lastName, ClassNames section
     public Student createStudent(String studentId,String firstName, String lastName, String sectionID){
         try {
             Section section = findSection(sectionID);
@@ -47,16 +48,39 @@ public class StudentService {
         }
     }
 
-    //createStudent
-    //createStudentsFromList
-    //updateStudent
+    public boolean createStudentsFromList(List<Student> students){
+        for (Student student:students ) {
+            studentRepo.add(student);
+            sectionRepo
+                    .getAllSections()
+                    .stream()
+                    .filter(
+                            section -> section
+                                    .getName()
+                                    .equals(student.getSection()))
+                    .findFirst()
+                    .ifPresent(section -> section
+                            .getStudents()
+                            .put(student.getID(),student));
+        }
+        return true;
+    }
 
-   //findStudentByID
-   //listStudentsInSection
+
+    public Student updateStudent(Student student){
+       return studentRepo.update(student);
+    }
 
 
 
-    //-> find existing student, remove from existing section, add to new section (in service!), StudentRepository.save
+    public List<Student> listStudentsInSection(String sectionID){
+        try{
+            Section section = findSection(sectionID);
+            return section.getStudents().values().stream().toList();
+        } catch (SectionNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 
 
