@@ -6,7 +6,6 @@ import repository.AdminRepository;
 public class AdministratorService {
     //createAdmin
     //checkCredentials
-    //removeAdmin
 
     private final AdminRepository adminRepo = new AdminRepository();
 

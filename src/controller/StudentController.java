@@ -1,6 +1,7 @@
 package controller;
 
 import model.Assignment;
+import service.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping(path = "/api")
 public class StudentController {
+    private final StudentService studentService = new StudentService();
     //1 : clicks on button "view pending assignments" :
     // GET posting, student/pending -> studentService.getPendingAssignemnts(studentID)
     // new view -> list of assignment(s) with the  most actual one on top
@@ -42,10 +44,10 @@ public class StudentController {
     // once check box is checked, the assignment is marked as "graded and received" in the status box.
     // GET /student/assignments/{id}/graded
 
-    /*@GetMapping("students/{studentId}/pending")
+    @GetMapping("students/{studentId}/pending")
     public List<Assignment> getPendingAssignmentsByStudent(@PathVariable String studentId){
-        return List.of(null);
-    }*/
+        return null;
+    }
 
 
 

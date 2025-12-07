@@ -38,3 +38,24 @@ IPV6
 
 @RestController
 @RequestMapping(path = "/server")
+
+since this is all students, here is the plan
+userIDs HAVE to start with a big letter so we can switch that
+TO fool anyone, let's do V for vidhyarthi and S for Shikshak, and K for Karyavaha(admin) (shakha styleee)
+So an user ID will be something like KPraveen_823?
+The we can use a SecureRandom for the number, and play switch with a RandomNumberGenerator and give them a  
+UID like that. 
+
+After we give them a basic password, we tell them to change it but keep a similar format (basically play password game with them LOL)
+The rules shall be : 
+1. Do not include anything that is in your UID in it
+2. Include a Taluk of Karnataka in your password
+3. Include four numbers, the sum of the numbers has to be greater than 20
+4. Include one of the following symbols : 
+   - a heart <3
+   - a snail _@_
+   - a rose --;-@
+   - a surprised face 0_0
+   - the stars and moon *(C)*
+   - a dollar sign $$
+IDK IM TIRED I WANT TO BE FINISHED ONCE

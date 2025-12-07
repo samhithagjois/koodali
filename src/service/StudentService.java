@@ -23,7 +23,7 @@ public class StudentService {
 
     }
 
-    private Student findStudentbyID(String studentID) throws StudentNotFoundException {
+    public Student findStudentbyID(String studentID) throws StudentNotFoundException {
         Person student = studentRepo
                 .findByID(studentID)
                 .orElseThrow(StudentNotFoundException::new);
@@ -38,6 +38,8 @@ public class StudentService {
 
     public Student createStudent(String studentId,String firstName, String lastName, String sectionID){
         try {
+            //PasswordService.generateTemporaryPassword
+            //AuthenticationService.storeCredentials(studentId, hashedPassword)
             Section section = findSection(sectionID);
             Student student  = new Student(studentId,firstName,lastName,section.getName());
             section.getStudents().put(student.getID(),student);
