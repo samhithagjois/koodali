@@ -1,6 +1,9 @@
 # koodali
 My project for the NKS kids so they don't have to submit their stuff on whatsapp anymore. The name is inspired by "Moodle" and is the name of a village in Karnataka where the two rivers Tunga and the Bhadra merge into the Tungabhadra, and also where there are many historically important temples andashrams. Read more about Koodali, the vilage, [here](https://en.wikipedia.org/wiki/Koodli)! 
 
+now just a clarification : While ChatGPT is telling me to do things because I ask it for clarification, in the end it is me doing them. While I did have a project back in 2nd sem, it wasn't nearly as extensive as this and this is already bigger than any project i've done in college. So naturally I'll need some helps. 
+You can be sure that I wrote all this damned code with my own damn hand. 
+
 Sooo here is the plan : 
 1. It will be something like moodle but very very simple. The login is done with the student/teachers's ID and the password, which will be assigned to the students in advance. 
 2. Then that takes them to the site. It is strictly for homework submission, exchange and download.

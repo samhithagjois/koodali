@@ -1,18 +1,28 @@
 package controller;
 
 import model.Assignment;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import service.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import service.exceptions.StudentNotFoundException;
 
 import java.util.List;
 
-@RestController
+
+@Controller
 @RequestMapping(path = "/api")
 public class StudentController {
-    private final StudentService studentService = new StudentService();
+
+    private final StudentService studentService;
+
+    @Autowired
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
+    }
+
     //1 : clicks on button "view pending assignments" :
     // GET posting, student/pending -> studentService.getPendingAssignemnts(studentID)
     // new view -> list of assignment(s) with the  most actual one on top
@@ -46,7 +56,15 @@ public class StudentController {
 
     @GetMapping("students/{studentId}/pending")
     public List<Assignment> getPendingAssignmentsByStudent(@PathVariable String studentId){
-        return null;
+        try {
+            return studentService.findStudentbyID(studentId).getPendingAssignments();
+        } catch (StudentNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        // correct error handling!
+        //https://medium.com/@sharmapraveen91/handle-exceptions-in-spring-boot-a-guide-to-clean-code-principles-e8a9d56cafe8
+
+
     }
 
 
