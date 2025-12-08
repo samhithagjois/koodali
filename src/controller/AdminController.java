@@ -1,22 +1,55 @@
 package controller;
 
-import org.springframework.web.bind.annotation.PostMapping;
+import model.Section;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import service.*;
+import service.exceptions.SectionNotFoundException;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "/api")
 public class AdminController {
 
     private final AdminOperationService adminOperationService;
+
+    public AdministratorService getAdminService() {
+        return adminService;
+    }
+
+    public StudentService getStudentService() {
+        return studentService;
+    }
+
+    public SectionService getSectionService() {
+        return sectionService;
+    }
+
+    public TeacherService getTeacherService() {
+        return teacherService;
+    }
+
     private final AdministratorService adminService;
     private final StudentService studentService;
     private final SectionService sectionService;
     private final TeacherService teacherService;
 
     @Autowired
-    public AdminController(){
-        
+    public AdminController(AdminOperationService adminOperationService,
+                           AdministratorService adminService,
+                           StudentService studentService,
+                           SectionService sectionService,
+                           TeacherService teacherService){
+
+        this.adminOperationService = adminOperationService;
+        this.adminService = adminService;
+        this.studentService = studentService;
+        this.sectionService = sectionService;
+        this.teacherService = teacherService;
     }
     //1 : manual
     //clicks on button "manage sections"
@@ -29,11 +62,24 @@ public class AdminController {
     //"reassign view" -> form view, where you type in student/teacher's name and the dropdown list gets smaller like when you're searching for smth
     // "from class : " and "to class : " as dropdown menus because the classes are
 
-    //idek what this red thingie is doing here
 
-    @GetMapping
+    @GetMapping("admin/sections")
     public List<Section> manageSections(){
-        return null;
+        return sectionService.getAllSections();
+    }
+
+    @GetMapping("admin/section/{id}")
+    public Section manageSection(@PathVariable String id){
+        try {
+            return sectionService.getSectionByID(id);
+        } catch (SectionNotFoundException e) {
+            throw new RuntimeException(e);
+            //Exception handling!
+        }
+    }
+
+    public AdminOperationService getAdminOperationService() {
+        return adminOperationService;
     }
 
     // logic :
