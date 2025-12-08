@@ -17,6 +17,8 @@ public class AdminController {
     // with all the given info : create new Student/Teacher object and call StudentService to store them in StudentRepository
     //"reassign view" -> form view, where you type in student/teacher's name and the dropdown list gets smaller like when you're searching for smth
     // "from class : " and "to class : " as dropdown menus because the classes are
+    
+    //idek what this red thingie is doing here
 
     // logic :
     // AdminController receives form
