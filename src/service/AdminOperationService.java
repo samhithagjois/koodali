@@ -269,11 +269,5 @@ public class AdminOperationService {
 
     }
 
-    public void resetUserPassword(String userID){
 
-        //→ calls AuthenticationService
-        //→ generates temp password
-        //→ flags mustChangePassword = true
-        //→ returns the temporary password so admin can give it to the student
-    }
 }

@@ -1,5 +1,6 @@
 package service.exceptions;
 
+// @ResponseStatus(value=HttpStatus.NOT_FOUND, reason="Section not found")  // 404
 public class SectionNotFoundException extends Exception{
 
     public SectionNotFoundException(){

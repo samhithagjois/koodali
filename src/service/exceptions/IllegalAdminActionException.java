@@ -1,5 +1,5 @@
 package service.exceptions;
-
+// @ResponseStatus(value=HttpStatus.NOT_FOUND, reason="Illegal Admin Activity")  // 404
 public class IllegalAdminActionException extends Exception{
 
 

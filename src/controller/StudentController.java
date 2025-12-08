@@ -62,7 +62,8 @@ public class StudentController {
             throw new RuntimeException(e);
         }
         // correct error handling!
-        //https://medium.com/@sharmapraveen91/handle-exceptions-in-spring-boot-a-guide-to-clean-code-principles-e8a9d56cafe8
+        //https://spring.io/blog/2013/11/01/exception-handling-in-spring-mvc
+        //https://www.baeldung.com/exception-handling-for-rest-with-spring
 
 
     }

@@ -1,5 +1,6 @@
 package service.exceptions;
 
+// @ResponseStatus(value=HttpStatus.NOT_FOUND, reason="Student not found")  // 404
 public class StudentNotFoundException extends Exception{
 
     public StudentNotFoundException(){

@@ -54,7 +54,6 @@ public final class SectionRepository {
     public List<Section> getAllSections() {
         return sections.values().stream().sorted().toList();
     }
-    //deleteSection
 
     /**
      * deletes a section.
@@ -63,12 +62,9 @@ public final class SectionRepository {
      * @return Section
      */
     public Section deleteSection(String className) {
-
         return sections.remove(ClassNames.valueOf(className));
-
     }
-    //addSection
-    ///updateSection
+
     /**
      * updates the sections map with a section that has changed, for example if a new teacher/student was added to the section
      * as we have a constant amount of sections, the key stays the name of the section,

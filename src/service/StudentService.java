@@ -18,6 +18,7 @@ public class StudentService {
 
     private final SectionRepository sectionRepo = new SectionRepository();
 
+    private final StudentExcelService studentExcelService = new StudentExcelService();
 
     public StudentService() {
 
@@ -38,8 +39,7 @@ public class StudentService {
 
     public Student createStudent(String studentId,String firstName, String lastName, String sectionID){
         try {
-            //PasswordService.generateTemporaryPassword
-            //AuthenticationService.storeCredentials(studentId, hashedPassword)
+
             Section section = findSection(sectionID);
             Student student  = new Student(studentId,firstName,lastName,section.getName());
             section.getStudents().put(student.getID(),student);

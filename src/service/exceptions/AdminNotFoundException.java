@@ -1,5 +1,6 @@
 package service.exceptions;
 
+// @ResponseStatus(value=HttpStatus.NOT_FOUND, reason="Admin not found")  // 404
 public class AdminNotFoundException extends Exception{
 
     public AdminNotFoundException() {
