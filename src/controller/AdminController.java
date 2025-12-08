@@ -48,6 +48,39 @@ public class AdminController {
     //"reassign view" -> form view, where you type in student/teacher's name and the dropdown list gets smaller like when you're searching for smth
     // "from class : " and "to class : " as dropdown menus because the classes are
 
+ @GetMapping("admin/sections")
+    public List<Section> manageSections(){
+        return sectionService.getAllSections();
+    }
+
+    @GetMapping("admin/section/{id}")
+    public Section manageSection(@PathVariable String id){
+        try {
+            return sectionService.getSectionByID(id);
+        } catch (SectionNotFoundException e) {
+            throw new RuntimeException(e);
+            //Exception handling!
+        }
+    }
+
+    public AdminOperationService getAdminOperationService() {
+        return adminOperationService;
+    }
+    public AdministratorService getAdminService() {
+        return adminService;
+    }
+
+    public StudentService getStudentService() {
+        return studentService;
+    }
+
+    public SectionService getSectionService() {
+        return sectionService;
+    }
+
+    public TeacherService getTeacherService() {
+        return teacherService;
+    }
 
 
     // logic :
