@@ -7,6 +7,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(path = "/api")
 public class AdminController {
+
+    private final AdminOperationService adminOperationService;
+    private final AdministratorService adminService;
+    private final StudentService studentService;
+    private final SectionService sectionService;
+    private final TeacherService teacherService;
+
+    @Autowired
+    public AdminController(){
+        
+    }
     //1 : manual
     //clicks on button "manage sections"
     //new view -> List of all Sections
@@ -17,7 +28,7 @@ public class AdminController {
     // with all the given info : create new Student/Teacher object and call StudentService to store them in StudentRepository
     //"reassign view" -> form view, where you type in student/teacher's name and the dropdown list gets smaller like when you're searching for smth
     // "from class : " and "to class : " as dropdown menus because the classes are
-    
+
     //idek what this red thingie is doing here
 
     @GetMapping
