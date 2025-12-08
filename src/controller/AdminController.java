@@ -20,6 +20,11 @@ public class AdminController {
     
     //idek what this red thingie is doing here
 
+    @GetMapping
+    public List<Section> manageSections(){
+        return null;
+    }
+
     // logic :
     // AdminController receives form
     // call studentService.createStudent(... all above)
