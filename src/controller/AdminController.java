@@ -18,6 +18,11 @@ public class AdminController {
     //"reassign view" -> form view, where you type in student/teacher's name and the dropdown list gets smaller like when you're searching for smth
     // "from class : " and "to class : " as dropdown menus because the classes are
 
+    @GetMapping
+    public List<Section> manageSections(){
+        return null;
+    }
+
     // logic :
     // AdminController receives form
     // call studentService.createStudent(... all above)
