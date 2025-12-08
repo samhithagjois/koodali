@@ -17,21 +17,7 @@ public class AdminController {
 
     private final AdminOperationService adminOperationService;
 
-    public AdministratorService getAdminService() {
-        return adminService;
-    }
 
-    public StudentService getStudentService() {
-        return studentService;
-    }
-
-    public SectionService getSectionService() {
-        return sectionService;
-    }
-
-    public TeacherService getTeacherService() {
-        return teacherService;
-    }
 
     private final AdministratorService adminService;
     private final StudentService studentService;
@@ -63,24 +49,6 @@ public class AdminController {
     // "from class : " and "to class : " as dropdown menus because the classes are
 
 
-    @GetMapping("admin/sections")
-    public List<Section> manageSections(){
-        return sectionService.getAllSections();
-    }
-
-    @GetMapping("admin/section/{id}")
-    public Section manageSection(@PathVariable String id){
-        try {
-            return sectionService.getSectionByID(id);
-        } catch (SectionNotFoundException e) {
-            throw new RuntimeException(e);
-            //Exception handling!
-        }
-    }
-
-    public AdminOperationService getAdminOperationService() {
-        return adminOperationService;
-    }
 
     // logic :
     // AdminController receives form
