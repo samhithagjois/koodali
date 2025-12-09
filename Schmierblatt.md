@@ -1,5 +1,7 @@
 # koodali
-My project for the NKS kids so they don't have to submit their stuff on whatsapp anymore. The name is inspired by "Moodle" and is the name of a village in Karnataka where the two rivers Tunga and the Bhadra merge into the Tungabhadra, and also where there are many historically important temples andashrams. Read more about Koodali, the vilage, [here](https://en.wikipedia.org/wiki/Koodli)! 
+My project for the NKS teachers and admins so they don't have to toggle 543456 excel sheets anymore. 
+It used to be a file download and upload site, but after talking, it has now changed,
+The name is inspired by "Moodle" and is the name of a village in Karnataka where the two rivers Tunga and the Bhadra merge into the Tungabhadra, and also where there are many historically important temples andashrams. Read more about Koodali, the vilage, [here](https://en.wikipedia.org/wiki/Koodli)! 
 
 now just a clarification : While ChatGPT is telling me to do things because I ask it for clarification, in the end it is me doing them. While I did have a project back in 2nd sem, it wasn't nearly as extensive as this and this is already bigger than any project i've done in college. So naturally I'll need some helps. 
 You can be sure that I wrote all this damned code with my own damn hand. 
