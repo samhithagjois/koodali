@@ -6,4 +6,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(path = "/api")
 public class TeacherController {
+    /*TeacherController
+  → HomeworkExcelImportService
+      → HomeworkResult list
+  → PointsCalculationService
+      → points per student
+  → LeaderboardService
+      → update leaderboard repository
+*/
 }

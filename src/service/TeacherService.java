@@ -19,21 +19,21 @@ public class TeacherService {
 
     }
 
-    public Teacher findTeacherbyID(String teacherID) throws TeacherNotFoundException {
+    public Teacher findTeacherbyID(String teacherID){
         Person teacher = teacherRepo
                 .findByID(teacherID)
                 .orElseThrow(TeacherNotFoundException::new);
         return (Teacher) teacher;
     }
 
-    public Teacher findTeacherbyName(String name) throws TeacherNotFoundException {
+    public Teacher findTeacherbyName(String name){
         Person teacher = teacherRepo
                 .findByName(name)
                 .orElseThrow(TeacherNotFoundException::new);
         return (Teacher) teacher;
     }
 
-    private Section findSection(String sectionName) throws SectionNotFoundException {
+    private Section findSection(String sectionName){
         return sectionRepo
                 .findSectionByName(sectionName)
                 .orElseThrow(SectionNotFoundException::new);

@@ -24,37 +24,33 @@ public class StudentService {
 
     }
 
-    public Student findStudentbyID(String studentID) throws StudentNotFoundException {
+    public Student findStudentbyID(String studentID) {
         Person student = studentRepo
                 .findByID(studentID)
                 .orElseThrow(StudentNotFoundException::new);
         return (Student) student;
     }
 
-    public Student findStudentbyName(String name) throws StudentNotFoundException {
+    public Student findStudentbyName(String name){
         Person student = studentRepo
                 .findByName(name)
                 .orElseThrow(StudentNotFoundException::new);
         return (Student) student;
     }
 
-    private Section findSection(String sectionName) throws SectionNotFoundException {
+    private Section findSection(String sectionName) {
         return sectionRepo
                 .findSectionByName(sectionName)
                 .orElseThrow(SectionNotFoundException::new);
     }
 
     public Student createStudent(String studentId, String firstName, String lastName, String sectionID) {
-        try {
 
             Section section = findSection(sectionID);
             Student student = new Student(studentId, firstName, lastName, section.getName());
             section.getStudents().put(student.getID(), student);
             return studentRepo.add(student);
 
-        } catch (SectionNotFoundException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     public boolean createStudentsFromList(List<Student> students) {

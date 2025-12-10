@@ -3,6 +3,7 @@ package model;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
+import java.util.Map;
 
 public class Student extends Person {
 
@@ -35,6 +36,8 @@ public class Student extends Person {
     private double attendancePercentage;
     private float phoneNumber, whatsappNumber;
 
+    private Map<String,Integer> homeworkPointsPerWeek;
+
 
     public Student(String personID, String firstName, String lastName, ClassNames section) {
         super(personID, firstName, lastName);
@@ -50,7 +53,7 @@ public class Student extends Person {
                    MultipartFile photo, MultipartFile consentForm, Date dateOfBirth, Date dateOfRegistration1,
                    Date dateOfFirstClass, String mothersName, String fathersName,
                    String fathersEmailID, String mothersEmailID, double attendancePercentage,
-                   float phoneNumber, float whatsappNumber) {
+                   float phoneNumber, float whatsappNumber, Map<String, Integer> homeworkPointsPerWeek) {
 
         super(firstName, lastName, personID,
                 city, pinCode, country, fullPostalAdress,
@@ -73,6 +76,7 @@ public class Student extends Person {
         this.attendancePercentage = attendancePercentage;
         this.phoneNumber = phoneNumber;
         this.whatsappNumber = whatsappNumber;
+        this.homeworkPointsPerWeek = homeworkPointsPerWeek;
     }
 
 
@@ -211,5 +215,13 @@ public class Student extends Person {
 
     public void setWhatsappNumber(float whatsappNumber) {
         this.whatsappNumber = whatsappNumber;
+    }
+
+    public Map<String, Integer> getHomeworkPointsPerWeek() {
+        return homeworkPointsPerWeek;
+    }
+
+    public void setHomeworkPointsPerWeek(Map<String, Integer> homeworkPointsPerWeek) {
+        this.homeworkPointsPerWeek = homeworkPointsPerWeek;
     }
 }

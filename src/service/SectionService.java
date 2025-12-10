@@ -34,7 +34,7 @@ public class SectionService {
      * @return Section
      * @throws SectionNotFoundException "didn't find section"
      */
-    public Section getSectionByID(String classId) throws SectionNotFoundException {
+    public Section getSectionByID(String classId) {
         Optional<Section> optionalSection = sectionRepository.findSectionByName(classId);
         if (optionalSection.isEmpty()) {
             throw new SectionNotFoundException();
@@ -66,7 +66,7 @@ public class SectionService {
         }
     }
 
-    public Section deleteSectionbyId(String sectionName) throws SectionNotFoundException {
+    public Section deleteSectionbyId(String sectionName){
         if (sectionRepository.containsSection(sectionName)) {
             return sectionRepository.deleteSection(sectionName);
 

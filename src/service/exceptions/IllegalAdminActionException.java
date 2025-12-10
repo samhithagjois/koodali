@@ -1,12 +1,6 @@
 package service.exceptions;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ResponseStatus;
-
-@ControllerAdvice
-@ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Illegal Admin Activity")  // 404
-public class IllegalAdminActionException extends Exception {
+public class IllegalAdminActionException extends RuntimeException {
 
 
     public IllegalAdminActionException() {
