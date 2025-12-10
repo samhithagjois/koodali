@@ -19,4 +19,4 @@ Functions to be implemented :
 3. Edit button : edits things in student class. update button also writes it back into excel file
 4. Teachers : : edit homework leaderboard, add points to each student. Save changes edits the student object and the student view, and sorts the view by points
 5. Filter functions in the student view : filter by fees not paid, filter by city, filter by group, filter by active and absent#
-6. 
+

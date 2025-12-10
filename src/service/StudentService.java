@@ -31,6 +31,13 @@ public class StudentService {
         return (Student) student;
     }
 
+    public Student findStudentbyName(String name) throws StudentNotFoundException {
+        Person student = studentRepo
+                .findByName(name)
+                .orElseThrow(StudentNotFoundException::new);
+        return (Student) student;
+    }
+
     private Section findSection(String sectionName) throws SectionNotFoundException {
         return sectionRepo
                 .findSectionByName(sectionName)
@@ -82,6 +89,10 @@ public class StudentService {
         } catch (SectionNotFoundException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public List<Student> getAllStudents(){
+        return studentRepo.getAll();
     }
 
 

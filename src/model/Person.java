@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Date;
+
 public abstract class Person {
     public String getFirstName() {
         return firstName;
@@ -26,19 +28,47 @@ public abstract class Person {
     }
 
 
-    protected String firstName, lastName,personID;
+    protected String firstName;
+    protected String lastName;
+    protected String personID;
+
+    public Person(String firstName, String lastName,
+                  String personID, String city, String pinCode,
+                  String country, String fullPostalAdress,
+                  Date dateOfRegistration, Date dateOfClassStart, boolean activeStatus) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.personID = personID;
+        this.city = city;
+        this.pinCode = pinCode;
+        this.country = country;
+        this.fullPostalAdress = fullPostalAdress;
+        this.dateOfRegistration = dateOfRegistration;
+        this.dateOfClassStart = dateOfClassStart;
+        this.activeStatus = activeStatus;
+    }
+
+    protected String city;
+    protected String pinCode;
+    protected String country;
+    protected String fullPostalAdress;
+    //new attributes
+    protected Date dateOfRegistration,dateOfClassStart;
+    protected boolean activeStatus;
 
     public Person( String personID, String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.personID = personID;
     }
+
+    //TODO
   /*
     STA
       id : String
       first name : String
       last name : String
-      date of birth : String
+
       email id : String
       active status : bool
       date of registration : Date
@@ -53,6 +83,7 @@ public abstract class Person {
       amount of textbooks : int
 
       S
+       date of birth : Date
       fathers name : String
       fathers email id : String
       fathers phone number : float

@@ -2,13 +2,11 @@ package controller;
 
 import model.Section;
 import model.Student;
+import model.Teacher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import service.*;
 import service.exceptions.SectionNotFoundException;
 import service.exceptions.StudentNotFoundException;
@@ -40,16 +38,6 @@ public class AdminController {
         this.sectionService = sectionService;
         this.teacherService = teacherService;
     }
-    //1 : manual
-    //clicks on button "manage sections"
-    //new view -> List of all Sections
-    //select section
-    // new view -> List of students and teachers in this section
-    // buttons : | add student | reassign student | add teacher | reassign teacher
-    // "add" view -> form view where you manually enter student/teacher data acc. to Teacher/Student in text boxes, SectionNames is a dropdown menu
-    // with all the given info : create new Student/Teacher object and call StudentService to store them in StudentRepository
-    //"reassign view" -> form view, where you type in student/teacher's name and the dropdown list gets smaller like when you're searching for smth
-    // "from class : " and "to class : " as dropdown menus because the classes are
 
     @GetMapping("admin/sections")
     public ResponseEntity<List<Section>> manageSections() {
@@ -59,9 +47,9 @@ public class AdminController {
 
     //Change tghis all to ResponseEntity!
     @GetMapping("admin/section/{classId}")
-    public Section selectSection(@PathVariable String classId) {
+    public ResponseEntity<Section> selectSection(@PathVariable String classId) {
         try {
-            return sectionService.getSectionByID(classId);
+            return new ResponseEntity<>(sectionService.getSectionByID(classId),HttpStatus.OK);
         } catch (SectionNotFoundException e) {
             throw new RuntimeException(e);
             //Exception handling!
@@ -69,31 +57,39 @@ public class AdminController {
     }
 
     @GetMapping("admin/section/{classId}/students")
-    public List<Student> getStudentsOfSection(@PathVariable String classId) {
-        return studentService.listStudentsInSection(classId);
+    public ResponseEntity<List<Student>> getStudentsOfSection(@PathVariable String classId) {
+        return new ResponseEntity<>(studentService.listStudentsInSection(classId), HttpStatus.OK);
     }
 
-    @GetMapping("admin/section/{classId}/students/{studentId}")
-    public Student selectStudentFromSection(@PathVariable String classId, @PathVariable String studentId) {
-
+    @GetMapping("admin/section/{classId}/teachers")
+    public List<Teacher> getTeachersOfSection(@PathVariable String classId) {
         try {
-            return getStudentsOfSection(classId)
-                    .stream()
-                    .filter(student -> student
-                            .getID()
-                            .equals(studentId))
-                    .findFirst()
-                    .orElseThrow(StudentNotFoundException::new);
-        } catch (StudentNotFoundException e) {
+            return sectionService.getSectionByID(classId).getTeachers().values().stream().toList();
+        } catch (SectionNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
 
-    @GetMapping("admin/students")
-    public List<Student> getAllStudents() {
-        return null;
-    }
+    @GetMapping("admin/section/{classId}/students/{studentId}")
+    public ResponseEntity<Student> selectStudentFromSection(@PathVariable String classId, @PathVariable String studentId) {
 
+        Student s= null;
+        try {
+            s = studentService
+                       .listStudentsInSection(classId)
+                       .stream()
+                       .filter(student -> student
+                               .getID()
+                               .equals(studentId))
+                       .findFirst()
+                       .orElseThrow(StudentNotFoundException::new);
+        } catch (StudentNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        return new ResponseEntity<>(s,HttpStatus.OK);
+
+    }
 
     public AdminOperationService getAdminOperationService() {
         return adminOperationService;

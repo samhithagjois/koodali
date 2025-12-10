@@ -24,6 +24,19 @@ public abstract class PersonRepository<T extends Person> {
         return first.map(persons::get);
     }
 
+    public Optional<Person> findByName(String name) {
+        Optional<T> first = persons
+                .values()
+                .stream()
+                .filter( t -> t.getFirstName().equals(name) || t.getLastName().equals(name))
+                .findFirst();
+       if(first.isPresent()){
+           Person p = first.get();
+           return Optional.of(p);
+       }
+       return Optional.empty();
+    }
+
     public T delete(String personID){
         return persons
                 .remove(personID);
