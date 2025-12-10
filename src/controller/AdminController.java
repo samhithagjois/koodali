@@ -6,7 +6,10 @@ import model.Teacher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import service.*;
 import service.exceptions.SectionNotFoundException;
 import service.exceptions.StudentNotFoundException;
@@ -49,7 +52,7 @@ public class AdminController {
     @GetMapping("admin/section/{classId}")
     public ResponseEntity<Section> selectSection(@PathVariable String classId) {
         try {
-            return new ResponseEntity<>(sectionService.getSectionByID(classId),HttpStatus.OK);
+            return new ResponseEntity<>(sectionService.getSectionByID(classId), HttpStatus.OK);
         } catch (SectionNotFoundException e) {
             throw new RuntimeException(e);
             //Exception handling!
@@ -73,21 +76,21 @@ public class AdminController {
     @GetMapping("admin/section/{classId}/students/{studentId}")
     public ResponseEntity<Student> selectStudentFromSection(@PathVariable String classId, @PathVariable String studentId) {
 
-        Student s= null;
+        Student s = null;
         try {
             s = studentService
-                       .listStudentsInSection(classId)
-                       .stream()
-                       .filter(student -> student
-                               .getID()
-                               .equals(studentId))
-                       .findFirst()
-                       .orElseThrow(StudentNotFoundException::new);
+                    .listStudentsInSection(classId)
+                    .stream()
+                    .filter(student -> student
+                            .getID()
+                            .equals(studentId))
+                    .findFirst()
+                    .orElseThrow(StudentNotFoundException::new);
         } catch (StudentNotFoundException e) {
             throw new RuntimeException(e);
         }
 
-        return new ResponseEntity<>(s,HttpStatus.OK);
+        return new ResponseEntity<>(s, HttpStatus.OK);
 
     }
 

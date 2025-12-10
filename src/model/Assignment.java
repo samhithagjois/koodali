@@ -6,31 +6,31 @@ import java.util.Date;
 public class Assignment {
 
     private String name;
-   private String description;
-   private Date submissionDeadline;
+    private String description;
+    private Date submissionDeadline;
 
 
     private Date assignedOn;
-   private File attachment;
-   private Section forClass;
-   private boolean graded;
-   private String feedback;
+    private File attachment;
+    private Section forClass;
+    private boolean graded;
+    private String feedback;
 
 
     private AssignmentStatus assignmentStatus;
 
-   public Assignment(String name, Section forClass, Date submissionDeadline, Date assignedOn){
-       this.name = name;
-       this.forClass = forClass;
-       this.submissionDeadline = submissionDeadline;
-       this.assignedOn = assignedOn;
-       this.description = "";
-       this.attachment = null;
-       this.graded = false;
-       this.assignmentStatus = AssignmentStatus.NOT_READ;
-       this.feedback = "";
+    public Assignment(String name, Section forClass, Date submissionDeadline, Date assignedOn) {
+        this.name = name;
+        this.forClass = forClass;
+        this.submissionDeadline = submissionDeadline;
+        this.assignedOn = assignedOn;
+        this.description = "";
+        this.attachment = null;
+        this.graded = false;
+        this.assignmentStatus = AssignmentStatus.NOT_READ;
+        this.feedback = "";
 
-   }
+    }
 
 
     public String getName() {
@@ -106,8 +106,6 @@ public class Assignment {
     public void setAssignmentStatus(AssignmentStatus assignmentStatus) {
         this.assignmentStatus = assignmentStatus;
     }
-
-
 
 
 }

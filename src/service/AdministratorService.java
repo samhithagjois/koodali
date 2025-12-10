@@ -10,11 +10,11 @@ public class AdministratorService {
     //TODO!
     private final AdminRepository adminRepo = new AdminRepository();
 
-    public AdministratorService(){
+    public AdministratorService() {
 
     }
 
-    public Administrator removeAdmin(String adminID){
-       return adminRepo.getAdmins().remove(adminID);
+    public Administrator removeAdmin(String adminID) {
+        return adminRepo.getAdmins().remove(adminID);
     }
 }

@@ -44,21 +44,21 @@ public class StudentService {
                 .orElseThrow(SectionNotFoundException::new);
     }
 
-    public Student createStudent(String studentId,String firstName, String lastName, String sectionID){
+    public Student createStudent(String studentId, String firstName, String lastName, String sectionID) {
         try {
 
             Section section = findSection(sectionID);
-            Student student  = new Student(studentId,firstName,lastName,section.getName());
-            section.getStudents().put(student.getID(),student);
-           return studentRepo.add(student);
+            Student student = new Student(studentId, firstName, lastName, section.getName());
+            section.getStudents().put(student.getID(), student);
+            return studentRepo.add(student);
 
         } catch (SectionNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public boolean createStudentsFromList(List<Student> students){
-        for (Student student:students ) {
+    public boolean createStudentsFromList(List<Student> students) {
+        for (Student student : students) {
             studentRepo.add(student);
             sectionRepo
                     .getAllSections()
@@ -70,20 +70,19 @@ public class StudentService {
                     .findFirst()
                     .ifPresent(section -> section
                             .getStudents()
-                            .put(student.getID(),student));
+                            .put(student.getID(), student));
         }
         return true;
     }
 
 
-    public Student updateStudent(Student student){
-       return studentRepo.update(student);
+    public Student updateStudent(Student student) {
+        return studentRepo.update(student);
     }
 
 
-
-    public List<Student> listStudentsInSection(String sectionID){
-        try{
+    public List<Student> listStudentsInSection(String sectionID) {
+        try {
             Section section = findSection(sectionID);
             return section.getStudents().values().stream().toList();
         } catch (SectionNotFoundException e) {
@@ -91,10 +90,9 @@ public class StudentService {
         }
     }
 
-    public List<Student> getAllStudents(){
+    public List<Student> getAllStudents() {
         return studentRepo.getAll();
     }
-
 
 
 }

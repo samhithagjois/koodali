@@ -3,6 +3,39 @@ package model;
 import java.util.Date;
 
 public abstract class Person {
+    protected String firstName;
+    protected String lastName;
+    protected String personID;
+    protected String city;
+    protected String pinCode;
+    protected String country;
+    protected String fullPostalAdress;
+    //new attributes
+    protected Date dateOfRegistration, dateOfClassStart;
+    protected boolean activeStatus;
+
+    public Person(String firstName, String lastName,
+                  String personID, String city, String pinCode,
+                  String country, String fullPostalAdress,
+                  Date dateOfRegistration, Date dateOfClassStart, boolean activeStatus) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.personID = personID;
+        this.city = city;
+        this.pinCode = pinCode;
+        this.country = country;
+        this.fullPostalAdress = fullPostalAdress;
+        this.dateOfRegistration = dateOfRegistration;
+        this.dateOfClassStart = dateOfClassStart;
+        this.activeStatus = activeStatus;
+    }
+
+    public Person(String personID, String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.personID = personID;
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -24,41 +57,6 @@ public abstract class Person {
     }
 
     public void setID(String personID) {
-        this.personID = personID;
-    }
-
-
-    protected String firstName;
-    protected String lastName;
-    protected String personID;
-
-    public Person(String firstName, String lastName,
-                  String personID, String city, String pinCode,
-                  String country, String fullPostalAdress,
-                  Date dateOfRegistration, Date dateOfClassStart, boolean activeStatus) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.personID = personID;
-        this.city = city;
-        this.pinCode = pinCode;
-        this.country = country;
-        this.fullPostalAdress = fullPostalAdress;
-        this.dateOfRegistration = dateOfRegistration;
-        this.dateOfClassStart = dateOfClassStart;
-        this.activeStatus = activeStatus;
-    }
-
-    protected String city;
-    protected String pinCode;
-    protected String country;
-    protected String fullPostalAdress;
-    //new attributes
-    protected Date dateOfRegistration,dateOfClassStart;
-    protected boolean activeStatus;
-
-    public Person( String personID, String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
         this.personID = personID;
     }
 

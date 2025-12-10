@@ -1,16 +1,13 @@
 package controller;
 
-import model.Assignment;
 import model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import service.*;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import service.exceptions.StudentNotFoundException;
+import service.StudentService;
 
 import java.util.List;
 
@@ -27,19 +24,14 @@ public class StudentController {
     }
 
     @GetMapping("/students")
-    public ResponseEntity<List<Student>> getAllStudents(){
+    public ResponseEntity<List<Student>> getAllStudents() {
         return new ResponseEntity<>(studentService.getAllStudents(), HttpStatus.OK);
     }
 
 
-
-        // correct error handling!
-        //https://spring.io/blog/2013/11/01/exception-handling-in-spring-mvc
-        //https://www.baeldung.com/exception-handling-for-rest-with-spring
-
-
-
-
+    // correct error handling!
+    //https://spring.io/blog/2013/11/01/exception-handling-in-spring-mvc
+    //https://www.baeldung.com/exception-handling-for-rest-with-spring
 
 
 }

@@ -4,7 +4,6 @@ import model.Teacher;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
-import java.util.Optional;
 
 @Component
 public class TeacherRepository extends PersonRepository<Teacher> {

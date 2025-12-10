@@ -2,14 +2,14 @@ package model;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class Student extends Person {
 
 
     private ClassNames section;
+
+
     //new variables
     //      date of birth : Date
     //      fathers name : String
@@ -27,13 +27,13 @@ public class Student extends Person {
     //      assessment test result : seperate page
     //      photo of child : Multipart file
     //      consent form  : Multipart file
-    private int amountOfTextbooks, feesPaid,pendingFees,homeworkLeaderBoardScore;
+    private int amountOfTextbooks, feesPaid, pendingFees, homeworkLeaderBoardScore;
     private MultipartFile photo, consentForm;
-    private Date dateOfBirth, dateOfRegistration,dateOfFirstClass;
+    private Date dateOfBirth, dateOfRegistration, dateOfFirstClass;
 
-    private String mothersName, fathersName,fathersEmailID,mothersEmailID;
+    private String mothersName, fathersName, fathersEmailID, mothersEmailID;
     private double attendancePercentage;
-    private float phoneNumber,whatsappNumber;
+    private float phoneNumber, whatsappNumber;
 
 
     public Student(String personID, String firstName, String lastName, ClassNames section) {
@@ -85,5 +85,131 @@ public class Student extends Person {
     }
 
 
+    public int getAmountOfTextbooks() {
+        return amountOfTextbooks;
+    }
 
+    public void setAmountOfTextbooks(int amountOfTextbooks) {
+        this.amountOfTextbooks = amountOfTextbooks;
+    }
+
+    public int getFeesPaid() {
+        return feesPaid;
+    }
+
+    public void setFeesPaid(int feesPaid) {
+        this.feesPaid = feesPaid;
+    }
+
+    public int getPendingFees() {
+        return pendingFees;
+    }
+
+    public void setPendingFees(int pendingFees) {
+        this.pendingFees = pendingFees;
+    }
+
+    public int getHomeworkLeaderBoardScore() {
+        return homeworkLeaderBoardScore;
+    }
+
+    public void setHomeworkLeaderBoardScore(int homeworkLeaderBoardScore) {
+        this.homeworkLeaderBoardScore = homeworkLeaderBoardScore;
+    }
+
+    public MultipartFile getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(MultipartFile photo) {
+        this.photo = photo;
+    }
+
+    public MultipartFile getConsentForm() {
+        return consentForm;
+    }
+
+    public void setConsentForm(MultipartFile consentForm) {
+        this.consentForm = consentForm;
+    }
+
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public Date getDateOfRegistration() {
+        return dateOfRegistration;
+    }
+
+    public void setDateOfRegistration(Date dateOfRegistration) {
+        this.dateOfRegistration = dateOfRegistration;
+    }
+
+    public Date getDateOfFirstClass() {
+        return dateOfFirstClass;
+    }
+
+    public void setDateOfFirstClass(Date dateOfFirstClass) {
+        this.dateOfFirstClass = dateOfFirstClass;
+    }
+
+    public String getMothersName() {
+        return mothersName;
+    }
+
+    public void setMothersName(String mothersName) {
+        this.mothersName = mothersName;
+    }
+
+    public String getFathersName() {
+        return fathersName;
+    }
+
+    public void setFathersName(String fathersName) {
+        this.fathersName = fathersName;
+    }
+
+    public String getFathersEmailID() {
+        return fathersEmailID;
+    }
+
+    public void setFathersEmailID(String fathersEmailID) {
+        this.fathersEmailID = fathersEmailID;
+    }
+
+    public String getMothersEmailID() {
+        return mothersEmailID;
+    }
+
+    public void setMothersEmailID(String mothersEmailID) {
+        this.mothersEmailID = mothersEmailID;
+    }
+
+    public double getAttendancePercentage() {
+        return attendancePercentage;
+    }
+
+    public void setAttendancePercentage(double attendancePercentage) {
+        this.attendancePercentage = attendancePercentage;
+    }
+
+    public float getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(float phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public float getWhatsappNumber() {
+        return whatsappNumber;
+    }
+
+    public void setWhatsappNumber(float whatsappNumber) {
+        this.whatsappNumber = whatsappNumber;
+    }
 }

@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ControllerAdvice
-@ResponseStatus(value= HttpStatus.NOT_FOUND, reason="Illegal Admin Activity")  // 404
-public class IllegalAdminActionException extends Exception{
+@ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Illegal Admin Activity")  // 404
+public class IllegalAdminActionException extends Exception {
 
 
     public IllegalAdminActionException() {

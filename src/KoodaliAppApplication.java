@@ -2,7 +2,7 @@ import org.springframework.boot.SpringApplication;
 
 public class KoodaliAppApplication {
 
-    KoodaliAppApplication(){
+    KoodaliAppApplication() {
 
     }
 
@@ -12,15 +12,4 @@ public class KoodaliAppApplication {
         SpringApplication.run(KoodaliAppApplication.class, args);
     }
 
-    /*@SpringBootApplication
-public class RestServiceApplication {
-	RestServiceApplication() {
-	}
-
-	public static void main(String[] args) {
-		ModelStorage.createSampleModel();
-
-		SpringApplication.run(RestServiceApplication.class, args);
-	}
-}*/
 }

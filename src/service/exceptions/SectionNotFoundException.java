@@ -5,10 +5,10 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ControllerAdvice
-@ResponseStatus(value= HttpStatus.NOT_FOUND, reason="Section not found")  // 404
-public class SectionNotFoundException extends Exception{
+@ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Section not found")  // 404
+public class SectionNotFoundException extends Exception {
 
-    public SectionNotFoundException(){
+    public SectionNotFoundException() {
         super("""
                 The section does not exist.
                 Please check that your input format follows the follwoing RegEx:

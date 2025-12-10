@@ -1,6 +1,6 @@
 package repository;
 
-import model.*;
+import model.Person;
 
 import java.util.HashMap;
 import java.util.List;
@@ -10,11 +10,11 @@ public abstract class PersonRepository<T extends Person> {
     protected final HashMap<String, T> persons = new HashMap<>();
 
 
-    public boolean contains(T Person){
+    public boolean contains(T Person) {
         return persons.containsValue(Person);
     }
 
-    public boolean contains(String PersonID){
+    public boolean contains(String PersonID) {
         return persons.containsKey(PersonID);
     }
 
@@ -28,31 +28,31 @@ public abstract class PersonRepository<T extends Person> {
         Optional<T> first = persons
                 .values()
                 .stream()
-                .filter( t -> t.getFirstName().equals(name) || t.getLastName().equals(name))
+                .filter(t -> t.getFirstName().equals(name) || t.getLastName().equals(name))
                 .findFirst();
-       if(first.isPresent()){
-           Person p = first.get();
-           return Optional.of(p);
-       }
-       return Optional.empty();
+        if (first.isPresent()) {
+            Person p = first.get();
+            return Optional.of(p);
+        }
+        return Optional.empty();
     }
 
-    public T delete(String personID){
+    public T delete(String personID) {
         return persons
                 .remove(personID);
     }
 
-    public T add(T person){
+    public T add(T person) {
         return persons
-                .put(person.getID(),person);
+                .put(person.getID(), person);
     }
 
-    public List<T> getAll(){
+    public List<T> getAll() {
         return persons.values().stream().toList();
     }
 
-    public T update(T person){
+    public T update(T person) {
         return persons
-                .put(person.getID(),person);
+                .put(person.getID(), person);
     }
 }

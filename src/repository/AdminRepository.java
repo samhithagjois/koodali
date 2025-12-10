@@ -7,7 +7,7 @@ import java.util.HashMap;
 public class AdminRepository extends PersonRepository<Administrator> {
 
 
-    private HashMap<String,Administrator> admins;
+    private HashMap<String, Administrator> admins;
 
 
     public AdminRepository() {

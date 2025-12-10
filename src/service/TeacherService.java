@@ -3,11 +3,10 @@ package service;
 import model.Person;
 import model.Section;
 import model.Teacher;
-import service.exceptions.TeacherNotFoundException;
 import repository.SectionRepository;
 import repository.TeacherRepository;
 import service.exceptions.SectionNotFoundException;
-
+import service.exceptions.TeacherNotFoundException;
 
 import java.util.List;
 
@@ -40,11 +39,11 @@ public class TeacherService {
                 .orElseThrow(SectionNotFoundException::new);
     }
 
-    public Teacher createTeacher(String teacherId, String firstName, String lastName, String sectionID){
+    public Teacher createTeacher(String teacherId, String firstName, String lastName, String sectionID) {
         try {
 
             Section section = findSection(sectionID);
-            Teacher teacher  = new Teacher(teacherId,firstName,lastName,section.getName());
+            Teacher teacher = new Teacher(teacherId, firstName, lastName, section.getName());
             section.getTeachers().put(teacher.getID(), teacher);
             return teacherRepo.add(teacher);
 
@@ -53,8 +52,8 @@ public class TeacherService {
         }
     }
 
-    public boolean createTeachersFromList(List<Teacher> Teachers){
-        for (Teacher teacher:Teachers ) {
+    public boolean createTeachersFromList(List<Teacher> Teachers) {
+        for (Teacher teacher : Teachers) {
             teacherRepo.add(teacher);
             sectionRepo
                     .getAllSections()
@@ -72,14 +71,13 @@ public class TeacherService {
     }
 
 
-    public Teacher updateTeacher(Teacher teacher){
+    public Teacher updateTeacher(Teacher teacher) {
         return teacherRepo.update(teacher);
     }
 
 
-
-    public List<Teacher> listTeachersInSection(String sectionID){
-        try{
+    public List<Teacher> listTeachersInSection(String sectionID) {
+        try {
             Section section = findSection(sectionID);
             return section.getTeachers().values().stream().toList();
         } catch (SectionNotFoundException e) {
@@ -87,7 +85,7 @@ public class TeacherService {
         }
     }
 
-    public List<Teacher> getAllTeachers(){
+    public List<Teacher> getAllTeachers() {
         return teacherRepo.getAll();
     }
 }

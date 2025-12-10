@@ -11,15 +11,15 @@ public class SectionService {
 
     private final SectionRepository sectionRepository = new SectionRepository();
 
-    public SectionService(){
+    public SectionService() {
 
     }
 
     /**
      * Get mapping
      * gets all sections
-     * */
-    public List<Section> getAllSections(){
+     */
+    public List<Section> getAllSections() {
         return sectionRepository.getAllSections();
     }
 
@@ -29,15 +29,16 @@ public class SectionService {
 
     /**
      * gets section by its id and throws a SectionNotFoundException if it doesn't work
+     *
      * @param classId class ID
      * @return Section
      * @throws SectionNotFoundException "didn't find section"
-     * */
+     */
     public Section getSectionByID(String classId) throws SectionNotFoundException {
         Optional<Section> optionalSection = sectionRepository.findSectionByName(classId);
-        if(optionalSection.isEmpty()){
+        if (optionalSection.isEmpty()) {
             throw new SectionNotFoundException();
-        }else{
+        } else {
             return optionalSection.get();
         }
 
@@ -46,8 +47,8 @@ public class SectionService {
     /**
      * since the amount of sections is constant, all we can do is update a given section
      * since we do not add a class externally, if you want to add a new section, please talk to Samhitha
-     * */
-    public Section updateSection(Section section){
+     */
+    public Section updateSection(Section section) {
         return sectionRepository.updateSection(section);
     }
 
@@ -56,7 +57,7 @@ public class SectionService {
      * deletes a Section from the repository, for example if two sections get merged
      * does NOT delete the enum entry, that has to be done manually!
      */
-    public Section deleteSection(Section section){
+    public Section deleteSection(Section section) {
         try {
             return deleteSectionbyId(section.getName().name());
         } catch (SectionNotFoundException e) {
@@ -69,12 +70,11 @@ public class SectionService {
         if (sectionRepository.containsSection(sectionName)) {
             return sectionRepository.deleteSection(sectionName);
 
-        }else{
+        } else {
             throw new SectionNotFoundException();
         }
 
     }
-
 
 
 }

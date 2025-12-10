@@ -20,12 +20,12 @@ public final class SectionRepository {
     /**
      * contains helper functions.
      * to be used in the service to throw up gang sig- oops, exceptions
-     * */
-    public boolean containsSection(Section section){
+     */
+    public boolean containsSection(Section section) {
         return sections.containsValue(section);
     }
 
-    public boolean containsSection(String className){
+    public boolean containsSection(String className) {
         return sections.containsKey(ClassNames.valueOf(className));
     }
 
@@ -58,6 +58,7 @@ public final class SectionRepository {
     /**
      * deletes a section.
      * DELETE mapping sections/{name}
+     *
      * @param className as String
      * @return Section
      */
@@ -70,12 +71,13 @@ public final class SectionRepository {
      * as we have a constant amount of sections, the key stays the name of the section,
      * and so all we have to do is "put".
      * PUT mapping /sections with RequestBody Section updatedSection;
+     *
      * @param section Section
-     *  @return Section
-     * */
+     * @return Section
+     */
 
     public Section updateSection(Section section) {
-       return sections.put(section.getName(), section);
+        return sections.put(section.getName(), section);
     }
 
 

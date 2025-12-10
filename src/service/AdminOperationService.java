@@ -12,7 +12,7 @@ public class AdminOperationService {
     /**
      * all the repositories. Here is where most of the crossover work betwwen these repositories will
      * be happening.
-     * */
+     */
     private final StudentRepository studentRepo = new StudentRepository();
     private final TeacherRepository teacherRepo = new TeacherRepository();
 
@@ -83,13 +83,13 @@ public class AdminOperationService {
      * Then, we set the students' section  to the section, and we add the student to the sections' student list
      * we then update the repositories.
      * So with a find - check problem - add - update structure we will go through most of this Service
-     * @param adminID admins ID
+     *
+     * @param adminID   admins ID
      * @param studentID students ID
      * @param sectionID as String! eventhough in Student we have ClassNames, we have to find and validate the section
      *                  In our case, sectionID is simply the name of the section
      * @throws SectionNotFoundException,StudentNotFoundException,AdminNotFoundException,IllegalAdminActionException because all of this can happen
-     *
-     * */
+     */
     public Student addStudentToSection(String adminID, String studentID, String sectionID)
             throws
             StudentNotFoundException,
@@ -115,7 +115,7 @@ public class AdminOperationService {
 
     /**
      * same game with the teacher, just with a different exception thrown this time!
-     * */
+     */
     public Teacher addTeacherToSection(String adminID, String teacherID, String sectionID) throws
             SectionNotFoundException,
             AdminNotFoundException,
@@ -140,11 +140,9 @@ public class AdminOperationService {
     }
 
 
-
     /**
      * The next two methods reassign students/teachers from their old section into the new one
-     *
-     * */
+     */
     public Student reassignStudentToSection(String adminID, String studentID, String sectionID) {
         try {
             Student student = deleteStudentFromSection(adminID, studentID, sectionID);
@@ -185,13 +183,13 @@ public class AdminOperationService {
     /**
      * the next two methods remove the teacher/student from the system entirely.
      * This method needs special care because... well it's removing a student from the repository.
-     * */
+     */
     public Student removeStudentFromSystem(String adminID, String studentID) {
         try {
             Administrator admin = findAdmin(adminID);
-           Student student = findStudent(studentID);
-           Section section = findSection(student.getSection().toString());
-           checkPermissionToModify(admin,section);
+            Student student = findStudent(studentID);
+            Section section = findSection(student.getSection().toString());
+            checkPermissionToModify(admin, section);
 
         } catch (AdminNotFoundException | StudentNotFoundException | SectionNotFoundException |
                  IllegalAdminActionException e) {
@@ -208,7 +206,7 @@ public class AdminOperationService {
             Administrator admin = findAdmin(adminID);
             Teacher teacher = findTeacher(teacherID);
             Section section = findSection(teacher.getSection().toString());
-            checkPermissionToModify(admin,section);
+            checkPermissionToModify(admin, section);
 
         } catch (AdminNotFoundException | SectionNotFoundException |
                  IllegalAdminActionException | TeacherNotFoundException e) {
@@ -244,7 +242,6 @@ public class AdminOperationService {
     }
 
 
-
     public Teacher deleteTeacherFromSection(String adminID, String teacherID, String sectionID) {
         try {
             Teacher teacher = findTeacher(teacherID);
@@ -262,7 +259,7 @@ public class AdminOperationService {
             return teacher;
 
 
-        } catch (AdminNotFoundException | SectionNotFoundException  |
+        } catch (AdminNotFoundException | SectionNotFoundException |
                  IllegalAdminActionException | TeacherNotFoundException e) {
             throw new RuntimeException(e);
         }
