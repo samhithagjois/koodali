@@ -1,20 +1,43 @@
 package service;
 
+import model.AdminPermissions;
 import model.Administrator;
 import repository.AdminRepository;
+import service.exceptions.AdminNotFoundException;
 
-public class AdministratorService {
+import java.util.Optional;
+
+public class AdministratorService extends PersonService<Administrator>{
     //createAdmin
     //checkCredentials
 
-    //TODO!
-    private final AdminRepository adminRepo = new AdminRepository();
+    private final AdminRepository adminRepo;
 
-    public AdministratorService() {
-
+    public AdministratorService(AdminRepository adminRepo) {
+        super(adminRepo);
+        this.adminRepo = adminRepo;
     }
 
-    public Administrator removeAdmin(String adminID) {
-        return adminRepo.getAdmins().remove(adminID);
+    public Administrator findByID(String adminID){
+        return adminRepo
+                .findByID(adminID)
+                .orElseThrow(AdminNotFoundException::new);
     }
+
+    public Administrator addAdminRights(Administrator admin, AdminPermissions permission){
+        if(!admin.getPermissions().contains(permission)){
+            admin.addPermission(permission);
+            return admin;
+        }
+        return admin;
+    }
+
+    public Administrator removeAdminRights(Administrator admin, AdminPermissions permission){
+        if(admin.getPermissions().contains(permission)){
+            admin.getPermissions().remove(permission);
+            return admin;
+        }
+        return admin;
+    }
+
 }

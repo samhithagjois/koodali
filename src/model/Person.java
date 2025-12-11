@@ -12,6 +12,8 @@ public abstract class Person {
     protected String fullPostalAdress;
     //new attributes
     protected Date dateOfRegistration, dateOfClassStart;
+
+
     protected boolean activeStatus;
 
     public Person(String firstName, String lastName,
@@ -60,7 +62,70 @@ public abstract class Person {
         this.personID = personID;
     }
 
-    //TODO
+    public String getPersonID() {
+        return personID;
+    }
+
+    public void setPersonID(String personID) {
+        this.personID = personID;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getPinCode() {
+        return pinCode;
+    }
+
+    public void setPinCode(String pinCode) {
+        this.pinCode = pinCode;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getFullPostalAdress() {
+        return fullPostalAdress;
+    }
+
+    public void setFullPostalAdress(String fullPostalAdress) {
+        this.fullPostalAdress = fullPostalAdress;
+    }
+
+    public Date getDateOfRegistration() {
+        return dateOfRegistration;
+    }
+
+    public void setDateOfRegistration(Date dateOfRegistration) {
+        this.dateOfRegistration = dateOfRegistration;
+    }
+
+    public Date getDateOfClassStart() {
+        return dateOfClassStart;
+    }
+
+    public void setDateOfClassStart(Date dateOfClassStart) {
+        this.dateOfClassStart = dateOfClassStart;
+    }
+
+    public boolean isActiveStatus() {
+        return activeStatus;
+    }
+
+    public void setActiveStatus(boolean activeStatus) {
+        this.activeStatus = activeStatus;
+    }
+
   /*
     STA
       id : String

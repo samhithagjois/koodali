@@ -58,15 +58,12 @@ public class SectionService {
      * does NOT delete the enum entry, that has to be done manually!
      */
     public Section deleteSection(Section section) {
-        try {
-            return deleteSectionbyId(section.getName().name());
-        } catch (SectionNotFoundException e) {
 
-            throw new RuntimeException(e);
-        }
+            return deleteSectionbyId(section.getName().name());
+
     }
 
-    public Section deleteSectionbyId(String sectionName){
+    private Section deleteSectionbyId(String sectionName){
         if (sectionRepository.containsSection(sectionName)) {
             return sectionRepository.deleteSection(sectionName);
 

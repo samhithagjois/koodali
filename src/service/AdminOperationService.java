@@ -50,24 +50,21 @@ public class AdminOperationService {
      * returns the Person/Section it finds, or throws the respective Exception
      */
     private Administrator findAdmin(String adminID) throws AdminNotFoundException {
-        Person admin = adminRepo
+        return adminRepo
                 .findByID(adminID)
                 .orElseThrow(AdminNotFoundException::new);
-        return (Administrator) admin;
     }
 
     private Teacher findTeacher(String teacherID) throws TeacherNotFoundException {
-        Person teacher = teacherRepo
+        return teacherRepo
                 .findByID(teacherID)
                 .orElseThrow(TeacherNotFoundException::new);
-        return (Teacher) teacher;
     }
 
     private Student findStudent(String studentID) throws StudentNotFoundException {
-        Person student = studentRepo
+        return studentRepo
                 .findByID(studentID)
                 .orElseThrow(StudentNotFoundException::new);
-        return (Student) student;
     }
 
     private Section findSection(String sectionName) throws SectionNotFoundException {
@@ -90,12 +87,7 @@ public class AdminOperationService {
      *                  In our case, sectionID is simply the name of the section
      * @throws SectionNotFoundException,StudentNotFoundException,AdminNotFoundException,IllegalAdminActionException because all of this can happen
      */
-    public Student addStudentToSection(String adminID, String studentID, String sectionID)
-            throws
-            StudentNotFoundException,
-            SectionNotFoundException,
-            AdminNotFoundException,
-            IllegalAdminActionException {
+    public Student addStudentToSection(String adminID, String studentID, String sectionID){
 
         Student student = findStudent(studentID);
         Administrator admin = findAdmin(adminID);

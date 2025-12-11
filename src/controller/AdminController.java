@@ -6,10 +6,7 @@ import model.Teacher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import service.*;
 import service.exceptions.SectionNotFoundException;
 import service.exceptions.StudentNotFoundException;
@@ -46,19 +43,19 @@ public class AdminController {
         return new ResponseEntity<>(sectionService.getAllSections(), HttpStatus.OK);
     }
 
-    @GetMapping("admin/section/{classId}")
+    @GetMapping("admin/sections/{classId}")
     public ResponseEntity<Section> selectSection(@PathVariable String classId) {
 
         return new ResponseEntity<>(sectionService.getSectionByID(classId), HttpStatus.OK);
 
     }
 
-    @GetMapping("admin/section/{classId}/students")
+    @GetMapping("admin/sections/{classId}/students")
     public ResponseEntity<List<Student>> getStudentsOfSection(@PathVariable String classId) {
         return new ResponseEntity<>(studentService.listStudentsInSection(classId), HttpStatus.OK);
     }
 
-    @GetMapping("admin/section/{classId}/teachers")
+    @GetMapping("admin/sections/{classId}/teachers")
     public List<Teacher> getTeachersOfSection(@PathVariable String classId) {
             return sectionService.getSectionByID(classId).getTeachers().values().stream().toList();
 
@@ -81,6 +78,16 @@ public class AdminController {
 
     }
 
+    @DeleteMapping("admin/sections/{classId}")
+    public ResponseEntity<Section> removeSection(@PathVariable String classId){
+        Section section = sectionService.getSectionByID(classId);
+        sectionService.deleteSection(section);
+        return new ResponseEntity<>( sectionService.deleteSection(section),HttpStatus.OK);
+    }
+
+
+
+    //---------------------------------------------------------------
     public AdminOperationService getAdminOperationService() {
         return adminOperationService;
     }

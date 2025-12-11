@@ -9,8 +9,7 @@ public class TeacherController {
     /*TeacherController
   → HomeworkExcelImportService
       → HomeworkResult list
-  → PointsCalculationService
-      → points per student
+
   → LeaderboardService
       → update leaderboard repository
 */

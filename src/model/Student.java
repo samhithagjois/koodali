@@ -3,6 +3,7 @@ package model;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Student extends Person {
@@ -50,10 +51,10 @@ public class Student extends Person {
                    String fullPostalAdress, Date dateOfRegistration,
                    Date dateOfClassStart, boolean activeStatus, ClassNames section,
                    int amountOfTextbooks, int feesPaid, int pendingFees, int homeworkLeaderBoardScore,
-                   MultipartFile photo, MultipartFile consentForm, Date dateOfBirth, Date dateOfRegistration1,
+                  Date dateOfBirth,
                    Date dateOfFirstClass, String mothersName, String fathersName,
                    String fathersEmailID, String mothersEmailID, double attendancePercentage,
-                   float phoneNumber, float whatsappNumber, Map<String, Integer> homeworkPointsPerWeek) {
+                   float phoneNumber, float whatsappNumber) {
 
         super(firstName, lastName, personID,
                 city, pinCode, country, fullPostalAdress,
@@ -64,10 +65,9 @@ public class Student extends Person {
         this.feesPaid = feesPaid;
         this.pendingFees = pendingFees;
         this.homeworkLeaderBoardScore = homeworkLeaderBoardScore;
-        this.photo = photo;
-        this.consentForm = consentForm;
+        this.photo = null;
+        this.consentForm = null;
         this.dateOfBirth = dateOfBirth;
-        this.dateOfRegistration = dateOfRegistration1;
         this.dateOfFirstClass = dateOfFirstClass;
         this.mothersName = mothersName;
         this.fathersName = fathersName;
@@ -76,7 +76,7 @@ public class Student extends Person {
         this.attendancePercentage = attendancePercentage;
         this.phoneNumber = phoneNumber;
         this.whatsappNumber = whatsappNumber;
-        this.homeworkPointsPerWeek = homeworkPointsPerWeek;
+        this.homeworkPointsPerWeek = new HashMap<>();
     }
 
 
