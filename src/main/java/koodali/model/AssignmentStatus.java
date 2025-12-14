@@ -1,0 +1,10 @@
+package koodali.model;
+
+public enum AssignmentStatus {
+    NOT_READ,
+    READ_NOT_SUBMITTED,
+    SUBMITTED_NOT_GRADED,
+    GRADED,
+    GRADED_RECEIVED,
+    DEADLINE_MISSED;
+}

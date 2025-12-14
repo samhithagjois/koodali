@@ -1,19 +1,19 @@
-import model.*;
+import koodali.model.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import repository.AdminRepository;
-import repository.SectionRepository;
-import repository.StudentRepository;
-import repository.TeacherRepository;
+import koodali.repository.AdminRepository;
+import koodali.repository.SectionRepository;
+import koodali.repository.StudentRepository;
+import koodali.repository.TeacherRepository;
 
-import static model.ClassNames.MU_ADV;
-import static model.ClassNames.MU_BEG;
+import static koodali.model.ClassNames.MU_ADV;
+import static koodali.model.ClassNames.MU_BEG;
 
 public class BasicFunctionalityTest {
 
     /**
-     * This test class will only test the model + repository
-     * Service + Repository to be tested in a seperate class, controller + view to be tested with mock
+     * This test class will only test the koodali.model + koodali.repository
+     * Service + Repository to be tested in a seperate class, koodali.controller + koodali.view to be tested with mock
      * */
 
     Student sushruth = new Student("NKS_M_001", "Sushruth", "", MU_ADV);

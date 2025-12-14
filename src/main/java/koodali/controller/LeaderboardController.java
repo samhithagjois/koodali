@@ -1,0 +1,21 @@
+package koodali.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import koodali.service.LeaderboardService;
+
+@RestController
+@RequestMapping(path = "/api")
+public class LeaderboardController {
+
+    private final LeaderboardService leaderboardService;
+
+    @Autowired
+    public LeaderboardController(LeaderboardService leaderboardService) {
+        this.leaderboardService = leaderboardService;
+    }
+
+    //filter by section
+    //
+}

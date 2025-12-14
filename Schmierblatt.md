@@ -10,10 +10,10 @@ Sooo here is the plan :
 1. It will be something like moodle but very very simple. The login is done with the student/teachers's ID and the password, which will be assigned to the students in advance. 
 2. Then that takes them to the site. It is strictly for homework submission, exchange and download.
 
-3. The students have following view : | View Pending Assignments  | View Graded Assignments
+3. The students have following koodali.view : | View Pending Assignments  | View Graded Assignments
 
-4. The teachers have following view : | Upload Assignment | View Ungraded Assignments | View Graded Assignments | Student Overview
-5. The administrators have following view : | Manage Sections | Manage Students | Student Overview | Teachers Overview
+4. The teachers have following koodali.view : | Upload Assignment | View Ungraded Assignments | View Graded Assignments | Student Overview
+5. The administrators have following koodali.view : | Manage Sections | Manage Students | Student Overview | Teachers Overview
 
 6. So the workflow is :
     -> Teacher uploads assignment A for class B
