@@ -11,10 +11,10 @@ import java.util.Optional;
 @Component
 public final class SectionRepository {
 
-    private HashMap<ClassNames, Section> sections;
+    private final HashMap<ClassNames, Section> sections;
 
     public SectionRepository() {
-
+        sections = new HashMap<>();
     }
 
     /**
@@ -78,11 +78,6 @@ public final class SectionRepository {
 
     public Section updateSection(Section section) {
         return sections.put(section.getName(), section);
-    }
-
-
-    public void setSections(HashMap<ClassNames, Section> sections) {
-        this.sections = sections;
     }
 
 

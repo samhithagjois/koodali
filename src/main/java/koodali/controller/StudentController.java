@@ -1,11 +1,14 @@
 package koodali.controller;
 
+import koodali.model.Section;
 import koodali.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import koodali.service.StudentService;
 
@@ -28,10 +31,14 @@ public class StudentController {
         return new ResponseEntity<>(studentService.getAll(), HttpStatus.OK);
     }
 
+    @PutMapping("/sections")
+    public ResponseEntity<Student> updateStudent(@RequestBody Student updatedStudent) {
+        Student oldStudent = studentService.findByID(updatedStudent.getID());
+        //Person attributes
+        oldStudent.setAmountOfTextbooks(updatedStudent.getAmountOfTextbooks());
+        oldStudent.setAttendancePercentage(updatedStudent.getAttendancePercentage());
 
-    // correct error handling!
-    //https://spring.io/blog/2013/11/01/exception-handling-in-spring-mvc
-    //https://www.baeldung.com/exception-handling-for-rest-with-spring
-
+        return new ResponseEntity<>(oldStudent, HttpStatus.OK);
+    }
 
 }

@@ -9,18 +9,15 @@ import java.util.HashMap;
 public class TeacherRepository extends PersonRepository<Teacher> {
 
 
-    private static HashMap<String, Teacher> teachers;
+    private final  HashMap<String, Teacher> teachers;
 
     public TeacherRepository() {
         super();
         teachers = new HashMap<>();
     }
 
-    public static HashMap<String, Teacher> getTeachers() {
+    public HashMap<String, Teacher> getTeachers() {
         return teachers;
     }
 
-    public static void setTeachers(HashMap<String, Teacher> teachers) {
-        TeacherRepository.teachers = teachers;
     }
-}

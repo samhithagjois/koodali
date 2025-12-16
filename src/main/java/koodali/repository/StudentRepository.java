@@ -9,7 +9,7 @@ import java.util.HashMap;
 @Component
 public class StudentRepository extends PersonRepository<Student> {
 
-    private HashMap<String, Student> students;
+    private final HashMap<String, Student> students;
 
 
     public StudentRepository() {
@@ -20,9 +20,5 @@ public class StudentRepository extends PersonRepository<Student> {
 
     public HashMap<String, Student> getStudents() {
         return students;
-    }
-
-    public void setStudents(HashMap<String, Student> students) {
-        this.students = students;
     }
 }

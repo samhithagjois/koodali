@@ -1,9 +1,13 @@
 package koodali.repository;
 
+import koodali.model.Student;
 import org.springframework.stereotype.Component;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Component
 public class LeaderboardRepository {
@@ -18,9 +22,17 @@ public class LeaderboardRepository {
       this.pointsMap = new HashMap<>();
    }
 
-   public List<String> getSorted(){
-      return pointsMap.keySet().stream().sorted().toList();
+   public void addToLeaderboard(Student student, int newPoints){
+      pointsMap.put(student.getID(),student.getHomeworkLeaderBoardScore()+newPoints);
    }
+
+
+
+   public void getSortedbyID(){
+
+   }
+
+
 
 
 }

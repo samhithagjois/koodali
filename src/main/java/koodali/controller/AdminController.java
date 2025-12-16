@@ -37,6 +37,10 @@ public class AdminController {
         this.teacherService = teacherService;
     }
 
+    //___________________________
+    /**
+     * GET mappings
+     * */
     @GetMapping("admin/sections")
     public ResponseEntity<List<Section>> manageSections() {
         return new ResponseEntity<>(sectionService.getAllSections(), HttpStatus.OK);
@@ -77,6 +81,11 @@ public class AdminController {
 
     }
 
+    //-------------
+
+    /**
+     * Delete Mappings
+     * */
     @DeleteMapping("admin/sections/{classId}")
     public ResponseEntity<Section> removeSection(@PathVariable String classId){
         Section section = sectionService.getSectionByID(classId);
@@ -84,9 +93,24 @@ public class AdminController {
         return new ResponseEntity<>( sectionService.deleteSection(section),HttpStatus.OK);
     }
 
+//-------------
 
+    /**
+     * Put Mappings
+     * */
 
+    @PutMapping("/sections")
+    public ResponseEntity<Section> updateSection(@RequestBody Section updatedSection) {
+        Section oldSection = sectionService.getSectionByID(updatedSection.getName().toString());
+        oldSection.setName(updatedSection.getName());
+        oldSection.setStudents(updatedSection.getStudents());
+        oldSection.setTeachers(updatedSection.getTeachers());
+        return new ResponseEntity<>(oldSection, HttpStatus.OK);
+    }
     //---------------------------------------------------------------
+    /**
+     * getters
+     * */
     public AdminOperationService getAdminOperationService() {
         return adminOperationService;
     }

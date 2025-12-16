@@ -24,7 +24,7 @@ public class Section {
         return students;
     }
 
-    public void setStudents(LinkedHashMap<String, Student> students) {
+    public void setStudents(HashMap<String, Student> students) {
         this.students = students;
     }
 
@@ -32,7 +32,7 @@ public class Section {
         return teachers;
     }
 
-    public void setTeachers(LinkedHashMap<String, Teacher> teachers) {
+    public void setTeachers(HashMap<String, Teacher> teachers) {
         this.teachers = teachers;
     }
 }
