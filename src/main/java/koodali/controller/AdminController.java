@@ -16,6 +16,9 @@ import java.util.List;
 @RequestMapping(path = "/api")
 public class AdminController {
 
+    /**
+     * All the Service classes needed for our Admin Operations
+     * */
     private final AdminOperationService adminOperationService;
 
     private final AdministratorService adminService;
@@ -38,23 +41,20 @@ public class AdminController {
     }
 
     //___________________________
+
     /**
-     * GET mappings :
-     * - manageSections : List<Section>
-     * - selectSection : Section
-     * - getStudentsOfSection : List<Student>
-     * - getTeachersOfSection : list <Teacher>
-     * - selectStudentOfSection : Student
-     * DELETE mappings :
-     * - removeSection : Section
-     * PUT mappings :
-     * -
-     **/
+     * this method gets all sections and displays them in a List
+     * */
     @GetMapping("admin/sections")
     public ResponseEntity<List<Section>> manageSections() {
         return new ResponseEntity<>(sectionService.getAllSections(), HttpStatus.OK);
     }
 
+    /**
+     * this method selects a section
+     * @param classId the name of the class
+     * @return Section
+     * */
     @GetMapping("admin/sections/{classId}")
     public ResponseEntity<Section> selectSection(@PathVariable String classId) {
 
@@ -62,17 +62,30 @@ public class AdminController {
 
     }
 
+    /**
+     * this method lists out all the students of a certain section
+     * @param classId section name
+     * */
     @GetMapping("admin/sections/{classId}/students")
     public ResponseEntity<List<Student>> getStudentsOfSection(@PathVariable String classId) {
         return new ResponseEntity<>(studentService.listStudentsInSection(classId), HttpStatus.OK);
     }
 
+    /**
+     * this method lists out all teachers of a section
+     * @param classId section name
+     * */
     @GetMapping("admin/sections/{classId}/teachers")
     public List<Teacher> getTeachersOfSection(@PathVariable String classId) {
             return sectionService.getSectionByID(classId).getTeachers().values().stream().toList();
 
     }
 
+    /**
+     * this method selects a Student from the section
+     * @param classId class name
+     * @param studentId student ID
+     * */
     @GetMapping("admin/section/{classId}/students/{studentId}")
     public ResponseEntity<Student> selectStudentFromSection(@PathVariable String classId, @PathVariable String studentId) {
 
@@ -95,6 +108,11 @@ public class AdminController {
     /**
      * Delete Mappings
      * */
+
+    /**
+     * remove a Section from the Section repository
+     * @param classId class name
+     * */
     @DeleteMapping("admin/sections/{classId}")
     public ResponseEntity<Section> removeSection(@PathVariable String classId){
         Section section = sectionService.getSectionByID(classId);
@@ -108,6 +126,10 @@ public class AdminController {
      * Put Mappings
      * */
 
+    /**
+     * updates the section that exists already
+     * @param updatedSection Section object that is updated
+     * */
     @PutMapping("admin/sections")
     public ResponseEntity<Section> updateSection(@RequestBody Section updatedSection) {
         Section oldSection = sectionService.getSectionByID(updatedSection.getName().toString());
@@ -117,6 +139,16 @@ public class AdminController {
         return new ResponseEntity<>(oldSection, HttpStatus.OK);
     }
 
+    /**
+     * TODO:broken methods. fix the security context options later!
+     * */
+
+    /**
+     * reassigns a student to the new section.
+     * @param adminId ID of the admin
+     * @param sectionId name of the new class
+     * @param studentId ID of the student
+     * */
     @PutMapping ("admin/sections/{sectionId}/students/{studentId}")
     ResponseEntity<Student> reassignStudent(String adminId, @PathVariable String sectionId, @PathVariable String studentId){
         Student s = adminOperationService.reassignStudentToSection(adminId,studentId,sectionId);

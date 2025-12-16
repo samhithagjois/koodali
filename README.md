@@ -18,5 +18,11 @@ Functions to be implemented :
 2. Search function : find Student by name, find Student by ID
 3. Edit button : edits things in student class. update button also writes it back into excel file
 4. Teachers : : edit homework leaderboard, add points to each student. Save changes edits the student object and the student koodali.view, and sorts the koodali.view by points
-5. Filter functions in the student koodali.view : filter by fees not paid, filter by city, filter by group, filter by active and absent#
+5. Filter functions in the student koodali.view : filter by fees not paid, filter by city, filter by group, filter by active and absent
+
+login to localhost : user and the pw from the log
+
+Other links I will need :
+https://spring.io/guides/gs/handling-form-submission form submission 
+
 

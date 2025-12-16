@@ -8,6 +8,9 @@ import koodali.repository.TeacherRepository;
 import koodali.service.exceptions.*;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class AdminOperationService {
 
@@ -136,11 +139,13 @@ public class AdminOperationService {
 
     /**
      * The next two methods reassign students/teachers from their old section into the new one
+     * also has List methods
      */
-    public Student reassignStudentToSection(String adminID, String studentID, String sectionID) {
-        try {
-            Student student = deleteStudentFromSection(adminID, studentID, sectionID);
-            Section section = findSection(sectionID);
+    public Student reassignStudentToSection(String adminID, String studentID, String newSectionID) {
+
+            Student student = findStudent(studentID);
+            deleteStudentFromSection(adminID, studentID, student.getSection().toString());
+            Section section = findSection(newSectionID);
             //change the section in the student
             student.setSection(section.getName());
             //add student to new class
@@ -149,13 +154,35 @@ public class AdminOperationService {
             sectionRepo.updateSection(section);
             //update student in studentRepo and return
             return studentRepo.update(student);
-        } catch (SectionNotFoundException se) {
-            throw new RuntimeException(se);
+
+    }
+
+    public List<Student> reassignListOfStudentsToSection(String adminID, List<String> studentIDs, String newSectionID){
+        //create new list to return
+        List<Student> students = new ArrayList<>();
+        //find the new section to assign the student to
+        Section section = findSection(newSectionID);
+        for (String id:studentIDs) {
+            //find student object
+            Student student = findStudent(id);
+            //delete student from section
+            deleteStudentFromSection(adminID,id,student.getSection().toString());
+            //add section to student
+            student.setSection(section.getName());
+            //add student to new class
+            section.getStudents().put(student.getID(), student);
+            //update section in sectionRepo
+            sectionRepo.updateSection(section);
+            students.add(student);
         }
+        return students;
     }
 
 
+
+
     public Teacher reassignTeacherToSection(String adminID, String teacherID, String sectionID) {
+        //TODO : remove try catch block, change the first part like with student method
         try {
             Teacher teacher = deleteTeacherFromSection(adminID, teacherID, sectionID);
             ClassNames className = findSection(sectionID).getName();

@@ -28,14 +28,13 @@ public class StudentController {
         return new ResponseEntity<>(studentService.getAll(), HttpStatus.OK);
     }
 
-    @PutMapping("/sections")
+    @PutMapping("/students")
     public ResponseEntity<Student> updateStudent(@RequestBody Student updatedStudent) {
-        Student oldStudent = studentService.findByID(updatedStudent.getID());
+      //  Student oldStudent = studentService.findByID(updatedStudent.getID());
         //Person attributes
-        oldStudent.setAmountOfTextbooks(updatedStudent.getAmountOfTextbooks());
-        oldStudent.setAttendancePercentage(updatedStudent.getAttendancePercentage());
 
-        return new ResponseEntity<>(oldStudent, HttpStatus.OK);
+
+        return new ResponseEntity<>(studentService.update(updatedStudent), HttpStatus.OK);
     }
 
     @PostMapping("/students")
