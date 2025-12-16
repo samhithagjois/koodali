@@ -39,8 +39,17 @@ public class AdminController {
 
     //___________________________
     /**
-     * GET mappings
-     * */
+     * GET mappings :
+     * - manageSections : List<Section>
+     * - selectSection : Section
+     * - getStudentsOfSection : List<Student>
+     * - getTeachersOfSection : list <Teacher>
+     * - selectStudentOfSection : Student
+     * DELETE mappings :
+     * - removeSection : Section
+     * PUT mappings :
+     * -
+     **/
     @GetMapping("admin/sections")
     public ResponseEntity<List<Section>> manageSections() {
         return new ResponseEntity<>(sectionService.getAllSections(), HttpStatus.OK);
@@ -99,7 +108,7 @@ public class AdminController {
      * Put Mappings
      * */
 
-    @PutMapping("/sections")
+    @PutMapping("admin/sections")
     public ResponseEntity<Section> updateSection(@RequestBody Section updatedSection) {
         Section oldSection = sectionService.getSectionByID(updatedSection.getName().toString());
         oldSection.setName(updatedSection.getName());
@@ -107,7 +116,30 @@ public class AdminController {
         oldSection.setTeachers(updatedSection.getTeachers());
         return new ResponseEntity<>(oldSection, HttpStatus.OK);
     }
+
+    @PutMapping ("admin/sections/{sectionId}/students/{studentId}")
+    ResponseEntity<Student> reassignStudent(String adminId, @PathVariable String sectionId, @PathVariable String studentId){
+        Student s = adminOperationService.reassignStudentToSection(adminId,studentId,sectionId);
+        //TODO : Security Context!
+        return new ResponseEntity<>(s,HttpStatus.OK);
+    }
+
+    @PutMapping("admin/sections/{sectionId}/students")
+    ResponseEntity<Student> addStudentToSection(@PathVariable String sectionId, String studentId, String adminId){
+        Student s = adminOperationService.addStudentToSection(adminId, studentId, sectionId);
+        //TODO : Security Context!
+        return new ResponseEntity<>(s,HttpStatus.OK);
+    }
+
     //---------------------------------------------------------------
+
+    /**
+     * Post mappings
+     * */
+
+
+
+    //-----------------------------------------------------------
     /**
      * getters
      * */

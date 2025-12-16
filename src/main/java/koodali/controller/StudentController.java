@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import koodali.service.StudentService;
 
 import java.util.List;
@@ -41,4 +38,9 @@ public class StudentController {
         return new ResponseEntity<>(oldStudent, HttpStatus.OK);
     }
 
+    @PostMapping("/students")
+    public ResponseEntity<Student> createStudent(@RequestBody Student newStudent) {
+
+        return new ResponseEntity<>(studentService.createStudent(newStudent), HttpStatus.CREATED);
+    }
 }

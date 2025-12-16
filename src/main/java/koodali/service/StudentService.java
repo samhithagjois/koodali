@@ -37,6 +37,11 @@ public class StudentService extends PersonService<Student>{
                 .orElseThrow(StudentNotFoundException::new);
     }
 
+    public Student createStudent(Student student){
+        Section section = sectionService.getSectionByID(student.getSection().toString());
+        section.getStudents().put(student.getID(),student);
+       return studentRepo.add(student);
+    }
 
     public Student createStudent(String studentId, String firstName, String lastName, String sectionID) {
 
@@ -73,7 +78,7 @@ public class StudentService extends PersonService<Student>{
 
     }
 
-    public boolean createStudentsFromList(List<Student> students) {
+    public void createStudentsFromList(List<Student> students) {
         for (Student student : students) {
             studentRepo.add(student);
             sectionService
@@ -88,7 +93,6 @@ public class StudentService extends PersonService<Student>{
                             .getStudents()
                             .put(student.getID(), student));
         }
-        return true;
     }
 
     public Student addHomeworkPoints(String studentID,String week, int points){
