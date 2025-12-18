@@ -10,6 +10,7 @@ import koodali.service.exceptions.StudentNotFoundException;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class StudentService extends PersonService<Student>{
@@ -62,8 +63,8 @@ public class StudentService extends PersonService<Student>{
                                  int amountOfTextbooks, int feesPaid, int pendingFees, int homeworkLeaderBoardScore,
                                  Date dateOfBirth,
                                  Date dateOfFirstClass, String mothersName, String fathersName,
-                                 String fathersEmailID, String mothersEmailID, double attendancePercentage,
-                                 float phoneNumber, float whatsappNumber) {
+                                 String fathersEmailID, String mothersEmailID, Map<String, Boolean> attendancePercentage,
+                                 String phoneNumber, String whatsappNumber) {
 
         Section section = sectionService.getSectionByID(sectionID.toString());
         Student student = new Student(

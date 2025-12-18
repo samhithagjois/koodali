@@ -34,8 +34,9 @@ public class Student extends Person {
     private Date dateOfBirth, dateOfRegistration, dateOfFirstClass;
 
     private String mothersName, fathersName, fathersEmailID, mothersEmailID;
-    private double attendancePercentage;
-    private float phoneNumber, whatsappNumber;
+    private Map<String, Boolean> attendance;
+    private String phoneNumber;
+    private String whatsappNumber;
 
     private Map<String,Integer> homeworkPointsPerWeek;
 
@@ -51,10 +52,10 @@ public class Student extends Person {
                    String fullPostalAdress, Date dateOfRegistration,
                    Date dateOfClassStart, boolean activeStatus, ClassNames section,
                    int amountOfTextbooks, int feesPaid, int pendingFees, int homeworkLeaderBoardScore,
-                  Date dateOfBirth,
+                   Date dateOfBirth,
                    Date dateOfFirstClass, String mothersName, String fathersName,
-                   String fathersEmailID, String mothersEmailID, double attendancePercentage,
-                   float phoneNumber, float whatsappNumber) {
+                   String fathersEmailID, String mothersEmailID, Map<String, Boolean> attendancePercentage,
+                   String phoneNumber, String whatsappNumber) {
 
         super(firstName, lastName, personID,
                 city, pinCode, country, fullPostalAdress,
@@ -73,7 +74,7 @@ public class Student extends Person {
         this.fathersName = fathersName;
         this.fathersEmailID = fathersEmailID;
         this.mothersEmailID = mothersEmailID;
-        this.attendancePercentage = attendancePercentage;
+        this.attendance = attendancePercentage;
         this.phoneNumber = phoneNumber;
         this.whatsappNumber = whatsappNumber;
         this.homeworkPointsPerWeek = new HashMap<>();
@@ -193,27 +194,27 @@ public class Student extends Person {
         this.mothersEmailID = mothersEmailID;
     }
 
-    public double getAttendancePercentage() {
-        return attendancePercentage;
+    public Map<String, Boolean> getAttendance() {
+        return attendance;
     }
 
-    public void setAttendancePercentage(double attendancePercentage) {
-        this.attendancePercentage = attendancePercentage;
+    public void setAttendance(Map<String, Boolean> attendance) {
+        this.attendance = attendance;
     }
 
-    public float getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(float phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
-    public float getWhatsappNumber() {
+    public String getWhatsappNumber() {
         return whatsappNumber;
     }
 
-    public void setWhatsappNumber(float whatsappNumber) {
+    public void setWhatsappNumber(String whatsappNumber) {
         this.whatsappNumber = whatsappNumber;
     }
 
