@@ -42,4 +42,9 @@ public class StudentController {
 
         return new ResponseEntity<>(studentService.createStudent(newStudent), HttpStatus.CREATED);
     }
+
+    @DeleteMapping("/students/{id}")
+    public ResponseEntity<Student> deleteStudent(@PathVariable String id){
+        return new ResponseEntity<>(studentService.delete(id),HttpStatus.OK);
+    }
 }

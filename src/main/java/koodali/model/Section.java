@@ -1,15 +1,29 @@
 package koodali.model;
 
+import java.util.Date;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 
 public class Section {
     private ClassNames name;
     private HashMap<String, Student> students;
     private HashMap<String, Teacher> teachers;
 
+    private HashMap<Date, Boolean> classSchedule;
+
     public Section(ClassNames name) {
         this.name = name;
+        this.students = new HashMap<>();
+        this.teachers = new HashMap<>();
+        this.classSchedule = new HashMap<>();
+        //TODO : you should be able to add and change things in the class schedule
+    }
+
+    public HashMap<Date, Boolean> getClassSchedule() {
+        return classSchedule;
+    }
+
+    public void setClassSchedule(HashMap<Date, Boolean> classSchedule) {
+        this.classSchedule = classSchedule;
     }
 
     public ClassNames getName() {

@@ -38,6 +38,27 @@ public class StudentService extends PersonService<Student>{
                 .orElseThrow(StudentNotFoundException::new);
     }
 
+    public double calculateAttendancePercentage(String studentID, String classID){
+        Student student = findByID(studentID);
+        Section section = sectionService.getSectionByID(classID);
+        List<Date> dates = section
+                .getClassSchedule()
+                .keySet()
+                .stream()
+                .toList();
+        List<Date> studentAttended = student
+                .getAttendance()
+                .entrySet()
+                .stream()
+                .filter(Map.Entry::getValue)
+                .map(Map.Entry::getKey)
+                .toList();
+
+        //TODO : test!
+        return (double) studentAttended.size()/dates.size();
+
+    }
+
     public Student createStudent(Student student){
         Section section = sectionService.getSectionByID(student.getSection().toString());
         section.getStudents().put(student.getID(),student);
@@ -63,7 +84,7 @@ public class StudentService extends PersonService<Student>{
                                  int amountOfTextbooks, int feesPaid, int pendingFees, int homeworkLeaderBoardScore,
                                  Date dateOfBirth,
                                  Date dateOfFirstClass, String mothersName, String fathersName,
-                                 String fathersEmailID, String mothersEmailID, Map<String, Boolean> attendancePercentage,
+                                 String fathersEmailID, String mothersEmailID, Map<Date, Boolean> attendancePercentage,
                                  String phoneNumber, String whatsappNumber) {
 
         Section section = sectionService.getSectionByID(sectionID.toString());
@@ -96,13 +117,16 @@ public class StudentService extends PersonService<Student>{
         }
     }
 
-    public Student addHomeworkPoints(String studentID,String week, int points){
+    public Student addHomeworkPoints(String studentID, Date week, int points){
         Student student = findByID(studentID);
         student.getHomeworkPointsPerWeek().put(week,points);
         student.setHomeworkLeaderBoardScore(student.getHomeworkLeaderBoardScore() + points);
         return update(student);
 
     }
+
+    //TODO : add getTotalPoints
+
 
 
     public List<Student> listStudentsInSection(String sectionID) {

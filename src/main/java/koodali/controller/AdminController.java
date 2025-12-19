@@ -106,10 +106,6 @@ public class AdminController {
     //-------------
 
     /**
-     * Delete Mappings
-     * */
-
-    /**
      * remove a Section from the Section repository
      * @param classId class name
      * */
@@ -123,10 +119,6 @@ public class AdminController {
 //-------------
 
     /**
-     * Put Mappings
-     * */
-
-    /**
      * updates the section that exists already
      * @param updatedSection Section object that is updated
      * */
@@ -138,10 +130,6 @@ public class AdminController {
         oldSection.setTeachers(updatedSection.getTeachers());
         return new ResponseEntity<>(oldSection, HttpStatus.OK);
     }
-
-    /**
-     * TODO:broken methods. fix the security context options later!
-     * */
 
     /**
      * reassigns a student to the new section.

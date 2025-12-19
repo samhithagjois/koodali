@@ -34,11 +34,11 @@ public class Student extends Person {
     private Date dateOfBirth, dateOfRegistration, dateOfFirstClass;
 
     private String mothersName, fathersName, fathersEmailID, mothersEmailID;
-    private Map<String, Boolean> attendance;
+    private Map<Date, Boolean> attendance;
     private String phoneNumber;
     private String whatsappNumber;
 
-    private Map<String,Integer> homeworkPointsPerWeek;
+    private Map<Date, Integer> homeworkPointsPerWeek;
 
 
     public Student(String personID, String firstName, String lastName, ClassNames section) {
@@ -54,7 +54,7 @@ public class Student extends Person {
                    int amountOfTextbooks, int feesPaid, int pendingFees, int homeworkLeaderBoardScore,
                    Date dateOfBirth,
                    Date dateOfFirstClass, String mothersName, String fathersName,
-                   String fathersEmailID, String mothersEmailID, Map<String, Boolean> attendancePercentage,
+                   String fathersEmailID, String mothersEmailID, Map<Date, Boolean> attendancePercentage,
                    String phoneNumber, String whatsappNumber) {
 
         super(firstName, lastName, personID,
@@ -77,7 +77,7 @@ public class Student extends Person {
         this.attendance = attendancePercentage;
         this.phoneNumber = phoneNumber;
         this.whatsappNumber = whatsappNumber;
-        this.homeworkPointsPerWeek = new HashMap<>();
+        this.homeworkPointsPerWeek = new HashMap<Date, Integer>();
     }
 
 
@@ -194,11 +194,11 @@ public class Student extends Person {
         this.mothersEmailID = mothersEmailID;
     }
 
-    public Map<String, Boolean> getAttendance() {
+    public Map<Date, Boolean> getAttendance() {
         return attendance;
     }
 
-    public void setAttendance(Map<String, Boolean> attendance) {
+    public void setAttendance(Map<Date, Boolean> attendance) {
         this.attendance = attendance;
     }
 
@@ -218,11 +218,11 @@ public class Student extends Person {
         this.whatsappNumber = whatsappNumber;
     }
 
-    public Map<String, Integer> getHomeworkPointsPerWeek() {
+    public Map<Date, Integer> getHomeworkPointsPerWeek() {
         return homeworkPointsPerWeek;
     }
 
-    public void setHomeworkPointsPerWeek(Map<String, Integer> homeworkPointsPerWeek) {
+    public void setHomeworkPointsPerWeek(Map<Date, Integer> homeworkPointsPerWeek) {
         this.homeworkPointsPerWeek = homeworkPointsPerWeek;
     }
 }
