@@ -6,7 +6,7 @@ import java.util.List;
 public class Administrator extends Person {
 
 
-    private List<AdminPermissions> permissions;
+    private final List<AdminPermissions> permissions;
 
     public Administrator(String personID, String firstName, String lastName) {
         super(personID, firstName, lastName);
@@ -18,13 +18,6 @@ public class Administrator extends Person {
      */
     public List<AdminPermissions> getPermissions() {
         return permissions;
-    }
-
-    /**
-     * standard setter
-     */
-    public void setPermissions(List<AdminPermissions> permissions) {
-        this.permissions = permissions;
     }
 
     /**

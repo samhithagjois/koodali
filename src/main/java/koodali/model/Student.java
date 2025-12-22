@@ -2,7 +2,8 @@ package koodali.model;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,14 +32,16 @@ public class Student extends Person {
     //      consent form  : Multipart file
     private int amountOfTextbooks, feesPaid, pendingFees, homeworkLeaderBoardScore;
     private MultipartFile photo, consentForm;
-    private Date dateOfBirth, dateOfRegistration, dateOfFirstClass;
+    private LocalDate dateOfBirth;
+    private LocalDateTime dateOfRegistration;
+    private LocalDate dateOfFirstClass;
 
     private String mothersName, fathersName, fathersEmailID, mothersEmailID;
-    private Map<Date, Boolean> attendance;
+    private Map<LocalDate, Boolean> attendance;
     private String phoneNumber;
     private String whatsappNumber;
 
-    private Map<Date, Integer> homeworkPointsPerWeek;
+    private Map<LocalDate, Integer> homeworkPointsPerWeek;
 
 
     public Student(String personID, String firstName, String lastName, ClassNames section) {
@@ -49,12 +52,12 @@ public class Student extends Person {
 
     public Student(String firstName, String lastName, String personID,
                    String city, String pinCode, String country,
-                   String fullPostalAdress, Date dateOfRegistration,
-                   Date dateOfClassStart, boolean activeStatus, ClassNames section,
+                   String fullPostalAdress, LocalDateTime dateOfRegistration,
+                   LocalDateTime dateOfClassStart, boolean activeStatus, ClassNames section,
                    int amountOfTextbooks, int feesPaid, int pendingFees, int homeworkLeaderBoardScore,
-                   Date dateOfBirth,
-                   Date dateOfFirstClass, String mothersName, String fathersName,
-                   String fathersEmailID, String mothersEmailID, Map<Date, Boolean> attendancePercentage,
+                   LocalDate dateOfBirth,
+                   LocalDate dateOfFirstClass, String mothersName, String fathersName,
+                   String fathersEmailID, String mothersEmailID, Map<LocalDate, Boolean> attendancePercentage,
                    String phoneNumber, String whatsappNumber) {
 
         super(firstName, lastName, personID,
@@ -77,7 +80,7 @@ public class Student extends Person {
         this.attendance = attendancePercentage;
         this.phoneNumber = phoneNumber;
         this.whatsappNumber = whatsappNumber;
-        this.homeworkPointsPerWeek = new HashMap<Date, Integer>();
+        this.homeworkPointsPerWeek = new HashMap<LocalDate, Integer>();
     }
 
 
@@ -138,27 +141,27 @@ public class Student extends Person {
         this.consentForm = consentForm;
     }
 
-    public Date getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public Date getDateOfRegistration() {
+    public LocalDateTime getDateOfRegistration() {
         return dateOfRegistration;
     }
 
-    public void setDateOfRegistration(Date dateOfRegistration) {
+    public void setDateOfRegistration(LocalDateTime dateOfRegistration) {
         this.dateOfRegistration = dateOfRegistration;
     }
 
-    public Date getDateOfFirstClass() {
+    public LocalDate getDateOfFirstClass() {
         return dateOfFirstClass;
     }
 
-    public void setDateOfFirstClass(Date dateOfFirstClass) {
+    public void setDateOfFirstClass(LocalDate dateOfFirstClass) {
         this.dateOfFirstClass = dateOfFirstClass;
     }
 
@@ -194,11 +197,11 @@ public class Student extends Person {
         this.mothersEmailID = mothersEmailID;
     }
 
-    public Map<Date, Boolean> getAttendance() {
+    public Map<LocalDate, Boolean> getAttendance() {
         return attendance;
     }
 
-    public void setAttendance(Map<Date, Boolean> attendance) {
+    public void setAttendance(Map<LocalDate, Boolean> attendance) {
         this.attendance = attendance;
     }
 
@@ -218,11 +221,11 @@ public class Student extends Person {
         this.whatsappNumber = whatsappNumber;
     }
 
-    public Map<Date, Integer> getHomeworkPointsPerWeek() {
+    public Map<LocalDate, Integer> getHomeworkPointsPerWeek() {
         return homeworkPointsPerWeek;
     }
 
-    public void setHomeworkPointsPerWeek(Map<Date, Integer> homeworkPointsPerWeek) {
+    public void setHomeworkPointsPerWeek(Map<LocalDate, Integer> homeworkPointsPerWeek) {
         this.homeworkPointsPerWeek = homeworkPointsPerWeek;
     }
 }

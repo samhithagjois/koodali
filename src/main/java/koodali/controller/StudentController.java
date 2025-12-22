@@ -47,4 +47,17 @@ public class StudentController {
     public ResponseEntity<Student> deleteStudent(@PathVariable String id){
         return new ResponseEntity<>(studentService.delete(id),HttpStatus.OK);
     }
+
+    /*
+     @GetMapping("/greeting")
+  public String greetingForm(Model model) {
+    model.addAttribute("greeting", new Greeting());
+    return "greeting";
+  }
+
+  @PostMapping("/greeting")
+  public String greetingSubmit(@ModelAttribute Greeting greeting, Model model) {
+    model.addAttribute("greeting", greeting);
+    return "result";
+  }*/
 }

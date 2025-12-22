@@ -1,6 +1,6 @@
 package koodali.model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public abstract class Person {
     protected String firstName;
@@ -11,7 +11,8 @@ public abstract class Person {
     protected String country;
     protected String fullPostalAdress;
     //new attributes
-    protected Date dateOfRegistration, dateOfClassStart;
+    protected LocalDateTime dateOfRegistration;
+    protected LocalDateTime dateOfClassStart;
 
 
     protected boolean activeStatus;
@@ -19,7 +20,7 @@ public abstract class Person {
     public Person(String firstName, String lastName,
                   String personID, String city, String pinCode,
                   String country, String fullPostalAdress,
-                  Date dateOfRegistration, Date dateOfClassStart, boolean activeStatus) {
+                  LocalDateTime dateOfRegistration, LocalDateTime dateOfClassStart, boolean activeStatus) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.personID = personID;
@@ -102,19 +103,19 @@ public abstract class Person {
         this.fullPostalAdress = fullPostalAdress;
     }
 
-    public Date getDateOfRegistration() {
+    public LocalDateTime getDateOfRegistration() {
         return dateOfRegistration;
     }
 
-    public void setDateOfRegistration(Date dateOfRegistration) {
+    public void setDateOfRegistration(LocalDateTime dateOfRegistration) {
         this.dateOfRegistration = dateOfRegistration;
     }
 
-    public Date getDateOfClassStart() {
+    public LocalDateTime getDateOfClassStart() {
         return dateOfClassStart;
     }
 
-    public void setDateOfClassStart(Date dateOfClassStart) {
+    public void setDateOfClassStart(LocalDateTime dateOfClassStart) {
         this.dateOfClassStart = dateOfClassStart;
     }
 

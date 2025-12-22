@@ -8,6 +8,8 @@ import koodali.repository.StudentRepository;
 import koodali.service.exceptions.SectionNotFoundException;
 import koodali.service.exceptions.StudentNotFoundException;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -79,11 +81,11 @@ public class StudentService extends PersonService<Student>{
                                  String lastName,
                                  ClassNames sectionID,
                                  String city, String pinCode, String country,
-                                 String fullPostalAdress, Date dateOfRegistration,
-                                 Date dateOfClassStart, boolean activeStatus,
+                                 String fullPostalAdress, LocalDateTime dateOfRegistration,
+                                 LocalDateTime dateOfClassStart, boolean activeStatus,
                                  int amountOfTextbooks, int feesPaid, int pendingFees, int homeworkLeaderBoardScore,
-                                 Date dateOfBirth,
-                                 Date dateOfFirstClass, String mothersName, String fathersName,
+                                 LocalDate dateOfBirth,
+                                 LocalDate dateOfFirstClass, String mothersName, String fathersName,
                                  String fathersEmailID, String mothersEmailID, Map<Date, Boolean> attendancePercentage,
                                  String phoneNumber, String whatsappNumber) {
 
