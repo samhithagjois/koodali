@@ -48,7 +48,7 @@ public class StudentService extends PersonService<Student>{
                 .keySet()
                 .stream()
                 .toList();
-        List<Date> studentAttended = student
+        List<LocalDate> studentAttended = student
                 .getAttendance()
                 .entrySet()
                 .stream()
@@ -86,7 +86,7 @@ public class StudentService extends PersonService<Student>{
                                  int amountOfTextbooks, int feesPaid, int pendingFees, int homeworkLeaderBoardScore,
                                  LocalDate dateOfBirth,
                                  LocalDate dateOfFirstClass, String mothersName, String fathersName,
-                                 String fathersEmailID, String mothersEmailID, Map<Date, Boolean> attendancePercentage,
+                                 String fathersEmailID, String mothersEmailID, Map<LocalDate, Boolean> attendancePercentage,
                                  String phoneNumber, String whatsappNumber) {
 
         Section section = sectionService.getSectionByID(sectionID.toString());
@@ -119,7 +119,7 @@ public class StudentService extends PersonService<Student>{
         }
     }
 
-    public Student addHomeworkPoints(String studentID, Date week, int points){
+    public Student addHomeworkPoints(String studentID, LocalDate week, int points){
         Student student = findByID(studentID);
         student.getHomeworkPointsPerWeek().put(week,points);
         student.setHomeworkLeaderBoardScore(student.getHomeworkLeaderBoardScore() + points);
