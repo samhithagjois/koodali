@@ -7,7 +7,6 @@ public class Section {
     private ClassNames name;
     private HashMap<String, Student> students;
     private HashMap<String, Teacher> teachers;
-
     private HashMap<Date, Boolean> classSchedule;
 
     public Section(ClassNames name) {
@@ -16,6 +15,10 @@ public class Section {
         this.teachers = new HashMap<>();
         this.classSchedule = new HashMap<>();
         //TODO : you should be able to add and change things in the class schedule
+    }
+
+    public String getID(){
+        return this.name.toString();
     }
 
     public HashMap<Date, Boolean> getClassSchedule() {

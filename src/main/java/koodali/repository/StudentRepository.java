@@ -9,16 +9,16 @@ import java.util.HashMap;
 @Component
 public class StudentRepository extends PersonRepository<Student> {
 
-    private final HashMap<String, Student> students;
+    //private final HashMap<String, Student> students;
 
 
     public StudentRepository() {
         super();
-        students = new HashMap<>();
+       // students = new HashMap<>();
 
     }
 
-    public HashMap<String, Student> getStudents() {
+  /*  public HashMap<String, Student> getStudents() {
         return students;
-    }
+    }*/
 }

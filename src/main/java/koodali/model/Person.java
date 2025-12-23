@@ -63,14 +63,6 @@ public abstract class Person {
         this.personID = personID;
     }
 
-    public String getPersonID() {
-        return personID;
-    }
-
-    public void setPersonID(String personID) {
-        this.personID = personID;
-    }
-
     public String getCity() {
         return city;
     }

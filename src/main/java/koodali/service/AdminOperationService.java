@@ -25,8 +25,14 @@ public class AdminOperationService {
 
     private final SectionRepository sectionRepo = new SectionRepository();
 
-    public AdminOperationService() {
+    private final StudentService studentService;
+    private final TeacherService teacherService;
+    private final AdministratorService adminService;
 
+    public AdminOperationService() {
+        studentService = new StudentService(studentRepo);
+        teacherService = new TeacherService(teacherRepo);
+        adminService = new AdministratorService(adminRepo);
     }
 
     /**
@@ -41,7 +47,7 @@ public class AdminOperationService {
      * @throws IllegalAdminActionException if for example a Munich admin tries changing Ingolstadt
      */
     public boolean checkPermissionToModify(Administrator admin, Section section) throws IllegalAdminActionException {
-        String area = section.getName().toString().substring(0, 1);
+        String area = section.getName().toString().substring(0, 2);
         for (AdminPermissions permission : admin.getPermissions()) {
             if (!permission.toString().equals(area)) {
                 throw new IllegalAdminActionException();
@@ -76,6 +82,43 @@ public class AdminOperationService {
         return sectionRepo
                 .findSectionByName(sectionName)
                 .orElseThrow(SectionNotFoundException::new);
+    }
+
+    /**
+     * creates/adds person to system
+     * @param person either the Student, Admin or Teacher to be added to the system
+     * */
+    public Person addPersonToSystem(Person person){
+        if(person instanceof Student s){
+            if(studentService.contains(s)){
+                throw new DuplicatePersonException();
+
+            }
+            return studentService.save(s);
+
+        }if (person instanceof Teacher t){
+            if(teacherService.contains(t)){
+                throw new DuplicatePersonException();
+
+            }
+            return teacherService.save(t);
+        }if (person instanceof Administrator a){
+            if(adminService.contains(a)){
+                throw new DuplicatePersonException();
+            }
+            return adminService.save(a);
+        }else throw new IllegalStateException("Unsupported person type: " + person.getClass());
+    }
+
+    /**
+     * adds a List of person(s) to the System.
+     * */
+    public List<Person> addListOfPersonsToSystem(List<Person> personList){
+        List<Person> result = new ArrayList<>();
+        for (Person person:personList) {
+            result.add(addPersonToSystem(person));
+        }
+        return result;
     }
 
 
@@ -182,8 +225,6 @@ public class AdminOperationService {
 
 
     public Teacher reassignTeacherToSection(String adminID, String teacherID, String sectionID) {
-        //TODO : remove try catch block, change the first part like with student method
-        try {
             Teacher teacher = deleteTeacherFromSection(adminID, teacherID, sectionID);
             ClassNames className = findSection(sectionID).getName();
             Section section = findSection(sectionID);
@@ -195,9 +236,7 @@ public class AdminOperationService {
             sectionRepo.updateSection(section);
 
             return teacherRepo.update(teacher);
-        } catch (SectionNotFoundException se) {
-            throw new RuntimeException(se);
-        }
+
     }
 
 
@@ -206,16 +245,11 @@ public class AdminOperationService {
      * This method needs special care because... well it's removing a student from the koodali.repository.
      */
     public Student removeStudentFromSystem(String adminID, String studentID) {
-        try {
+
             Administrator admin = findAdmin(adminID);
             Student student = findStudent(studentID);
             Section section = findSection(student.getSection().toString());
             checkPermissionToModify(admin, section);
-
-        } catch (AdminNotFoundException | StudentNotFoundException | SectionNotFoundException |
-                 IllegalAdminActionException e) {
-            throw new RuntimeException(e);
-        }
 
         return studentRepo.delete(studentID);
     }
@@ -223,22 +257,19 @@ public class AdminOperationService {
 
     public Teacher removeTeacherFromSystem(String adminID, String teacherID) {
 
-        try {
+
             Administrator admin = findAdmin(adminID);
             Teacher teacher = findTeacher(teacherID);
             Section section = findSection(teacher.getSection().toString());
             checkPermissionToModify(admin, section);
 
-        } catch (AdminNotFoundException | SectionNotFoundException |
-                 IllegalAdminActionException | TeacherNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+
 
         return teacherRepo.delete(teacherID);
     }
 
-    public Student deleteStudentFromSection(String adminID, String studentID, String sectionID) {
-        try {
+    public void deleteStudentFromSection(String adminID, String studentID, String sectionID) {
+
             Student student = findStudent(studentID);
             Administrator admin = findAdmin(adminID);
             Section section = findSection(sectionID);
@@ -251,20 +282,13 @@ public class AdminOperationService {
                     .findSectionByName(student.getSection().name())
                     .ifPresent(section1 -> section1.getStudents().remove(studentID, student));
             student.setSection(null);
-            return student;
-
-
-        } catch (AdminNotFoundException | SectionNotFoundException | StudentNotFoundException |
-                 IllegalAdminActionException e) {
-            throw new RuntimeException(e);
-        }
 
 
     }
 
 
     public Teacher deleteTeacherFromSection(String adminID, String teacherID, String sectionID) {
-        try {
+
             Teacher teacher = findTeacher(teacherID);
             Administrator admin = findAdmin(adminID);
             Section section = findSection(sectionID);
@@ -280,10 +304,6 @@ public class AdminOperationService {
             return teacher;
 
 
-        } catch (AdminNotFoundException | SectionNotFoundException |
-                 IllegalAdminActionException | TeacherNotFoundException e) {
-            throw new RuntimeException(e);
-        }
 
 
     }

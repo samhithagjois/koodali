@@ -9,6 +9,15 @@ import koodali.service.exceptions.*;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
+
+
+    @ExceptionHandler(DuplicatePersonException.class)
+    public ResponseEntity<String> handleDuplicatePerson(DuplicatePersonException ex) {
+        return ResponseEntity
+                .status(HttpStatus.CONFLICT)
+                .body(ex.getMessage());
+    }
+
     @ExceptionHandler(SectionNotFoundException.class)
     public ResponseEntity<String> handleSectionNotFound(SectionNotFoundException ex) {
         return ResponseEntity

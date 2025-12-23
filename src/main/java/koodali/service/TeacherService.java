@@ -3,7 +3,6 @@ package koodali.service;
 import koodali.model.Section;
 import koodali.model.Teacher;
 import koodali.repository.TeacherRepository;
-import koodali.service.exceptions.SectionNotFoundException;
 import koodali.service.exceptions.TeacherNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +28,7 @@ public class TeacherService extends PersonService<Teacher>{
                 .orElseThrow(TeacherNotFoundException::new);
     }
 
+
     public Teacher findTeacherbyName(String name){
         return teacherRepo
                 .findByName(name)
@@ -36,22 +36,20 @@ public class TeacherService extends PersonService<Teacher>{
     }
 
 
+
     public Teacher createTeacher(String teacherId, String firstName, String lastName, String sectionID) {
-        try {
+
 
             Section section = sectionService.getSectionByID(sectionID);
             Teacher teacher = new Teacher(teacherId, firstName, lastName, section.getName());
             section.getTeachers().put(teacher.getID(), teacher);
-            return teacherRepo.add(teacher);
+            return teacherRepo.save(teacher);
 
-        } catch (SectionNotFoundException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     public boolean createTeachersFromList(List<Teacher> Teachers) {
         for (Teacher teacher : Teachers) {
-            teacherRepo.add(teacher);
+            teacherRepo.save(teacher);
             sectionService
                     .getAllSections()
                     .stream()
@@ -69,12 +67,10 @@ public class TeacherService extends PersonService<Teacher>{
 
 
     public List<Teacher> listTeachersInSection(String sectionID) {
-        try {
+
             Section section = sectionService.getSectionByID(sectionID);
             return section.getTeachers().values().stream().toList();
-        } catch (SectionNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+
     }
 
 }

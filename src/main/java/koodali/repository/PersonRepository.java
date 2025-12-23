@@ -52,10 +52,13 @@ public abstract class PersonRepository<T extends Person> {
 
     /**
      * adds Person to the system
+     * @param person to be added
+     * @return the person that was added - do NOT return persons.put esp since we use this methods to save/add people to the system
      * */
-    public T add(T person) {
-        return persons
+    public T save(T person) {
+        persons
                 .put(person.getID(), person);
+        return person;
     }
 
     public List<T> getAll() {

@@ -64,7 +64,7 @@ public class StudentService extends PersonService<Student>{
     public Student createStudent(Student student){
         Section section = sectionService.getSectionByID(student.getSection().toString());
         section.getStudents().put(student.getID(),student);
-       return studentRepo.add(student);
+       return studentRepo.save(student);
     }
 
     public Student createStudent(String studentId, String firstName, String lastName, String sectionID) {
@@ -72,7 +72,7 @@ public class StudentService extends PersonService<Student>{
             Section section = sectionService.getSectionByID(sectionID);
             Student student = new Student(studentId, firstName, lastName, section.getName());
             section.getStudents().put(student.getID(), student);
-            return studentRepo.add(student);
+            return studentRepo.save(student);
 
     }
 
@@ -98,13 +98,13 @@ public class StudentService extends PersonService<Student>{
                 mothersEmailID,attendancePercentage,phoneNumber,whatsappNumber
         );
         section.getStudents().put(student.getID(), student);
-        return studentRepo.add(student);
+        return studentRepo.save(student);
 
     }
 
     public void createStudentsFromList(List<Student> students) {
         for (Student student : students) {
-            studentRepo.add(student);
+            studentRepo.save(student);
             sectionService
                     .getAllSections()
                     .stream()
@@ -139,6 +139,8 @@ public class StudentService extends PersonService<Student>{
             throw new RuntimeException(e);
         }
     }
+
+
 
 
 

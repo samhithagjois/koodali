@@ -21,8 +21,8 @@ public abstract class PersonService<T extends Person> {
         return personRepo.update(person);
     }
 
-    public T add(T person){
-        return personRepo.add(person);
+    public T save(T person){
+        return personRepo.save(person);
     }
 
     public T findByID(String id){
@@ -35,6 +35,10 @@ public abstract class PersonService<T extends Person> {
 
     public T delete(String id){
         return personRepo.delete(id);
+    }
+
+    public boolean contains(T p){
+        return personRepo.contains(p);
     }
 
 }
