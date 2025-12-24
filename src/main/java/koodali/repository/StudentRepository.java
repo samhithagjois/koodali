@@ -1,17 +1,16 @@
 package koodali.repository;
 
 import koodali.model.Student;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
 
 
-@Component
-public class StudentRepository extends PersonRepository<Student> {
-
-    //private final HashMap<String, Student> students;
-
-
-    public StudentRepository() {
-        super();
-       }
+@Repository
+public interface StudentRepository extends PersonRepository<Student> {
+    Optional<Student> findByFirstNameIgnoreCaseOrLastNameIgnoreCase(
+            String firstName,
+            String lastName
+    );
 
 }

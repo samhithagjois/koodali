@@ -18,21 +18,21 @@ public class AdminOperationService {
      * all the repositories. Here is where most of the crossover work betwwen these repositories will
      * be happening.
      */
-    private final StudentRepository studentRepo = new StudentRepository();
-    private final TeacherRepository teacherRepo = new TeacherRepository();
-
-    private final AdminRepository adminRepo = new AdminRepository();
-
-    private final SectionRepository sectionRepo = new SectionRepository();
-
     private final StudentService studentService;
     private final TeacherService teacherService;
     private final AdministratorService adminService;
+    private final SectionService sectionService;
 
-    public AdminOperationService() {
-        studentService = new StudentService(studentRepo);
-        teacherService = new TeacherService(teacherRepo);
-        adminService = new AdministratorService(adminRepo);
+    public AdminOperationService(
+            StudentService studentService,
+            TeacherService teacherService,
+            AdministratorService adminService,
+            SectionService sectionService
+    ) {
+        this.studentService = studentService;
+        this.teacherService = teacherService;
+        this.adminService = adminService;
+        this.sectionService = sectionService;
     }
 
     /**
@@ -60,28 +60,20 @@ public class AdminOperationService {
      * helper methods to reduce code duplication! (I sound super fancy now, don't I)
      * returns the Person/Section it finds, or throws the respective Exception
      */
-    private Administrator findAdmin(String adminID) throws AdminNotFoundException {
-        return adminRepo
-                .findByID(adminID)
-                .orElseThrow(AdminNotFoundException::new);
+    private Administrator findAdmin(String adminID){
+        return adminService.findByID(adminID);
     }
 
-    private Teacher findTeacher(String teacherID) throws TeacherNotFoundException {
-        return teacherRepo
-                .findByID(teacherID)
-                .orElseThrow(TeacherNotFoundException::new);
+    private Teacher findTeacher(String teacherID){
+        return teacherService.findByID(teacherID);
     }
 
-    private Student findStudent(String studentID) throws StudentNotFoundException {
-        return studentRepo
-                .findByID(studentID)
-                .orElseThrow(StudentNotFoundException::new);
+    private Student findStudent(String studentID){
+        return studentService.findByID(studentID);
     }
 
-    private Section findSection(String sectionName) throws SectionNotFoundException {
-        return sectionRepo
-                .findSectionByName(sectionName)
-                .orElseThrow(SectionNotFoundException::new);
+    private Section findSection(String sectionName){
+        return sectionService.getSectionByID(sectionName);
     }
 
     /**
@@ -150,8 +142,8 @@ public class AdminOperationService {
         }
         student.setSection(section.getName());
         section.getStudents().put(student.getID(), student);
-        sectionRepo.updateSection(section);
-        return studentRepo.update(student);
+        sectionService.updateSection(section);
+        return studentService.save(student);
 
 
     }
@@ -176,8 +168,8 @@ public class AdminOperationService {
         }
         teacher.setSection(section.getName());
         section.getTeachers().put(teacher.getID(), teacher);
-        sectionRepo.updateSection(section);
-        return teacherRepo.update(teacher);
+        sectionService.updateSection(section);
+        return teacherService.save(teacher);
 
 
     }
@@ -196,10 +188,10 @@ public class AdminOperationService {
         student.setSection(section.getName());
         //add student to new class
         section.getStudents().put(studentID, student);
-        //update section in sectionRepo
-        sectionRepo.updateSection(section);
+        //update section
+        sectionService.updateSection(section);
         //update student in studentRepo and return
-        return studentRepo.update(student);
+        return studentService.save(student);
 
     }
 
@@ -218,7 +210,7 @@ public class AdminOperationService {
             //add student to new class
             section.getStudents().put(student.getID(), student);
             //update section in sectionRepo
-            sectionRepo.updateSection(section);
+            sectionService.updateSection(section);
             students.add(student);
         }
         return students;
@@ -234,9 +226,9 @@ public class AdminOperationService {
 
         section.getTeachers().put(teacherID, teacher);
 
-        sectionRepo.updateSection(section);
+        sectionService.updateSection(section);
 
-        return teacherRepo.update(teacher);
+        return teacherService.save(teacher);
 
     }
 
@@ -252,7 +244,7 @@ public class AdminOperationService {
         Section section = findSection(student.getSection().toString());
         checkPermissionToModify(admin, section);
 
-        return studentRepo.delete(studentID);
+        return studentService.delete(studentID);
     }
 
 
@@ -265,10 +257,10 @@ public class AdminOperationService {
         checkPermissionToModify(admin, section);
 
 
-        return teacherRepo.delete(teacherID);
+        return teacherService.delete(teacherID);
     }
 
-    public void deleteStudentFromSection(String adminID, String studentID, String sectionID) {
+    public Student deleteStudentFromSection(String adminID, String studentID, String sectionID) {
 
         Student student = findStudent(studentID);
         Administrator admin = findAdmin(adminID);
@@ -278,10 +270,10 @@ public class AdminOperationService {
             throw new IllegalAdminActionException();
         }
         //remove student from old section
-        sectionRepo
-                .findSectionByName(student.getSection().name())
-                .ifPresent(section1 -> section1.getStudents().remove(studentID, student));
+        sectionService
+                .getSectionByID(student.getSection().name()).getStudents().remove(studentID, student);
         student.setSection(null);
+        return student;
 
 
     }
@@ -297,9 +289,8 @@ public class AdminOperationService {
             throw new IllegalAdminActionException();
         }
         //remove student from old section
-        sectionRepo
-                .findSectionByName(teacher.getSection().toString())
-                .ifPresent(section1 -> section1.getTeachers().remove(teacherID, teacher));
+        sectionService
+                .getSectionByID(teacher.getSection().toString()).getTeachers().remove(teacherID, teacher);
         teacher.setSection(null);
         return teacher;
 

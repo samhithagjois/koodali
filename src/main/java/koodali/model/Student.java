@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
+
 public class Student extends Person {
 
 
@@ -81,6 +82,10 @@ public class Student extends Person {
         this.phoneNumber = phoneNumber;
         this.whatsappNumber = whatsappNumber;
         this.homeworkPointsPerWeek = new HashMap<LocalDate, Integer>();
+    }
+
+    public Student() {
+        super();
     }
 
 

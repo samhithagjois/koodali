@@ -16,6 +16,10 @@ public class LeaderboardController {
         this.leaderboardService = leaderboardService;
     }
 
+    public LeaderboardService getLeaderboardService() {
+        return leaderboardService;
+    }
+
 
     //TODO : following methods :
     // 1: fetch all students

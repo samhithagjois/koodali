@@ -45,7 +45,6 @@ public class SectionService {
         }
 
     }
-
     /**
      * since the amount of sections is constant, all we can do is update a given section
      * since we do not add a class externally, if you want to add a new section, please talk to Samhitha

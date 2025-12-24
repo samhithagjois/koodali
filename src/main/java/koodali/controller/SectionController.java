@@ -23,13 +23,16 @@ public class SectionController {
         this.sectionService = sectionService;
     }
 
+    /**
+     *
+     * */
     @GetMapping("/sections")
     public ResponseEntity<List<Section>> getAllSections() {
         return new ResponseEntity<>(sectionService.getAllSections(), HttpStatus.OK);
     }
 
     @GetMapping("/sections/{classId}/students")
-    public ResponseEntity<List<String>> showStudentsOfSectionInfo(@PathVariable String classId) {
+    public ResponseEntity<List<String>> showInfoStudentsOfSection(@PathVariable String classId) {
         List<String> names = sectionService.getSectionByID(classId)
                 .getStudents()
                 .values()
@@ -45,7 +48,7 @@ public class SectionController {
     }
 
     @GetMapping("/sections/{classId}/students")
-    public ResponseEntity<List<String>> showTeachersOfSectionInfo(@PathVariable String classId) {
+    public ResponseEntity<List<String>> showInfoTeachersOfSection(@PathVariable String classId) {
         List<String> names = sectionService.getSectionByID(classId)
                 .getTeachers()
                 .values()

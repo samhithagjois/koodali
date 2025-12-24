@@ -23,6 +23,13 @@ public class Teacher extends Person {
         studentOverview = new ArrayList<>();
     }
 
+    public Teacher(){
+        ungradedAssignments = new ArrayList<>();
+        gradedAssignments = new ArrayList<>();
+        this.section = ClassNames.UNASSIGNED;
+        studentOverview = new ArrayList<>();
+    }
+
     public List<Assignment> getUngradedAssignments() {
         return ungradedAssignments;
     }

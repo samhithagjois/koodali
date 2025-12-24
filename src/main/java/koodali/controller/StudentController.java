@@ -29,16 +29,12 @@ public class StudentController {
 
     @PutMapping("/students")
     public ResponseEntity<Student> updateStudent(@RequestBody Student updatedStudent) {
-        //  Student oldStudent = studentService.findByID(updatedStudent.getID());
-        //Person attributes
-
-
-        return new ResponseEntity<>(studentService.update(updatedStudent), HttpStatus.OK);
+         return new ResponseEntity<>(studentService.update(updatedStudent), HttpStatus.OK);
     }
+
 
     @PostMapping("/students")
     public ResponseEntity<Student> createStudent(@RequestBody Student newStudent) {
-
         return new ResponseEntity<>(studentService.createStudent(newStudent), HttpStatus.CREATED);
     }
 

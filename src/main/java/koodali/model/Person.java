@@ -33,6 +33,19 @@ public abstract class Person {
         this.activeStatus = activeStatus;
     }
 
+    public Person (){
+        this.firstName = "";
+        this.lastName = "";
+        this.personID = "";
+        this.city = "";
+        this.pinCode = "";
+        this.country = "";
+        this.fullPostalAdress = "";
+        this.dateOfRegistration = LocalDateTime.now();
+        this.dateOfClassStart =  LocalDateTime.now();
+        this.activeStatus = true;
+    }
+
     public Person(String personID, String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;

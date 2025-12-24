@@ -30,13 +30,13 @@ public class StudentService extends PersonService<Student> {
 
     public Student findByID(String studentID) {
         return studentRepo
-                .findByID(studentID)
+                .findById(studentID)
                 .orElseThrow(StudentNotFoundException::new);
     }
 
-    public Student findStudentbyName(String name) {
+    public Student findStudentbyName(String firstName,String lastName) {
         return studentRepo
-                .findByName(name)
+                .findByFirstNameIgnoreCaseOrLastNameIgnoreCase(firstName,lastName)
                 .orElseThrow(StudentNotFoundException::new);
     }
 

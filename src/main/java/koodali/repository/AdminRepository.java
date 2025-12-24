@@ -1,14 +1,12 @@
 package koodali.repository;
 
 import koodali.model.Administrator;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
+@Repository
+public interface AdminRepository extends PersonRepository<Administrator> {
 
-@Component
-public class AdminRepository extends PersonRepository<Administrator> {
-
-
+/*
     private HashMap<String, Administrator> admins;
 
 
@@ -23,6 +21,7 @@ public class AdminRepository extends PersonRepository<Administrator> {
 
     public void setAdmins(HashMap<String, Administrator> admins) {
         this.admins = admins;
-    }
+    }*/
+
 
 }

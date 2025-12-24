@@ -24,14 +24,14 @@ public class TeacherService extends PersonService<Teacher> {
 
     public Teacher findByID(String teacherID) {
         return teacherRepo
-                .findByID(teacherID)
+                .findById(teacherID)
                 .orElseThrow(TeacherNotFoundException::new);
     }
 
 
-    public Teacher findTeacherbyName(String name) {
+    public Teacher findTeacherbyName(String firstName,String lastName) {
         return teacherRepo
-                .findByName(name)
+                .findByFirstNameIgnoreCaseOrLastNameIgnoreCase(firstName,lastName)
                 .orElseThrow(TeacherNotFoundException::new);
     }
 

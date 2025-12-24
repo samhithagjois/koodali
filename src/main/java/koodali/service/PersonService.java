@@ -14,11 +14,11 @@ public abstract class PersonService<T extends Person> {
     }
 
     public List<T> getAll() {
-        return personRepo.getAll();
+        return personRepo.findAll();
     }
 
     public T update(T person) {
-        return personRepo.update(person);
+        return personRepo.save(person);
     }
 
     public T save(T person) {
@@ -26,19 +26,24 @@ public abstract class PersonService<T extends Person> {
     }
 
     public T findByID(String id) {
-        if (personRepo.findByID(id).isPresent()) {
-            return personRepo.findByID(id).get();
+        if (personRepo.findById(id).isPresent()) {
+            return personRepo.findById(id).get();
         } else {
             return null;
         }
     }
 
     public T delete(String id) {
-        return personRepo.delete(id);
+        personRepo.deleteById(id);
+        return personRepo.getReferenceById(id);
     }
 
     public boolean contains(T p) {
-        return personRepo.contains(p);
+        return personRepo.findAll().contains(p);
+    }
+
+    public void clearRepo(){
+        personRepo.deleteAll();
     }
 
 }

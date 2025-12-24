@@ -20,7 +20,7 @@ public class AdministratorService extends PersonService<Administrator> {
 
     public Administrator findByID(String adminID) {
         return adminRepo
-                .findByID(adminID)
+                .findById(adminID)
                 .orElseThrow(AdminNotFoundException::new);
     }
 
