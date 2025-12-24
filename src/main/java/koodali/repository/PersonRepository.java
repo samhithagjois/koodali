@@ -21,9 +21,10 @@ public abstract class PersonRepository<T extends Person> {
 
     /**
      * finds the person involved by their id. Preferable use this in backend
+     *
      * @param personID the ID of the person
      * @return an Optional<Person> because we need to know if they exist or not!
-     * */
+     */
     public Optional<T> findByID(String personID) {
         Optional<String> first = persons.keySet().stream().filter(s -> s.equals(personID)).findFirst();
         return first.map(persons::get);
@@ -31,9 +32,10 @@ public abstract class PersonRepository<T extends Person> {
 
     /**
      * finds the person by their name. Not case sensitive, will be used in frontend much more
+     *
      * @param name , can be any part of the persons name
      * @return an Optional Person
-     * */
+     */
     public Optional<T> findByName(String name) {
         return persons
                 .values()
@@ -44,7 +46,7 @@ public abstract class PersonRepository<T extends Person> {
 
     /**
      * deletes the Person from the System entirely, so be careful
-     * */
+     */
     public T delete(String personID) {
         return persons
                 .remove(personID);
@@ -52,9 +54,10 @@ public abstract class PersonRepository<T extends Person> {
 
     /**
      * adds Person to the system
+     *
      * @param person to be added
      * @return the person that was added - do NOT return persons.put esp since we use this methods to save/add people to the system
-     * */
+     */
     public T save(T person) {
         persons
                 .put(person.getID(), person);

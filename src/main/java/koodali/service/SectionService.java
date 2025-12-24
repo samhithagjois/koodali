@@ -61,11 +61,11 @@ public class SectionService {
      */
     public Section deleteSection(Section section) {
 
-            return deleteSectionbyId(section.getName().name());
+        return deleteSectionbyId(section.getName().name());
 
     }
 
-    private Section deleteSectionbyId(String sectionName){
+    private Section deleteSectionbyId(String sectionName) {
         if (sectionRepository.containsSection(sectionName)) {
             return sectionRepository.deleteSection(sectionName);
 

@@ -3,12 +3,12 @@ package koodali.controller;
 import koodali.model.Section;
 import koodali.model.Student;
 import koodali.model.Teacher;
+import koodali.service.*;
+import koodali.service.exceptions.StudentNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import koodali.service.*;
-import koodali.service.exceptions.StudentNotFoundException;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ public class AdminController {
 
     /**
      * All the Service classes needed for our Admin Operations
-     * */
+     */
     private final AdminOperationService adminOperationService;
 
     private final AdministratorService adminService;
@@ -44,7 +44,7 @@ public class AdminController {
 
     /**
      * this method gets all sections and displays them in a List
-     * */
+     */
     @GetMapping("admin/sections")
     public ResponseEntity<List<Section>> manageSections() {
         return new ResponseEntity<>(sectionService.getAllSections(), HttpStatus.OK);
@@ -52,9 +52,10 @@ public class AdminController {
 
     /**
      * this method selects a section
+     *
      * @param classId the name of the class
      * @return Section
-     * */
+     */
     @GetMapping("admin/sections/{classId}")
     public ResponseEntity<Section> selectSection(@PathVariable String classId) {
 
@@ -64,8 +65,9 @@ public class AdminController {
 
     /**
      * this method lists out all the students of a certain section
+     *
      * @param classId section name
-     * */
+     */
     @GetMapping("admin/sections/{classId}/students")
     public ResponseEntity<List<Student>> getStudentsOfSection(@PathVariable String classId) {
         return new ResponseEntity<>(studentService.listStudentsInSection(classId), HttpStatus.OK);
@@ -73,30 +75,32 @@ public class AdminController {
 
     /**
      * this method lists out all teachers of a section
+     *
      * @param classId section name
-     * */
+     */
     @GetMapping("admin/sections/{classId}/teachers")
     public List<Teacher> getTeachersOfSection(@PathVariable String classId) {
-            return sectionService.getSectionByID(classId).getTeachers().values().stream().toList();
+        return sectionService.getSectionByID(classId).getTeachers().values().stream().toList();
 
     }
 
     /**
      * this method selects a Student from the section
-     * @param classId class name
+     *
+     * @param classId   class name
      * @param studentId student ID
-     * */
+     */
     @GetMapping("admin/section/{classId}/students/{studentId}")
     public ResponseEntity<Student> selectStudentFromSection(@PathVariable String classId, @PathVariable String studentId) {
 
         Student s = studentService
-                    .listStudentsInSection(classId)
-                    .stream()
-                    .filter(student -> student
-                            .getID()
-                            .equals(studentId))
-                    .findFirst()
-                    .orElseThrow(StudentNotFoundException::new);
+                .listStudentsInSection(classId)
+                .stream()
+                .filter(student -> student
+                        .getID()
+                        .equals(studentId))
+                .findFirst()
+                .orElseThrow(StudentNotFoundException::new);
 
 
         return new ResponseEntity<>(s, HttpStatus.OK);
@@ -107,21 +111,23 @@ public class AdminController {
 
     /**
      * remove a Section from the Section repository
+     *
      * @param classId class name
-     * */
+     */
     @DeleteMapping("admin/sections/{classId}")
-    public ResponseEntity<Section> removeSection(@PathVariable String classId){
+    public ResponseEntity<Section> removeSection(@PathVariable String classId) {
         Section section = sectionService.getSectionByID(classId);
         sectionService.deleteSection(section);
-        return new ResponseEntity<>( sectionService.deleteSection(section),HttpStatus.OK);
+        return new ResponseEntity<>(sectionService.deleteSection(section), HttpStatus.OK);
     }
 
 //-------------
 
     /**
      * updates the section that exists already
+     *
      * @param updatedSection Section object that is updated
-     * */
+     */
     @PutMapping("admin/sections")
     public ResponseEntity<Section> updateSection(@RequestBody Section updatedSection) {
         Section oldSection = sectionService.getSectionByID(updatedSection.getName().toString());
@@ -133,22 +139,23 @@ public class AdminController {
 
     /**
      * reassigns a student to the new section.
-     * @param adminId ID of the admin
+     *
+     * @param adminId   ID of the admin
      * @param sectionId name of the new class
      * @param studentId ID of the student
-     * */
-    @PutMapping ("admin/sections/{sectionId}/students/{studentId}")
-    ResponseEntity<Student> reassignStudent(String adminId, @PathVariable String sectionId, @PathVariable String studentId){
-        Student s = adminOperationService.reassignStudentToSection(adminId,studentId,sectionId);
+     */
+    @PutMapping("admin/sections/{sectionId}/students/{studentId}")
+    ResponseEntity<Student> reassignStudent(String adminId, @PathVariable String sectionId, @PathVariable String studentId) {
+        Student s = adminOperationService.reassignStudentToSection(adminId, studentId, sectionId);
         //TODO : Security Context!
-        return new ResponseEntity<>(s,HttpStatus.OK);
+        return new ResponseEntity<>(s, HttpStatus.OK);
     }
 
     @PutMapping("admin/sections/{sectionId}/students")
-    ResponseEntity<Student> addStudentToSection(@PathVariable String sectionId, String studentId, String adminId){
+    ResponseEntity<Student> addStudentToSection(@PathVariable String sectionId, String studentId, String adminId) {
         Student s = adminOperationService.addStudentToSection(adminId, studentId, sectionId);
         //TODO : Security Context!
-        return new ResponseEntity<>(s,HttpStatus.OK);
+        return new ResponseEntity<>(s, HttpStatus.OK);
     }
 
     //---------------------------------------------------------------
@@ -158,11 +165,11 @@ public class AdminController {
      * */
 
 
-
     //-----------------------------------------------------------
+
     /**
      * getters
-     * */
+     */
     public AdminOperationService getAdminOperationService() {
         return adminOperationService;
     }

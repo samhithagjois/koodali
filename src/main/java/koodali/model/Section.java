@@ -17,7 +17,7 @@ public class Section {
         //TODO : you should be able to add and change things in the class schedule
     }
 
-    public String getID(){
+    public String getID() {
         return this.name.toString();
     }
 

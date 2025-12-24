@@ -6,5 +6,5 @@ public enum AssignmentStatus {
     SUBMITTED_NOT_GRADED,
     GRADED,
     GRADED_RECEIVED,
-    DEADLINE_MISSED;
+    DEADLINE_MISSED
 }

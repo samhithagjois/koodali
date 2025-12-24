@@ -1,13 +1,12 @@
 package koodali.controller;
 
-import koodali.model.Section;
 import koodali.model.Student;
+import koodali.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import koodali.service.StudentService;
 
 import java.util.List;
 
@@ -30,7 +29,7 @@ public class StudentController {
 
     @PutMapping("/students")
     public ResponseEntity<Student> updateStudent(@RequestBody Student updatedStudent) {
-      //  Student oldStudent = studentService.findByID(updatedStudent.getID());
+        //  Student oldStudent = studentService.findByID(updatedStudent.getID());
         //Person attributes
 
 
@@ -44,8 +43,8 @@ public class StudentController {
     }
 
     @DeleteMapping("/students/{id}")
-    public ResponseEntity<Student> deleteStudent(@PathVariable String id){
-        return new ResponseEntity<>(studentService.delete(id),HttpStatus.OK);
+    public ResponseEntity<Student> deleteStudent(@PathVariable String id) {
+        return new ResponseEntity<>(studentService.delete(id), HttpStatus.OK);
     }
 
     /*

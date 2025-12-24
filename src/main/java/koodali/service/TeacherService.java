@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class TeacherService extends PersonService<Teacher>{
+public class TeacherService extends PersonService<Teacher> {
     private final TeacherRepository teacherRepo;
 
     private final SectionService sectionService;
@@ -22,28 +22,27 @@ public class TeacherService extends PersonService<Teacher>{
         this.sectionService = new SectionService();
     }
 
-    public Teacher findByID(String teacherID){
+    public Teacher findByID(String teacherID) {
         return teacherRepo
                 .findByID(teacherID)
                 .orElseThrow(TeacherNotFoundException::new);
     }
 
 
-    public Teacher findTeacherbyName(String name){
+    public Teacher findTeacherbyName(String name) {
         return teacherRepo
                 .findByName(name)
                 .orElseThrow(TeacherNotFoundException::new);
     }
 
 
-
     public Teacher createTeacher(String teacherId, String firstName, String lastName, String sectionID) {
 
 
-            Section section = sectionService.getSectionByID(sectionID);
-            Teacher teacher = new Teacher(teacherId, firstName, lastName, section.getName());
-            section.getTeachers().put(teacher.getID(), teacher);
-            return teacherRepo.save(teacher);
+        Section section = sectionService.getSectionByID(sectionID);
+        Teacher teacher = new Teacher(teacherId, firstName, lastName, section.getName());
+        section.getTeachers().put(teacher.getID(), teacher);
+        return teacherRepo.save(teacher);
 
     }
 
@@ -68,8 +67,8 @@ public class TeacherService extends PersonService<Teacher>{
 
     public List<Teacher> listTeachersInSection(String sectionID) {
 
-            Section section = sectionService.getSectionByID(sectionID);
-            return section.getTeachers().values().stream().toList();
+        Section section = sectionService.getSectionByID(sectionID);
+        return section.getTeachers().values().stream().toList();
 
     }
 

@@ -1,6 +1,6 @@
 package koodali.service;
 
-import koodali.repository.*;
+import koodali.repository.LeaderboardRepository;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -9,7 +9,7 @@ public class LeaderboardService {
     private final LeaderboardRepository leaderboardRepository = new LeaderboardRepository();
     //HomewoerkExcelService service
 
-    public LeaderboardService(){
+    public LeaderboardService() {
 
     }
 

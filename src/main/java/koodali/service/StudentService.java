@@ -3,10 +3,10 @@ package koodali.service;
 import koodali.model.ClassNames;
 import koodali.model.Section;
 import koodali.model.Student;
-import org.springframework.stereotype.Service;
 import koodali.repository.StudentRepository;
 import koodali.service.exceptions.SectionNotFoundException;
 import koodali.service.exceptions.StudentNotFoundException;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class StudentService extends PersonService<Student>{
+public class StudentService extends PersonService<Student> {
 
     private final StudentRepository studentRepo;
 
@@ -23,7 +23,7 @@ public class StudentService extends PersonService<Student>{
 
 
     public StudentService(StudentRepository studentRepo) {
-       super(studentRepo);
+        super(studentRepo);
         this.studentRepo = studentRepo;
         this.sectionService = new SectionService();
     }
@@ -34,13 +34,13 @@ public class StudentService extends PersonService<Student>{
                 .orElseThrow(StudentNotFoundException::new);
     }
 
-    public Student findStudentbyName(String name){
+    public Student findStudentbyName(String name) {
         return studentRepo
                 .findByName(name)
                 .orElseThrow(StudentNotFoundException::new);
     }
 
-    public double calculateAttendancePercentage(String studentID, String classID){
+    public double calculateAttendancePercentage(String studentID, String classID) {
         Student student = findByID(studentID);
         Section section = sectionService.getSectionByID(classID);
         List<Date> dates = section
@@ -57,22 +57,22 @@ public class StudentService extends PersonService<Student>{
                 .toList();
 
         //TODO : test!
-        return (double) studentAttended.size()/dates.size();
+        return (double) studentAttended.size() / dates.size();
 
     }
 
-    public Student createStudent(Student student){
+    public Student createStudent(Student student) {
         Section section = sectionService.getSectionByID(student.getSection().toString());
-        section.getStudents().put(student.getID(),student);
-       return studentRepo.save(student);
+        section.getStudents().put(student.getID(), student);
+        return studentRepo.save(student);
     }
 
     public Student createStudent(String studentId, String firstName, String lastName, String sectionID) {
 
-            Section section = sectionService.getSectionByID(sectionID);
-            Student student = new Student(studentId, firstName, lastName, section.getName());
-            section.getStudents().put(student.getID(), student);
-            return studentRepo.save(student);
+        Section section = sectionService.getSectionByID(sectionID);
+        Student student = new Student(studentId, firstName, lastName, section.getName());
+        section.getStudents().put(student.getID(), student);
+        return studentRepo.save(student);
 
     }
 
@@ -91,11 +91,11 @@ public class StudentService extends PersonService<Student>{
 
         Section section = sectionService.getSectionByID(sectionID.toString());
         Student student = new Student(
-            firstName,lastName,studentId,city,pinCode,country,fullPostalAdress,
-                dateOfRegistration,dateOfClassStart,activeStatus, sectionID,
-                amountOfTextbooks,feesPaid, pendingFees, homeworkLeaderBoardScore,
-                dateOfBirth,dateOfFirstClass,mothersName,fathersName,fathersEmailID,
-                mothersEmailID,attendancePercentage,phoneNumber,whatsappNumber
+                firstName, lastName, studentId, city, pinCode, country, fullPostalAdress,
+                dateOfRegistration, dateOfClassStart, activeStatus, sectionID,
+                amountOfTextbooks, feesPaid, pendingFees, homeworkLeaderBoardScore,
+                dateOfBirth, dateOfFirstClass, mothersName, fathersName, fathersEmailID,
+                mothersEmailID, attendancePercentage, phoneNumber, whatsappNumber
         );
         section.getStudents().put(student.getID(), student);
         return studentRepo.save(student);
@@ -119,16 +119,15 @@ public class StudentService extends PersonService<Student>{
         }
     }
 
-    public Student addHomeworkPoints(String studentID, LocalDate week, int points){
+    public Student addHomeworkPoints(String studentID, LocalDate week, int points) {
         Student student = findByID(studentID);
-        student.getHomeworkPointsPerWeek().put(week,points);
+        student.getHomeworkPointsPerWeek().put(week, points);
         student.setHomeworkLeaderBoardScore(student.getHomeworkLeaderBoardScore() + points);
         return update(student);
 
     }
 
     //TODO : add getTotalPoints
-
 
 
     public List<Student> listStudentsInSection(String sectionID) {
@@ -139,9 +138,6 @@ public class StudentService extends PersonService<Student>{
             throw new RuntimeException(e);
         }
     }
-
-
-
 
 
 }

@@ -18,7 +18,7 @@ public class StudentExcelService {
     }
 
 
-    public static void exportStudentsToExcel(List<Student> students,String outputFilename )throws IOException {
+    public static void exportStudentsToExcel(List<Student> students, String outputFilename) throws IOException {
         // create a new file
         //create columns given the student's constructer, one constructor field is one column
         //for each student, a seperate row.
@@ -54,7 +54,7 @@ public class StudentExcelService {
             int rownum;
             sheet.createRow(0).createCell(0).setCellValue(new HSSFRichTextString("Export"));
 
-            for (rownum = 1; rownum < students.size()+2; rownum++) {
+            for (rownum = 1; rownum < students.size() + 2; rownum++) {
                 HSSFRow r = sheet.createRow(rownum);
                 r.setHeight((short) 0x249);
             }

@@ -7,7 +7,7 @@ import koodali.service.exceptions.AdminNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AdministratorService extends PersonService<Administrator>{
+public class AdministratorService extends PersonService<Administrator> {
     //createAdmin
     //checkCredentials
 
@@ -18,22 +18,22 @@ public class AdministratorService extends PersonService<Administrator>{
         this.adminRepo = adminRepo;
     }
 
-    public Administrator findByID(String adminID){
+    public Administrator findByID(String adminID) {
         return adminRepo
                 .findByID(adminID)
                 .orElseThrow(AdminNotFoundException::new);
     }
 
-    public Administrator addAdminRights(Administrator admin, AdminPermissions permission){
-        if(!admin.getPermissions().contains(permission)){
+    public Administrator addAdminRights(Administrator admin, AdminPermissions permission) {
+        if (!admin.getPermissions().contains(permission)) {
             admin.addPermission(permission);
             return admin;
         }
         return admin;
     }
 
-    public Administrator removeAdminRights(Administrator admin, AdminPermissions permission){
-        if(admin.getPermissions().contains(permission)){
+    public Administrator removeAdminRights(Administrator admin, AdminPermissions permission) {
+        if (admin.getPermissions().contains(permission)) {
             admin.getPermissions().remove(permission);
             return admin;
         }

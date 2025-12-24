@@ -10,6 +10,6 @@ public enum ClassNames {
     NL_BEG, NL_I_1, NL_I_2, NL_I_3, NL_ADV,
     LX_BEG, LX_I_1, LX_I_2, LX_I_3, LX_ADV,
     BE_BEG, BE_I_1, BE_I_2, BE_I_3, BE_ADV,
-    UNASSIGNED;
+    UNASSIGNED
 
 }

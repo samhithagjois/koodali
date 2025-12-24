@@ -13,7 +13,6 @@ public class Teacher extends Person {
     private int amountOfTextbooks;
 
 
-
     private LocalDate joinDate;
 
     public Teacher(String personID, String firstName, String lastName, ClassNames section) {
