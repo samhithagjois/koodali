@@ -9,5 +9,5 @@ public enum AdminPermissions {
      * EU - Online Europe
      * ALL - all schools. PLEASE talk to Rashmi a.k.a. Amma if someone deserves this.
      */
-    DE, MU, ER, IN, EU, ALL;
+    DE, MU, ER, IN, EU, ALL
 }

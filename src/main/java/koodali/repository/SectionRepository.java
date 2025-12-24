@@ -11,6 +11,8 @@ import java.util.Optional;
 @Component
 public final class SectionRepository {
 
+    //TODO : check if you want to refactor this to JpaRepository
+
     private final HashMap<ClassNames, Section> sections;
 
     public SectionRepository() {
