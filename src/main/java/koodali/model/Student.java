@@ -1,13 +1,13 @@
 package koodali.model;
 
-import org.springframework.web.multipart.MultipartFile;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
-
+@Entity
 public class Student extends Person {
 
 
@@ -32,17 +32,32 @@ public class Student extends Person {
     //      photo of child : Multipart file
     //      consent form  : Multipart file
     private int amountOfTextbooks, feesPaid, pendingFees, homeworkLeaderBoardScore;
-    private MultipartFile photo, consentForm;
+    private String pathToPhoto;
+    private String pathToConsentForm;
     private LocalDate dateOfBirth;
     private LocalDateTime dateOfRegistration;
     private LocalDate dateOfFirstClass;
 
     private String mothersName, fathersName, fathersEmailID, mothersEmailID;
-    private Map<LocalDate, Boolean> attendance;
+    @ElementCollection
+    @CollectionTable(
+            name = "student_attendance",
+            joinColumns = @JoinColumn(name = "personID")
+    )
+    @MapKeyColumn(name = "week")
+    @Column(name = "present")
+    private Map<LocalDate, Boolean> attendance = new HashMap<>();
     private String phoneNumber;
     private String whatsappNumber;
 
-    private Map<LocalDate, Integer> homeworkPointsPerWeek;
+    @ElementCollection
+    @CollectionTable(
+            name = "homework_points",
+            joinColumns = @JoinColumn(name = "personID")
+    )
+    @MapKeyColumn(name = "week")
+    @Column(name = "points")
+    private Map<LocalDate, Integer> homeworkPointsPerWeek = new HashMap<>();
 
 
     public Student(String personID, String firstName, String lastName, ClassNames section) {
@@ -70,8 +85,8 @@ public class Student extends Person {
         this.feesPaid = feesPaid;
         this.pendingFees = pendingFees;
         this.homeworkLeaderBoardScore = homeworkLeaderBoardScore;
-        this.photo = null;
-        this.consentForm = null;
+        this.pathToPhoto = "";
+        this.pathToConsentForm = "";
         this.dateOfBirth = dateOfBirth;
         this.dateOfFirstClass = dateOfFirstClass;
         this.mothersName = mothersName;
@@ -130,20 +145,20 @@ public class Student extends Person {
         this.homeworkLeaderBoardScore = homeworkLeaderBoardScore;
     }
 
-    public MultipartFile getPhoto() {
-        return photo;
+    public String getPathToPhoto() {
+        return pathToPhoto;
     }
 
-    public void setPhoto(MultipartFile photo) {
-        this.photo = photo;
+    public void setPathToPhoto(String photo) {
+        this.pathToPhoto = photo;
     }
 
-    public MultipartFile getConsentForm() {
-        return consentForm;
+    public String getPathToConsentForm() {
+        return pathToConsentForm;
     }
 
-    public void setConsentForm(MultipartFile consentForm) {
-        this.consentForm = consentForm;
+    public void setPathToConsentForm(String consentForm) {
+        this.pathToConsentForm = consentForm;
     }
 
     public LocalDate getDateOfBirth() {

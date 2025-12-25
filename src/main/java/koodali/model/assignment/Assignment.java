@@ -1,4 +1,6 @@
-package koodali.model;
+package koodali.model.assignment;
+
+import koodali.model.Section;
 
 import java.io.File;
 import java.util.Date;

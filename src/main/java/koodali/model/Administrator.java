@@ -1,16 +1,29 @@
 package koodali.model;
 
+import jakarta.persistence.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class Administrator extends Person {
 
 
-    private final List<AdminPermissions> permissions;
+    @ElementCollection
+    @Enumerated(EnumType.STRING)
+    @CollectionTable(
+            name = "admin_permissions",
+            joinColumns = @JoinColumn(name = "admin_id")
+    )
+    @Column(name = "permission")
+    private final List<AdminPermissions> permissions = new ArrayList<>();
 
     public Administrator(String personID, String firstName, String lastName) {
         super(personID, firstName, lastName);
-        permissions = new ArrayList<>();
+    }
+
+    public Administrator() {
+        super();
     }
 
     /**

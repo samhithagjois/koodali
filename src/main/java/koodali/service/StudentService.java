@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -44,7 +43,7 @@ public class StudentService extends PersonService<Student> {
     public double calculateAttendancePercentage(String studentID, String classID) {
         Student student = findByID(studentID);
         Section section = sectionService.getSectionByID(classID);
-        List<Date> dates = section
+        List<LocalDate> dates = section
                 .getClassSchedule()
                 .keySet()
                 .stream()

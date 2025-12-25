@@ -1,10 +1,17 @@
 package koodali.model;
 
-import java.time.LocalDateTime;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
 
+import java.time.LocalDateTime;
+@MappedSuperclass
 public abstract class Person {
     protected String firstName;
     protected String lastName;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected String personID;
     protected String city;
     protected String pinCode;
@@ -19,7 +26,7 @@ public abstract class Person {
 
     public Person(String firstName, String lastName,
                   String personID, String city, String pinCode,
-                  String country, String fullPostalAdress,
+                  String country, String fullPostalAddress,
                   LocalDateTime dateOfRegistration, LocalDateTime dateOfClassStart, boolean activeStatus) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -27,7 +34,7 @@ public abstract class Person {
         this.city = city;
         this.pinCode = pinCode;
         this.country = country;
-        this.fullPostalAdress = fullPostalAdress;
+        this.fullPostalAdress = fullPostalAddress;
         this.dateOfRegistration = dateOfRegistration;
         this.dateOfClassStart = dateOfClassStart;
         this.activeStatus = activeStatus;

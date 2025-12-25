@@ -1,31 +1,53 @@
 package koodali.model;
 
-import java.util.Date;
+import jakarta.persistence.*;
+
+import java.time.LocalDate;
 import java.util.HashMap;
 
+@Entity
 public class Section {
     private ClassNames name;
+    @OneToMany
+    //@MapKey(name = "id")
+    @JoinColumn(name = "section_id")
     private HashMap<String, Student> students;
+    @OneToMany
+    @JoinColumn(name = "section_id")
     private HashMap<String, Teacher> teachers;
-    private HashMap<Date, Boolean> classSchedule;
+    @ElementCollection
+    @CollectionTable(
+            name = "classSchedule",
+            joinColumns = @JoinColumn(name = "section_id")
+    )
+    @MapKeyColumn(name = "week")
+    @Column(name = "class")
+    private HashMap<LocalDate, Boolean> classSchedule;
+    @Id
+    @GeneratedValue
+    private String id;
 
     public Section(ClassNames name) {
         this.name = name;
         this.students = new HashMap<>();
         this.teachers = new HashMap<>();
-        this.classSchedule = new HashMap<>();
+        this.classSchedule = new HashMap<LocalDate, Boolean>();
         //TODO : you should be able to add and change things in the class schedule
+    }
+
+    public Section() {
+
     }
 
     public String getID() {
         return this.name.toString();
     }
 
-    public HashMap<Date, Boolean> getClassSchedule() {
+    public HashMap<LocalDate, Boolean> getClassSchedule() {
         return classSchedule;
     }
 
-    public void setClassSchedule(HashMap<Date, Boolean> classSchedule) {
+    public void setClassSchedule(HashMap<LocalDate, Boolean> classSchedule) {
         this.classSchedule = classSchedule;
     }
 
@@ -51,5 +73,13 @@ public class Section {
 
     public void setTeachers(HashMap<String, Teacher> teachers) {
         this.teachers = teachers;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
     }
 }

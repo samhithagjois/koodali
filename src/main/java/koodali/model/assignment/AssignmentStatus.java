@@ -1,4 +1,4 @@
-package koodali.model;
+package koodali.model.assignment;
 
 public enum AssignmentStatus {
     NOT_READ,

@@ -47,7 +47,7 @@ public class SectionController {
         return new ResponseEntity<>(names, HttpStatus.OK);
     }
 
-    @GetMapping("/sections/{classId}/students")
+    @GetMapping("/sections/{classId}/teachers")
     public ResponseEntity<List<String>> showInfoTeachersOfSection(@PathVariable String classId) {
         List<String> names = sectionService.getSectionByID(classId)
                 .getTeachers()
