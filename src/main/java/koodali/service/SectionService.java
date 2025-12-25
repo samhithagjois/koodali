@@ -11,10 +11,11 @@ import java.util.Optional;
 @Service
 public class SectionService {
 
-    private final SectionRepository sectionRepository = new SectionRepository();
+    private final SectionRepository sectionRepository;
 
-    public SectionService() {
+    public SectionService(SectionRepository sectionRepository) {
 
+        this.sectionRepository = sectionRepository;
     }
 
     /**
@@ -22,7 +23,7 @@ public class SectionService {
      * gets all sections
      */
     public List<Section> getAllSections() {
-        return sectionRepository.getAllSections();
+        return sectionRepository.findAll();
     }
 
     public SectionRepository getSectionRepository() {
@@ -37,20 +38,14 @@ public class SectionService {
      * @throws SectionNotFoundException "didn't find section"
      */
     public Section getSectionByID(String classId) {
-        Optional<Section> optionalSection = sectionRepository.findSectionByName(classId);
-        if (optionalSection.isEmpty()) {
-            throw new SectionNotFoundException();
-        } else {
-            return optionalSection.get();
-        }
-
+      return  Optional.of(sectionRepository.getReferenceById(classId)).orElseThrow(SectionNotFoundException::new);
     }
     /**
      * since the amount of sections is constant, all we can do is update a given section
      * since we do not add a class externally, if you want to add a new section, please talk to Samhitha
      */
     public Section updateSection(Section section) {
-        return sectionRepository.updateSection(section);
+        return sectionRepository.save(section);
     }
 
 
@@ -65,8 +60,10 @@ public class SectionService {
     }
 
     private Section deleteSectionbyId(String sectionName) {
-        if (sectionRepository.containsSection(sectionName)) {
-            return sectionRepository.deleteSection(sectionName);
+        if (sectionRepository.existsById(sectionName)) {
+            Section s = sectionRepository.getReferenceById(sectionName);
+            sectionRepository.delete(s);
+            return s;
 
         } else {
             throw new SectionNotFoundException();

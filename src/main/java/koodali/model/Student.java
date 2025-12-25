@@ -81,7 +81,7 @@ public class Student extends Person {
         this.attendance = attendancePercentage;
         this.phoneNumber = phoneNumber;
         this.whatsappNumber = whatsappNumber;
-        this.homeworkPointsPerWeek = new HashMap<LocalDate, Integer>();
+        this.homeworkPointsPerWeek = new HashMap<>();
     }
 
     public Student() {

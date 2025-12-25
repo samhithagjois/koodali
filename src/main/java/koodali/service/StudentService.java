@@ -22,10 +22,11 @@ public class StudentService extends PersonService<Student> {
     private final SectionService sectionService;
 
 
-    public StudentService(StudentRepository studentRepo) {
+    public StudentService(StudentRepository studentRepo, SectionService sectionService) {
         super(studentRepo);
         this.studentRepo = studentRepo;
-        this.sectionService = new SectionService();
+
+        this.sectionService = sectionService;
     }
 
     public Student findByID(String studentID) {
@@ -127,7 +128,10 @@ public class StudentService extends PersonService<Student> {
 
     }
 
-    //TODO : add getTotalPoints
+    public int getTotalPoints(String studentID){
+        Student student = findByID(studentID);
+        return student.getHomeworkLeaderBoardScore();
+    }
 
 
     public List<Student> listStudentsInSection(String sectionID) {

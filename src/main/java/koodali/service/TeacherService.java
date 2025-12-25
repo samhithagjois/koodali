@@ -15,11 +15,11 @@ public class TeacherService extends PersonService<Teacher> {
     private final SectionService sectionService;
 
 
-    public TeacherService(TeacherRepository teacherRepo) {
+    public TeacherService(TeacherRepository teacherRepo, SectionService sectionService) {
         super(teacherRepo);
         this.teacherRepo = teacherRepo;
 
-        this.sectionService = new SectionService();
+        this.sectionService = sectionService;
     }
 
     public Teacher findByID(String teacherID) {

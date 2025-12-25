@@ -1,10 +1,6 @@
 package koodali.service;
 
 import koodali.model.*;
-import koodali.repository.AdminRepository;
-import koodali.repository.SectionRepository;
-import koodali.repository.StudentRepository;
-import koodali.repository.TeacherRepository;
 import koodali.service.exceptions.*;
 import org.springframework.stereotype.Service;
 
@@ -60,19 +56,19 @@ public class AdminOperationService {
      * helper methods to reduce code duplication! (I sound super fancy now, don't I)
      * returns the Person/Section it finds, or throws the respective Exception
      */
-    private Administrator findAdmin(String adminID){
+    private Administrator findAdmin(String adminID) {
         return adminService.findByID(adminID);
     }
 
-    private Teacher findTeacher(String teacherID){
+    private Teacher findTeacher(String teacherID) {
         return teacherService.findByID(teacherID);
     }
 
-    private Student findStudent(String studentID){
+    private Student findStudent(String studentID) {
         return studentService.findByID(studentID);
     }
 
-    private Section findSection(String sectionName){
+    private Section findSection(String sectionName) {
         return sectionService.getSectionByID(sectionName);
     }
 

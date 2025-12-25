@@ -2,9 +2,11 @@ package koodali.service;
 
 import koodali.model.Person;
 import koodali.repository.PersonRepository;
+import org.springframework.data.repository.NoRepositoryBean;
 
 import java.util.List;
 
+@NoRepositoryBean
 public abstract class PersonService<T extends Person> {
 
     private final PersonRepository<T> personRepo;
@@ -42,7 +44,7 @@ public abstract class PersonService<T extends Person> {
         return personRepo.findAll().contains(p);
     }
 
-    public void clearRepo(){
+    public void clear(){
         personRepo.deleteAll();
     }
 
