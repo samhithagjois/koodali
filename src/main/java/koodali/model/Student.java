@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 @Entity
 public class Student extends Person {
@@ -101,6 +102,24 @@ public class Student extends Person {
 
     public Student() {
         super();
+        this.personID = "NKS"+section.toString().substring(0,1).toUpperCase()+"_"+ UUID.randomUUID();
+        this.section = ClassNames.UNASSIGNED;
+        this.amountOfTextbooks = 0;
+        this.feesPaid = 0;
+        this.pendingFees = 0;
+        this.homeworkLeaderBoardScore = 0;
+        this.pathToPhoto = "";
+        this.pathToConsentForm = "";
+        this.dateOfBirth = null;
+        this.dateOfFirstClass = null;
+        this.mothersName = "";
+        this.fathersName = "";
+        this.fathersEmailID = "";
+        this.mothersEmailID = "";
+        this.attendance = new HashMap<>();
+        this.phoneNumber = "";
+        this.whatsappNumber = "";
+        this.homeworkPointsPerWeek = new HashMap<>();
     }
 
 

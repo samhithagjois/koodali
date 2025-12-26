@@ -10,4 +10,8 @@ public class HomeController {
     //login to teachers view
     //Leaderboard for students
 
+    @RequestMapping("/home")
+    public void homeSetting(){
+
+    }
 }

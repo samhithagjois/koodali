@@ -1,9 +1,6 @@
 package koodali.model;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 @MappedSuperclass
@@ -11,7 +8,7 @@ public abstract class Person {
     protected String firstName;
     protected String lastName;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "person_id")
     protected String personID;
     protected String city;
     protected String pinCode;

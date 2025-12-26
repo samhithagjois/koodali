@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 public class Administrator extends Person {
@@ -13,7 +14,7 @@ public class Administrator extends Person {
     @Enumerated(EnumType.STRING)
     @CollectionTable(
             name = "admin_permissions",
-            joinColumns = @JoinColumn(name = "admin_id")
+            joinColumns = @JoinColumn(name = "person_id")
     )
     @Column(name = "permission")
     private final List<AdminPermissions> permissions = new ArrayList<>();
@@ -24,6 +25,7 @@ public class Administrator extends Person {
 
     public Administrator() {
         super();
+        this.personID = "NKS"+"_A_"+ UUID.randomUUID();
     }
 
     /**

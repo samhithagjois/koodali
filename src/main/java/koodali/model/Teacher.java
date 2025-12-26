@@ -7,6 +7,7 @@ import jakarta.persistence.OneToMany;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 public class Teacher extends Person {
@@ -28,6 +29,7 @@ public class Teacher extends Person {
 
     public Teacher(){
         super();
+        this.personID = "NKS"+section.toString().substring(0,1).toUpperCase()+"_T_"+ UUID.randomUUID();
 
     }
 

@@ -9,16 +9,15 @@ import java.util.HashMap;
 public class Section {
     private ClassNames name;
     @OneToMany
-    //@MapKey(name = "id")
-    @JoinColumn(name = "section_id")
+    @JoinColumn(name = "id")
     private HashMap<String, Student> students;
     @OneToMany
-    @JoinColumn(name = "section_id")
+    @JoinColumn(name = "id")
     private HashMap<String, Teacher> teachers;
     @ElementCollection
     @CollectionTable(
             name = "classSchedule",
-            joinColumns = @JoinColumn(name = "section_id")
+            joinColumns = @JoinColumn(name = "id")
     )
     @MapKeyColumn(name = "week")
     @Column(name = "class")
