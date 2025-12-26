@@ -54,7 +54,7 @@ public class AdminOperationService {
 
     /**
      * helper methods to reduce code duplication! (I sound super fancy now, don't I)
-     * returns the Person/Section it finds, or throws the respective Exception
+     * returns the Person/Section it finds
      */
     private Administrator findAdmin(String adminID) {
         return adminService.findByID(adminID);
@@ -76,7 +76,9 @@ public class AdminOperationService {
      * creates/adds person to system
      *
      * @param person either the Student, Admin or Teacher to be added to the system
-     */
+     * @return the person added
+     * @throws DuplicatePersonException if the person has already been added
+     * */
     public Person addPersonToSystem(Person person) {
         if (person instanceof Student s) {
             if (studentService.contains(s)) {
@@ -103,6 +105,8 @@ public class AdminOperationService {
 
     /**
      * adds a List of person(s) to the System.
+     * @param personList a List of people
+     * @return the list of people added.
      */
     public List<Person> addListOfPersonsToSystem(List<Person> personList) {
         List<Person> result = new ArrayList<>();
@@ -124,7 +128,10 @@ public class AdminOperationService {
      * @param studentID students ID
      * @param sectionID as String! eventhough in Student we have ClassNames, we have to find and validate the section
      *                  In our case, sectionID is simply the name of the section
-     * @throws SectionNotFoundException,StudentNotFoundException,AdminNotFoundException,IllegalAdminActionException because all of this can happen
+     * @throws SectionNotFoundException if Section was not found (wich means the id is wrong!)
+     * @throws StudentNotFoundException if the student was not found
+     * @throws AdminNotFoundException if the admin ID is wrong
+     * @throws IllegalAdminActionException because all of this can happen
      */
     public Student addStudentToSection(String adminID, String studentID, String sectionID) {
 

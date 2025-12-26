@@ -1,9 +1,12 @@
 package koodali.controller;
 
+import koodali.model.Student;
 import koodali.service.LeaderboardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "/api")
@@ -19,7 +22,6 @@ public class LeaderboardController {
     public LeaderboardService getLeaderboardService() {
         return leaderboardService;
     }
-
 
     //TODO : following methods :
     // 1: fetch all students

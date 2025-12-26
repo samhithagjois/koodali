@@ -27,6 +27,11 @@ public class StudentController {
         return new ResponseEntity<>(studentService.getAll(), HttpStatus.OK);
     }
 
+    @GetMapping("/students/{id}")
+    public ResponseEntity<Student> getStudent(@PathVariable String id) {
+        return new ResponseEntity<>(studentService.findByID(id), HttpStatus.OK);
+    }
+
     @PutMapping("/students")
     public ResponseEntity<Student> updateStudent(@RequestBody Student updatedStudent) {
          return new ResponseEntity<>(studentService.update(updatedStudent), HttpStatus.OK);
@@ -40,19 +45,6 @@ public class StudentController {
 
     @DeleteMapping("/students/{id}")
     public ResponseEntity<Student> deleteStudent(@PathVariable String id) {
-        return new ResponseEntity<>(studentService.delete(id), HttpStatus.OK);
+        return new ResponseEntity<>(studentService.delete(id), HttpStatus.NO_CONTENT);
     }
-
-    /*
-     @GetMapping("/greeting")
-  public String greetingForm(Model model) {
-    model.addAttribute("greeting", new Greeting());
-    return "greeting";
-  }
-
-  @PostMapping("/greeting")
-  public String greetingSubmit(@ModelAttribute Greeting greeting, Model model) {
-    model.addAttribute("greeting", greeting);
-    return "result";
-  }*/
 }

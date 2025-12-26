@@ -24,11 +24,23 @@ public class SectionController {
     }
 
     /**
-     *
+     *--------------------- GET Mappings------------------------------------
+     * */
+
+    /**
+     * gets all sections and returns them as a List
      * */
     @GetMapping("/sections")
     public ResponseEntity<List<Section>> getAllSections() {
         return new ResponseEntity<>(sectionService.getAllSections(), HttpStatus.OK);
+    }
+
+    /**
+     * gets a specified Section. Can throw SectionNotFoundException
+     * */
+    @GetMapping("/sections/{id}")
+    public ResponseEntity<Section> getSection(@PathVariable String id){
+        return new ResponseEntity<>(sectionService.getSectionByID(id), HttpStatus.OK);
     }
 
     @GetMapping("/sections/{classId}/students")
@@ -61,6 +73,18 @@ public class SectionController {
 
         return new ResponseEntity<>(names, HttpStatus.OK);
     }
+
+    /**
+     * -------------------- POST Mappings -------------------------------
+     * */
+
+    /**
+     * -------------------- PUT Mappings -------------------------------
+     * */
+
+    /**
+     * -------------------- DELETE Mappings -------------------------------
+     * */
 
     /*	@GetMapping("/cars")
 	public ResponseEntity<List<Car>> getAllCars() {
