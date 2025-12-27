@@ -18,7 +18,7 @@ public class LeaderboardService {
     }
 
     public List<Student> fetchAllStudents(){
-        List<String> ids = leaderboardRepository.getPointsMap().keySet().stream().toList();
+        List<String> ids = leaderboardRepository.findAll();
         return List.of();
         //TODO : bring in StudentService, create studentRepo and SectionService and pass them in constructor
         // either create method in StudentService getStudentsByListOfIDs or do a stream filter operation on studentService.getAll
@@ -31,12 +31,8 @@ public class LeaderboardService {
         // Should only be following :
         // - descending/ascending by points
         // - descending ascending by ID
-
     }
 
-    //TODO : following methods :
-    // 1: fetch all students
-    // 2: sort by highest points
 
 
 }

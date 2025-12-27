@@ -25,7 +25,7 @@ public class StudentExcelService {
         //fill the values accordingly?
 
         //code taken and adapted from https://github.com/apache/poi/blob/trunk/poi-examples/src/main/java/org/apache/poi/examples/hssf/usermodel/HSSFReadWrite.java
-        try (HSSFWorkbook wb = new HSSFWorkbook();
+        /*try (HSSFWorkbook wb = new HSSFWorkbook();
              FileOutputStream out = new FileOutputStream(outputFilename)) {
 
             HSSFSheet sheet = wb.createSheet();
@@ -62,7 +62,7 @@ public class StudentExcelService {
             //TODO:continue!
 
             wb.write(out);
-        }
+        }*/
     }
     //Imports/exports the students from excel file to StudentRepository
 
