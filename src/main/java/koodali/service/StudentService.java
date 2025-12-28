@@ -86,7 +86,7 @@ public class StudentService extends PersonService<Student> {
                                  int amountOfTextbooks, int feesPaid, int pendingFees, int homeworkLeaderBoardScore,
                                  LocalDate dateOfBirth,
                                  LocalDate dateOfFirstClass, String mothersName, String fathersName,
-                                 String fathersEmailID, String mothersEmailID, Map<LocalDate, Boolean> attendancePercentage,
+                                 String fathersEmailID, String mothersEmailID, String childEmailAddress, Map<LocalDate, Boolean> attendancePercentage,
                                  String phoneNumber, String whatsappNumber) {
 
         Section section = sectionService.getSectionByID(sectionID.toString());
@@ -95,7 +95,7 @@ public class StudentService extends PersonService<Student> {
                 dateOfRegistration, dateOfClassStart, activeStatus, sectionID,
                 amountOfTextbooks, feesPaid, pendingFees, homeworkLeaderBoardScore,
                 dateOfBirth, dateOfFirstClass, mothersName, fathersName, fathersEmailID,
-                mothersEmailID, attendancePercentage, phoneNumber, whatsappNumber
+                mothersEmailID,childEmailAddress, attendancePercentage, phoneNumber, whatsappNumber
         );
         section.getStudents().put(student.getID(), student);
         return studentRepo.save(student);

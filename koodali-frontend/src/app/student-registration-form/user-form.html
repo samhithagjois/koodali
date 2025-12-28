@@ -1,0 +1,39 @@
+<h2>Student Registration Form</h2>
+
+<form (ngSubmit)="onSubmit()" #userForm="ngForm">
+  <i>Given Name / First name of student</i>
+  <input type="text" name="firstName" [(ngModel)]="user.firstName" placeholder="First Name" required />
+  <br /><br />
+
+  <input type="text" name="lastName" [(ngModel)]="user.lastName" placeholder="Last Name" required />
+  <br /><br />
+
+  <input type="text" name="city" [(ngModel)]="user.city" placeholder="City" required />
+  <br /><br />
+
+  <input type="text" name="pinCode" [(ngModel)]="user.pinCode" placeholder="pin Code" required />
+  <br /><br />
+
+  <input type="text" name="country" [(ngModel)]="user.country" placeholder="Country" required/>
+  <br /><br />
+  <input type="text" name="fullPostalAddress" [(ngModel)]="user.fullPostalAddress" placeholder="full Postal Address" required />
+  <br /><br />
+  <input type="date" name="dateOfBirth" [(ngModel)]="user.dateOfBirth" placeholder="date of Birth" required/>
+  <br /><br />
+  <input type="text" name="mothersName" [(ngModel)]="user.mothersName" placeholder="mothers Name" required/>
+  <br /><br />
+  <input type="text" name="fathersName" [(ngModel)]="user.fathersName" placeholder="fathers Name" required/>
+  <br /><br />
+  <input type="text" name="fathersEmailID" [(ngModel)]="user.fathersEmailID" placeholder="fathers Email ID" required/>
+  <br /><br />
+  <input type="text" name="mothersEmailID" [(ngModel)]="user.mothersEmailID" placeholder="mothers Email ID" required/>
+  <br /><br />
+  <input type="text" name="childEmailID" [(ngModel)]="user.childEmailID" placeholder="childs Email ID" required/>
+  <br /><br />
+  <input type="text" name="phoneNumber" [(ngModel)]="user.phoneNumber" placeholder="phone Number" required/>
+  <br /><br />
+  <input type="text" name="whatsappNumber" [(ngModel)]="user.whatsappNumber" placeholder="whatsapp Number" required/>
+  <br /><br />
+
+  <button type="submit">Submit</button>
+</form>

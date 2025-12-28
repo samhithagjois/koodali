@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+/*import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
@@ -10,3 +10,16 @@ import { RouterOutlet } from '@angular/router';
 export class App {
   protected readonly title = signal('koodali-frontend');
 }
+*/
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
+@NgModule({
+  imports: [
+    FormsModule,
+    HttpClientModule
+  ]
+})
+export class AppModule {}
+

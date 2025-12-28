@@ -57,7 +57,7 @@ public class HomeworkPointsExcelService {
             int points = entry.getValue();
            Student s = studentService.findByID(id);
            s.setHomeworkLeaderBoardScore(points);
-           leaderboardRepository.save(s.getID());
+           leaderboardRepository.save(s);
         }
 
     }

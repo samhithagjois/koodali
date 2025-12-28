@@ -39,7 +39,7 @@ public class Student extends Person {
     private LocalDateTime dateOfRegistration;
     private LocalDate dateOfFirstClass;
 
-    private String mothersName, fathersName, fathersEmailID, mothersEmailID;
+    private String mothersName, fathersName, fathersEmailID, mothersEmailID, childEmailID;
     @ElementCollection
     @CollectionTable(
             name = "student_attendance",
@@ -60,6 +60,43 @@ public class Student extends Person {
     @Column(name = "points")
     private Map<LocalDate, Integer> homeworkPointsPerWeek = new HashMap<>();
 
+    public Student(String firstName,
+                   String lastName,
+                   String city,
+                   String pinCode,
+                   String country,
+                   String fullPostalAddress,
+                   LocalDate dateOfBirth,
+                   String mothersName,
+                   String fathersName,
+                   String fathersEmailID,
+                   String mothersEmailID,
+                   String childEmailID,
+                   String phoneNumber,
+                   String whatsappNumber){
+        super(firstName,lastName, "",city,pinCode, country,fullPostalAddress
+        ,LocalDateTime.now(),LocalDateTime.of(LocalDateTime.now().getYear(),9,1,8,30),true);
+        this.personID = "NKS"+section.toString().substring(0,1).toUpperCase()+"_"+ UUID.randomUUID();
+        this.section = ClassNames.UNASSIGNED;
+        this.amountOfTextbooks = 0;
+        this.feesPaid = 0;
+        this.pendingFees = 0;
+        this.homeworkLeaderBoardScore = 0;
+        this.pathToPhoto = "";
+        this.pathToConsentForm = "";
+        this.dateOfBirth = dateOfBirth;
+        this.dateOfFirstClass = null;
+        this.mothersName = mothersName;
+        this.fathersName = fathersName;
+        this.fathersEmailID = fathersEmailID;
+        this.mothersEmailID = mothersEmailID;
+        this.childEmailID = childEmailID;
+        this.attendance = new HashMap<>();
+        this.phoneNumber = phoneNumber;
+        this.whatsappNumber = whatsappNumber;
+        this.homeworkPointsPerWeek = new HashMap<>();
+
+    }
 
     public Student(String personID, String firstName, String lastName, ClassNames section) {
         super(personID, firstName, lastName);
@@ -74,7 +111,7 @@ public class Student extends Person {
                    int amountOfTextbooks, int feesPaid, int pendingFees, int homeworkLeaderBoardScore,
                    LocalDate dateOfBirth,
                    LocalDate dateOfFirstClass, String mothersName, String fathersName,
-                   String fathersEmailID, String mothersEmailID, Map<LocalDate, Boolean> attendancePercentage,
+                   String fathersEmailID, String mothersEmailID, String childEmailID, Map<LocalDate, Boolean> attendancePercentage,
                    String phoneNumber, String whatsappNumber) {
 
         super(firstName, lastName, personID,
@@ -94,6 +131,7 @@ public class Student extends Person {
         this.fathersName = fathersName;
         this.fathersEmailID = fathersEmailID;
         this.mothersEmailID = mothersEmailID;
+        this.childEmailID = childEmailID;
         this.attendance = attendancePercentage;
         this.phoneNumber = phoneNumber;
         this.whatsappNumber = whatsappNumber;
@@ -116,6 +154,7 @@ public class Student extends Person {
         this.fathersName = "";
         this.fathersEmailID = "";
         this.mothersEmailID = "";
+        this.childEmailID = "";
         this.attendance = new HashMap<>();
         this.phoneNumber = "";
         this.whatsappNumber = "";

@@ -18,7 +18,7 @@ public class LeaderboardService {
     }
 
     public List<Student> fetchAllStudents(){
-        List<String> ids = leaderboardRepository.findAll();
+        List<String> ids = leaderboardRepository.findAll().stream().map(Student::getID).toList();
         return List.of();
         //TODO : bring in StudentService, create studentRepo and SectionService and pass them in constructor
         // either create method in StudentService getStudentsByListOfIDs or do a stream filter operation on studentService.getAll
