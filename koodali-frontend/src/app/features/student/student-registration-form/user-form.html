@@ -1,7 +1,9 @@
 <h2>Student Registration Form</h2>
 
 <form (ngSubmit)="onSubmit()" #userForm="ngForm">
-  <i>Given Name / First name of student</i>
+ <p>
+   <i>Given Name / First name of student</i>
+ </p>
   <input type="text" name="firstName" [(ngModel)]="user.firstName" placeholder="First Name" required />
   <br /><br />
 

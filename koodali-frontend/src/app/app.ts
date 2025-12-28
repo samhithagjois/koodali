@@ -1,25 +1,17 @@
-/*import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+//import {HomeView} from './features/home/home-view/home-view';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
   imports: [RouterOutlet],
-  templateUrl: './app.html',
-  styleUrl: './app.css'
-})
-export class App {
-  protected readonly title = signal('koodali-frontend');
-}
-*/
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+  template: `
 
-@NgModule({
-  imports: [
-    FormsModule,
-    HttpClientModule
-  ]
+    <router-outlet></router-outlet>
+  `
 })
-export class AppModule {}
+export class AppComponent {}
 
+//code given to me by ChatGPT this is the first time I'm trusting the clanker
+// <app-home-view></app-home-view>
