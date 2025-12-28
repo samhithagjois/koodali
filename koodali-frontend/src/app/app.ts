@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-//import {HomeView} from './features/home/home-view/home-view';
+//import {HomeView} from './features/home-view/home-view';
 
 @Component({
   selector: 'app-root',
@@ -8,10 +8,11 @@ import { RouterOutlet } from '@angular/router';
   imports: [RouterOutlet],
   template: `
 
+
     <router-outlet></router-outlet>
   `
 })
 export class AppComponent {}
 
 //code given to me by ChatGPT this is the first time I'm trusting the clanker
-// <app-home-view></app-home-view>
+// // <app-home-view></app-home-view>
