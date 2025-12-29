@@ -22,5 +22,10 @@ export const routes: Routes = [
       import('./features/student/student-registration-form/user-form')
         .then(m => m.UserForm)
   },
+  //admin -> button -> sectionOverview -> edit Section -> button -> EditSectionView
+  //admin -> button -> studentOverview -> edit Student -> button -> EditStudentView (Student registration)
+  //admin -> button -> teacherOverview -> edit Teacher -> button -> EditTeacherView
+  //admin -> button -> sectionOverview -> teachers -> text hyperlink -> See Teachers Page
+  //admin -> button -> sectionOverview -> students -> text hyperlink -> See Students Page
 
 ];
