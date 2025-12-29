@@ -23,6 +23,11 @@ Functions to be implemented :
 login to localhost : user and the pw from the log
 
 Other links I will need :
-https://spring.io/guides/gs/handling-form-submission form submission 
+https://spring.io/guides/gs/handling-form-submission form submission
+
+THINGS TO DO (in random order) : 
+1. ADMIN
+   1. Section overview shows all Sections. The info displayed is as follows : 
+      id| Section Name | Section FUll Name | Taragathi Name |\[Teacher(s)](links to Teacher Overview) |\[Amount Of Students](links to Student Overview) | Edit Section (button)(links to Section edit Form)
 
 

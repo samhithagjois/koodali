@@ -11,10 +11,6 @@ export const routes: Routes = [
   },
 
   {
-  /*  path: '/admin/admin-overview',
-    loadComponent: () =>
-      import('./features/admin/admin-overview')
-        .then(m => m.AdminOverview)*/
     path:'admin',component : AdminOverview
   },
   {

@@ -5,9 +5,7 @@ import { Component } from '@angular/core';
   standalone : true,
   imports: [],
   template: `
-    <p>
-      section-overview works!
-    </p>
+    <h3>Section Overview for Administration</h3>
   `,
   styleUrl: './section-overview.css',
 })
