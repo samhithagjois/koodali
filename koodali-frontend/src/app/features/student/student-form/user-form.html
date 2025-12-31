@@ -1,9 +1,7 @@
 <h2>Manual Student Registration Form</h2>
 
 <form (ngSubmit)="onSubmit()" #userForm="ngForm">
- <p>
-   <i>Given Name / First name of student</i>
- </p>
+
   <input type="text" name="firstName" [(ngModel)]="user.firstName" placeholder="First Name" required />
   <br /><br />
 
@@ -30,7 +28,7 @@
   <br /><br />
   <input type="text" name="mothersEmailID" [(ngModel)]="user.mothersEmailID" placeholder="mothers Email ID" required/>
   <br /><br />
-  <input type="text" name="childEmailID" [(ngModel)]="user.childEmailID" placeholder="childs Email ID" required/>
+  <input type="text" name="childEmailID" [(ngModel)]="user.childEmailID" placeholder="child's Email ID" required/>
   <br /><br />
   <input type="text" name="phoneNumber" [(ngModel)]="user.phoneNumber" placeholder="phone Number" required/>
   <br /><br />

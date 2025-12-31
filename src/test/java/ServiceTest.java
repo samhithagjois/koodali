@@ -19,12 +19,13 @@ public class ServiceTest {
     static Administrator samhitha = new Administrator("NKS_AD_001", "Samhitha", "Jois");
     static Administrator vinayak = new Administrator("NKS_AD_002", "Vinayak", "Belavadi");
    // private final AdminOperationService adminOperationService = new AdminOperationService(null);
-    //TODO : Mock!
-    Student sushruth = new Student("NKS_M_001", "Sushruth", "", MU_ADV);
-    Student riddhi = new Student("NKS_M_002", "Riddhi", "", MU_BEG);
-    Student dhriti = new Student("NKS_M_003", "Dhriti", "", MU_BEG);
-    Student parineeta = new Student("NKS_M_004", "Parineeta", "", MU_ADV);
-    Student shravya = new Student("NKS_ER_004", "Shravya", "", IN_BEG);
+    //TODO 1 : Mock!
+    Student sushruth = new Student();
+
+    Student riddhi = new Student();
+    Student dhriti = new Student();
+    Student parineeta = new Student();
+    Student shravya = new Student();
     Section mu_adv = new Section(MU_ADV);
     Section mu_beg = new Section(MU_BEG);
     Section in_beg = new Section(IN_BEG);
@@ -44,12 +45,15 @@ public class ServiceTest {
         }
 
 
+
         samhitha.addPermission(AdminPermissions.MU);
         vinayak.addPermission(AdminPermissions.DE);
         vinayak.addPermission(AdminPermissions.IN);
 
 
     }
+
+
 
    /* @Test
     public void adminPermissions() {

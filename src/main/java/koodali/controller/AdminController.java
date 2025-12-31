@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping(path = "/api")
 public class AdminController {
@@ -147,14 +148,14 @@ public class AdminController {
     @PutMapping("admin/sections/{sectionId}/students/{studentId}")
     ResponseEntity<Student> reassignStudent(String adminId, @PathVariable String sectionId, @PathVariable String studentId) {
         Student s = adminOperationService.reassignStudentToSection(adminId, studentId, sectionId);
-        //TODO : Security Context!
+        //TODO 6: Security Context!
         return new ResponseEntity<>(s, HttpStatus.OK);
     }
 
     @PutMapping("admin/sections/{sectionId}/students")
     ResponseEntity<Student> addStudentToSection(@PathVariable String sectionId, String studentId, String adminId) {
         Student s = adminOperationService.addStudentToSection(adminId, studentId, sectionId);
-        //TODO : Security Context!
+        //TODO 6: Security Context!
         return new ResponseEntity<>(s, HttpStatus.OK);
     }
 

@@ -1,13 +1,12 @@
 package koodali.controller;
 
-import koodali.model.Student;
 import koodali.service.LeaderboardService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping(path = "/api")
 public class LeaderboardController {
@@ -23,7 +22,7 @@ public class LeaderboardController {
         return leaderboardService;
     }
 
-    //TODO : following methods :
+    //TODO 7 : following methods :
     // 1: fetch all students
     // 2: sort by highest points
     // 3 : filter by section

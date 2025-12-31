@@ -74,9 +74,9 @@ public class Student extends Person {
                    String childEmailID,
                    String phoneNumber,
                    String whatsappNumber){
-        super(firstName,lastName, "",city,pinCode, country,fullPostalAddress
+        //TODO: add pathTo variables in all form related constructors!
+        super(firstName,lastName, "NKS"+ClassNames.UNASSIGNED.toString().substring(0,1).toUpperCase()+"_"+ UUID.randomUUID(),city,pinCode, country,fullPostalAddress
         ,LocalDateTime.now(),LocalDateTime.of(LocalDateTime.now().getYear(),9,1,8,30),true);
-        this.personID = "NKS"+section.toString().substring(0,1).toUpperCase()+"_"+ UUID.randomUUID();
         this.section = ClassNames.UNASSIGNED;
         this.amountOfTextbooks = 0;
         this.feesPaid = 0;
@@ -98,24 +98,35 @@ public class Student extends Person {
 
     }
 
-    public Student(String personID, String firstName, String lastName, ClassNames section) {
-        super(personID, firstName, lastName);
-
-        this.section = section;
-    }
-
-    public Student(String firstName, String lastName, String personID,
-                   String city, String pinCode, String country,
-                   String fullPostalAdress, LocalDateTime dateOfRegistration,
-                   LocalDateTime dateOfClassStart, boolean activeStatus, ClassNames section,
-                   int amountOfTextbooks, int feesPaid, int pendingFees, int homeworkLeaderBoardScore,
+    public Student(String firstName,
+                   String lastName,
+                   String personID,
+                   String city,
+                   String pinCode,
+                   String country,
+                   String fullPostalAddress,
+                   LocalDateTime dateOfRegistration,
+                   LocalDateTime dateOfClassStart,
+                   boolean activeStatus,
+                   ClassNames section,
+                   int amountOfTextbooks,
+                   int feesPaid,
+                   int pendingFees,
+                   int homeworkLeaderBoardScore,
                    LocalDate dateOfBirth,
-                   LocalDate dateOfFirstClass, String mothersName, String fathersName,
-                   String fathersEmailID, String mothersEmailID, String childEmailID, Map<LocalDate, Boolean> attendancePercentage,
-                   String phoneNumber, String whatsappNumber) {
+                   LocalDate dateOfFirstClass,
+                   String mothersName,
+                   String fathersName,
+                   String fathersEmailID,
+                   String mothersEmailID,
+                   String childEmailID,
+                   Map<LocalDate, Boolean> attendancePercentage,
+                   String phoneNumber,
+                   String whatsappNumber) {
+        //TODO:decide on which constructor to use for the form
 
         super(firstName, lastName, personID,
-                city, pinCode, country, fullPostalAdress,
+                city, pinCode, country, fullPostalAddress,
                 dateOfRegistration, dateOfClassStart,
                 activeStatus);
         this.section = section;

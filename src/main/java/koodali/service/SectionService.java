@@ -71,6 +71,8 @@ public class SectionService {
 
     }
 
+    //addStudents
+    //removeStudents -> warn when students.amount <=1 that it is better to delete the section
 
 }
 

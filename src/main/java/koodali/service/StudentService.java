@@ -56,7 +56,7 @@ public class StudentService extends PersonService<Student> {
                 .map(Map.Entry::getKey)
                 .toList();
 
-        //TODO : test!
+        //TODO 1.1 : test!
         return (double) studentAttended.size() / dates.size();
 
     }
@@ -65,15 +65,6 @@ public class StudentService extends PersonService<Student> {
         Section section = sectionService.getSectionByID(student.getSection().toString());
         section.getStudents().put(student.getID(), student);
         return studentRepo.save(student);
-    }
-
-    public Student createStudent(String studentId, String firstName, String lastName, String sectionID) {
-
-        Section section = sectionService.getSectionByID(sectionID);
-        Student student = new Student(studentId, firstName, lastName, section.getName());
-        section.getStudents().put(student.getID(), student);
-        return studentRepo.save(student);
-
     }
 
     public Student createStudent(String studentId,

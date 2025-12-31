@@ -31,7 +31,7 @@ public class Section {
         this.students = new HashMap<>();
         this.teachers = new HashMap<>();
         this.classSchedule = new HashMap<LocalDate, Boolean>();
-        //TODO : you should be able to add and change things in the class schedule
+        //TODO 5 : you should be able to add and change things in the class schedule
     }
 
     public Section() {
