@@ -4,33 +4,44 @@ import koodali.model.Student;
 import koodali.repository.LeaderboardRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class LeaderboardService {
 
     private final LeaderboardRepository leaderboardRepository;
-    //HomewoerkExcelService service
+    private final StudentService studentService;
 
-    public LeaderboardService(LeaderboardRepository leaderboardRepository) {
+    //HomeworkPointsService service
+
+    public LeaderboardService(LeaderboardRepository leaderboardRepository, StudentService studentService) {
 
         this.leaderboardRepository = leaderboardRepository;
+        this.studentService = studentService;
     }
 
-    public List<Student> fetchAllStudents(){
+    public List<Student> fetchAllStudentsByIDs(){
+        List<Student> result = new ArrayList<>();
         List<String> ids = leaderboardRepository.findAll().stream().map(Student::getID).toList();
-        return List.of();
-        //TODO 3: bring in StudentService, create studentRepo and SectionService and pass them in constructor
-        // either create method in StudentService getStudentsByListOfIDs or do a stream filter operation on studentService.getAll
-        // return the filtered Students sorted by ID.
+        for (String id: ids) {
+            result.add(studentService.findByID(id));
+        }
+        return result;
     }
 
-    public List<Student> sortBy(String option){
+    public List<Student> sortBy(LeaderboardOption option){
+
         return List.of();
-        //TODO 4: switch the options. Change into Enum if needed
-        // Should only be following :
-        // - descending/ascending by points
-        // - descending ascending by ID
+    }
+
+    public List<Student> filterBy(LeaderboardOption option){
+
+        return List.of();
+    }
+
+    public void updateLeaderboard(){
+
     }
 
 
