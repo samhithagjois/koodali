@@ -169,7 +169,7 @@ public class AdminOperationService {
         if (checkPermissionToModify(admin, section)) {
             throw new IllegalAdminActionException();
         }
-        teacher.setSection(section.getName());
+        teacher.setSection(List.of(section.getName()));
         section.getTeachers().put(teacher.getID(), teacher);
         sectionService.updateSection(section);
         return teacherService.save(teacher);
@@ -220,12 +220,13 @@ public class AdminOperationService {
     }
 
 
-    public Teacher reassignTeacherToSection(String adminID, String teacherID, String sectionID) {
+    public Teacher reassignTeacherToSection(String adminID, String teacherID, String oldSectionID, String sectionID) {
         Teacher teacher = deleteTeacherFromSection(adminID, teacherID, sectionID);
+        teacher.getSection().remove(sectionService.getSectionByID(sectionID).getName());
         ClassNames className = findSection(sectionID).getName();
         Section section = findSection(sectionID);
 
-        teacher.setSection(className);
+
 
         section.getTeachers().put(teacherID, teacher);
 

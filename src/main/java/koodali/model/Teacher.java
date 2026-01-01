@@ -16,28 +16,29 @@ public class Teacher extends Person {
     @ManyToMany
 
     private final List<Student> studentOverview = new ArrayList<>();
-    private ClassNames section = ClassNames.UNASSIGNED;
+    @ManyToMany
+    private List<ClassNames> section;
     private int amountOfTextbooks = 0;
 
 
     private LocalDate joinDate;
 
-    public Teacher(String personID, String firstName, String lastName, ClassNames section) {
+    public Teacher(String personID, String firstName, String lastName, List<ClassNames> section) {
         super(personID, firstName, lastName);
         this.section = section;
     }
 
     public Teacher(){
         super();
-        this.personID = "NKS"+section.toString().substring(0,1).toUpperCase()+"_T_"+ UUID.randomUUID();
+        this.personID = "NKS_T_"+ UUID.randomUUID();
 
     }
 
-    public ClassNames getSection() {
+    public List<ClassNames> getSection() {
         return section;
     }
 
-    public void setSection(ClassNames section) {
+    public void setSection(List<ClassNames> section) {
         this.section = section;
     }
 

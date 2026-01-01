@@ -1,11 +1,13 @@
 package koodali.service;
 
+import koodali.model.ClassNames;
 import koodali.model.Section;
 import koodali.model.Teacher;
 import koodali.repository.TeacherRepository;
 import koodali.service.exceptions.TeacherNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -36,12 +38,22 @@ public class TeacherService extends PersonService<Teacher> {
     }
 
 
-    public Teacher createTeacher(String teacherId, String firstName, String lastName, String sectionID) {
+    public Teacher createTeacher(String teacherId, String firstName, String lastName, List<String> sectionIDs) {
+
+        List<ClassNames> teacherClasses = new ArrayList<>();
+        for (String s:sectionIDs) {
+            Section sectionByID = sectionService.getSectionByID(s);
+            teacherClasses.add(sectionByID.getName());
+
+        }
 
 
-        Section section = sectionService.getSectionByID(sectionID);
-        Teacher teacher = new Teacher(teacherId, firstName, lastName, section.getName());
-        section.getTeachers().put(teacher.getID(), teacher);
+        Teacher teacher = new Teacher(teacherId, firstName, lastName, teacherClasses);
+
+        for (ClassNames name:teacherClasses ) {
+            sectionService.getSectionByID(name.toString()).getTeachers().put(teacher.getID(),teacher);
+        }
+
         return teacherRepo.save(teacher);
 
     }
@@ -53,9 +65,7 @@ public class TeacherService extends PersonService<Teacher> {
                     .getAllSections()
                     .stream()
                     .filter(
-                            section -> section
-                                    .getName()
-                                    .equals(teacher.getSection()))
+                            section -> teacher.getSection().contains(section.getName()))
                     .findFirst()
                     .ifPresent(section -> section
                             .getTeachers()

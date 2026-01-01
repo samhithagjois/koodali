@@ -1,5 +1,8 @@
 package koodali.service;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class HomeworkPointsExcelService {
     //TODO: methods
     // 1. createTemplate

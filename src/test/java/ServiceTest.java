@@ -29,9 +29,9 @@ public class ServiceTest {
     Section mu_adv = new Section(MU_ADV);
     Section mu_beg = new Section(MU_BEG);
     Section in_beg = new Section(IN_BEG);
-    Teacher savitri = new Teacher("NKS_T_001", "Savitri", "", MU_BEG);
-    Teacher anita = new Teacher("NKS_T_002", "Anita", "", MU_ADV);
-    Teacher manasi = new Teacher("NKS_T_003", "Manasi", "", UNASSIGNED);
+    Teacher savitri = new Teacher("NKS_T_001", "Savitri", "", List.of(MU_BEG));
+    Teacher anita = new Teacher("NKS_T_002", "Anita", "", List.of(MU_ADV));
+    Teacher manasi = new Teacher("NKS_T_003", "Manasi", "", List.of(UNASSIGNED));
 
     @BeforeEach
     public void fillUpClassAndStudentSchedule() {
