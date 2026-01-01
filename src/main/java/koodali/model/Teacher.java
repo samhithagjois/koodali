@@ -1,10 +1,9 @@
 package koodali.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -16,16 +15,26 @@ public class Teacher extends Person {
     @ManyToMany
 
     private final List<Student> studentOverview = new ArrayList<>();
-    @ManyToMany
-    private List<ClassNames> section;
+    @ElementCollection
+    @CollectionTable(
+            name = "teacher_sections",
+            joinColumns = @JoinColumn(name = "teacher_id")
+    )
+    @Column(name = "section")
+    private List<ClassNames> sections;
     private int amountOfTextbooks = 0;
-
 
     private LocalDate joinDate;
 
-    public Teacher(String personID, String firstName, String lastName, List<ClassNames> section) {
+    public Teacher(String personID, String firstName, String lastName, List<ClassNames> sections) {
         super(personID, firstName, lastName);
-        this.section = section;
+        this.sections = sections;
+    }
+
+    public Teacher (String firstName, String lastName, String city, String pinCode,
+                    String country, String fullPostalAddress,
+                    LocalDateTime dateOfRegistration, LocalDateTime dateOfClassStart, boolean activeStatus){
+
     }
 
     public Teacher(){
@@ -34,12 +43,12 @@ public class Teacher extends Person {
 
     }
 
-    public List<ClassNames> getSection() {
-        return section;
+    public List<ClassNames> getSections() {
+        return sections;
     }
 
-    public void setSection(List<ClassNames> section) {
-        this.section = section;
+    public void setSections(List<ClassNames> section) {
+        this.sections = section;
     }
 
     public List<Student> getStudentOverview() {

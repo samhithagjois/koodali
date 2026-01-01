@@ -76,7 +76,8 @@ public class StudentService extends PersonService<Student> {
                                  LocalDateTime dateOfClassStart, boolean activeStatus,
                                  int amountOfTextbooks, int feesPaid, int pendingFees, int homeworkLeaderBoardScore,
                                  LocalDate dateOfBirth,
-                                 LocalDate dateOfFirstClass, String mothersName, String fathersName,
+                                 LocalDate dateOfFirstClass, String pathToPhoto,
+                                 String pathToConsentForm,String mothersName, String fathersName,
                                  String fathersEmailID, String mothersEmailID, String childEmailAddress, Map<LocalDate, Boolean> attendancePercentage,
                                  String phoneNumber, String whatsappNumber) {
 
@@ -85,7 +86,7 @@ public class StudentService extends PersonService<Student> {
                 firstName, lastName, studentId, city, pinCode, country, fullPostalAdress,
                 dateOfRegistration, dateOfClassStart, activeStatus, sectionID,
                 amountOfTextbooks, feesPaid, pendingFees, homeworkLeaderBoardScore,
-                dateOfBirth, dateOfFirstClass, mothersName, fathersName, fathersEmailID,
+                dateOfBirth, dateOfFirstClass,pathToPhoto, pathToConsentForm,mothersName, fathersName, fathersEmailID,
                 mothersEmailID,childEmailAddress, attendancePercentage, phoneNumber, whatsappNumber
         );
         section.getStudents().put(student.getID(), student);

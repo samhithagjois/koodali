@@ -10,9 +10,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:4200")
+
 @Controller
 @RequestMapping(path = "/api")
+@CrossOrigin(origins = "http://localhost:4200")
 public class StudentController {
 
     private final StudentService studentService;

@@ -37,6 +37,10 @@ public class TeacherService extends PersonService<Teacher> {
                 .orElseThrow(TeacherNotFoundException::new);
     }
 
+    public Teacher createTeacher(Teacher teacher){
+        return teacherRepo.save(teacher);
+    }
+
 
     public Teacher createTeacher(String teacherId, String firstName, String lastName, List<String> sectionIDs) {
 
@@ -65,7 +69,7 @@ public class TeacherService extends PersonService<Teacher> {
                     .getAllSections()
                     .stream()
                     .filter(
-                            section -> teacher.getSection().contains(section.getName()))
+                            section -> teacher.getSections().contains(section.getName()))
                     .findFirst()
                     .ifPresent(section -> section
                             .getTeachers()

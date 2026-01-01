@@ -21,6 +21,7 @@ public class Section {
     )
     @MapKeyColumn(name = "week")
     @Column(name = "class")
+    //TODO:make this a list
     private HashMap<LocalDate, Boolean> classSchedule;
     @Id
     @GeneratedValue
@@ -30,7 +31,7 @@ public class Section {
         this.name = name;
         this.students = new HashMap<>();
         this.teachers = new HashMap<>();
-        this.classSchedule = new HashMap<LocalDate, Boolean>();
+        this.classSchedule = new HashMap<>();
         //TODO 5 : you should be able to add and change things in the class schedule
     }
 

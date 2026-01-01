@@ -1,9 +1,5 @@
 import koodali.model.*;
-import koodali.service.AdminOperationService;
-import koodali.service.exceptions.DuplicatePersonException;
-import koodali.service.exceptions.IllegalAdminActionException;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -11,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import static koodali.model.ClassNames.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 public class ServiceTest {
 

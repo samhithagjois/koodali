@@ -4,7 +4,10 @@ import {SectionOverview} from './features/admin/section-overview/section-overvie
 import {UserForm} from './features/student/student-form/user-form';
 import {StudentOverview} from './features/student/student-overview';
 import {TeacherOverview} from './features/teacher/teacher-overview';
+import {AdminTeacherOverview} from './features/admin/admin-teacher-overview/teacher-overview';
 import {Leaderboard} from './features/leaderboard/leaderboard';
+import {AdminStudentOverview} from './features/admin/admin-student-overview/student-overview';
+import {TeacherForm} from './features/teacher/teacher-form/teacher-form';
 
 export const routes: Routes = [
   {
@@ -33,7 +36,16 @@ export const routes: Routes = [
     path: 'admin/section-overview', component: SectionOverview
   },
   {
+    path: 'admin/teacher-overview', component: AdminTeacherOverview
+  },
+  {
+    path: 'admin/student-overview', component: AdminStudentOverview
+  },
+  {
     path: 'student/student-registration', component: UserForm
+  },
+  {
+    path: 'teacher/edit-teacher-profile', component: TeacherForm
   },
   //admin -> (Sections Overview) button -> sectionOverview -> edit Section -> button -> EditSectionView
   //admin -> (Student Overview) button -> studentOverview -> edit Student -> button -> EditStudentView (Student registration)

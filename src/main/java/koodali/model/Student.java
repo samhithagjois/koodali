@@ -73,8 +73,10 @@ public class Student extends Person {
                    String mothersEmailID,
                    String childEmailID,
                    String phoneNumber,
-                   String whatsappNumber){
-        //TODO: add pathTo variables in all form related constructors!
+                   String whatsappNumber,
+                   String pathToConsentForm,
+                   String pathToPhoto){
+        //TODO: add pathTo variables in the form!
         super(firstName,lastName, "NKS"+ClassNames.UNASSIGNED.toString().substring(0,1).toUpperCase()+"_"+ UUID.randomUUID(),city,pinCode, country,fullPostalAddress
         ,LocalDateTime.now(),LocalDateTime.of(LocalDateTime.now().getYear(),9,1,8,30),true);
         this.section = ClassNames.UNASSIGNED;
@@ -82,8 +84,8 @@ public class Student extends Person {
         this.feesPaid = 0;
         this.pendingFees = 0;
         this.homeworkLeaderBoardScore = 0;
-        this.pathToPhoto = "";
-        this.pathToConsentForm = "";
+        this.pathToPhoto = pathToPhoto;
+        this.pathToConsentForm = pathToConsentForm;
         this.dateOfBirth = dateOfBirth;
         this.dateOfFirstClass = null;
         this.mothersName = mothersName;
@@ -115,6 +117,8 @@ public class Student extends Person {
                    int homeworkLeaderBoardScore,
                    LocalDate dateOfBirth,
                    LocalDate dateOfFirstClass,
+                   String pathToPhoto,
+                   String pathToConsentForm,
                    String mothersName,
                    String fathersName,
                    String fathersEmailID,
@@ -124,6 +128,7 @@ public class Student extends Person {
                    String phoneNumber,
                    String whatsappNumber) {
         //TODO:decide on which constructor to use for the form
+        //TODO:add a field in the manual student form where you can
 
         super(firstName, lastName, personID,
                 city, pinCode, country, fullPostalAddress,
@@ -134,8 +139,8 @@ public class Student extends Person {
         this.feesPaid = feesPaid;
         this.pendingFees = pendingFees;
         this.homeworkLeaderBoardScore = homeworkLeaderBoardScore;
-        this.pathToPhoto = "";
-        this.pathToConsentForm = "";
+        this.pathToPhoto = pathToPhoto;
+        this.pathToConsentForm = pathToConsentForm;
         this.dateOfBirth = dateOfBirth;
         this.dateOfFirstClass = dateOfFirstClass;
         this.mothersName = mothersName;
