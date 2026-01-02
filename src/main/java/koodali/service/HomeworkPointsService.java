@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -39,7 +40,7 @@ public class HomeworkPointsService {
 
         for (HomeworkPointsEntity entity : homeworkPointsRepository.findAll()) {
 
-            String section = sectionService.getSectionByID(sectionID).getID();
+            String section = sectionService.getSectionByID(sectionID).getName();
             if(section.equalsIgnoreCase(sectionID)){
                 result.add(entity);
             }
@@ -64,13 +65,14 @@ public class HomeworkPointsService {
     public List<HomeworkPointsEntity> getListForAllSectionsOfTeacher(String teacherID){
         List<HomeworkPointsEntity> result = new ArrayList<>();
         Teacher teacher = teacherService.findByID(teacherID);
+        for (String section:teacher.getSections()) {
+            result.addAll(getListForSection(section));
 
-
+        }
 
         return result;
     }
 
-    //TODO
     //HomeworkPointsService
     // : methods :
     // 1. getListForSection(String sectionID)

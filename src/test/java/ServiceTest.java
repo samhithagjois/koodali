@@ -1,16 +1,16 @@
 import koodali.model.*;
 import org.junit.jupiter.api.BeforeEach;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static koodali.model.ClassNames.*;
-
 public class ServiceTest {
 
-    static Map<LocalDateTime, Boolean> schedule = new HashMap<>();
+    static List<LocalDateTime> schedule = new ArrayList<>();
     static Administrator samhitha = new Administrator("NKS_AD_001", "Samhitha", "Jois");
     static Administrator vinayak = new Administrator("NKS_AD_002", "Vinayak", "Belavadi");
    // private final AdminOperationService adminOperationService = new AdminOperationService(null);
@@ -21,12 +21,12 @@ public class ServiceTest {
     Student dhriti = new Student();
     Student parineeta = new Student();
     Student shravya = new Student();
-    Section mu_adv = new Section(MU_ADV);
-    Section mu_beg = new Section(MU_BEG);
-    Section in_beg = new Section(IN_BEG);
-    Teacher savitri = new Teacher("NKS_T_001", "Savitri", "", List.of(MU_BEG));
-    Teacher anita = new Teacher("NKS_T_002", "Anita", "", List.of(MU_ADV));
-    Teacher manasi = new Teacher("NKS_T_003", "Manasi", "", List.of(UNASSIGNED));
+    Section mu_adv = new Section("MU_ADV");
+    Section mu_beg = new Section("MU_BEG");
+    Section in_beg = new Section("IN_BEG");
+    Teacher savitri = new Teacher("NKS_T_001", "Savitri", "", List.of("MU_BEG"));
+    Teacher anita = new Teacher("NKS_T_002", "Anita", "", List.of("MU_ADV"));
+    Teacher manasi = new Teacher("NKS_T_003", "Manasi", "", List.of("UNASSIGNED"));
 
     @BeforeEach
     public void fillUpClassAndStudentSchedule() {
@@ -35,7 +35,7 @@ public class ServiceTest {
 
         for (int month = 1; month <= 12; month++) {
             for (int day : days) {
-                schedule.put(LocalDateTime.of(2025, month, day, 8, 30), true);
+                schedule.add(LocalDateTime.of(2025, month, day, 8, 30));
             }
         }
 

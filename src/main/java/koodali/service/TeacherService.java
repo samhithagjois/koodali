@@ -1,6 +1,5 @@
 package koodali.service;
 
-import koodali.model.ClassNames;
 import koodali.model.Section;
 import koodali.model.Teacher;
 import koodali.repository.TeacherRepository;
@@ -44,7 +43,7 @@ public class TeacherService extends PersonService<Teacher> {
 
     public Teacher createTeacher(String teacherId, String firstName, String lastName, List<String> sectionIDs) {
 
-        List<ClassNames> teacherClasses = new ArrayList<>();
+        List<String> teacherClasses = new ArrayList<>();
         for (String s:sectionIDs) {
             Section sectionByID = sectionService.getSectionByID(s);
             teacherClasses.add(sectionByID.getName());
@@ -54,8 +53,8 @@ public class TeacherService extends PersonService<Teacher> {
 
         Teacher teacher = new Teacher(teacherId, firstName, lastName, teacherClasses);
 
-        for (ClassNames name:teacherClasses ) {
-            sectionService.getSectionByID(name.toString()).getTeachers().put(teacher.getID(),teacher);
+        for (String name:teacherClasses ) {
+            sectionService.getSectionByID(name).getTeachers().put(teacher.getID(),teacher);
         }
 
         return teacherRepo.save(teacher);

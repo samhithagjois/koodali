@@ -126,7 +126,7 @@ public class AdminOperationService {
      *
      * @param adminID   admins ID
      * @param studentID students ID
-     * @param sectionID as String! eventhough in Student we have ClassNames, we have to find and validate the section
+     * @param sectionID as String! eventhough in Student we have ClassNames_DEPR, we have to find and validate the section
      *                  In our case, sectionID is simply the name of the section
      * @throws SectionNotFoundException if Section was not found (wich means the id is wrong!)
      * @throws StudentNotFoundException if the student was not found
@@ -223,7 +223,7 @@ public class AdminOperationService {
     public Teacher reassignTeacherToSection(String adminID, String teacherID, String oldSectionID, String sectionID) {
         Teacher teacher = deleteTeacherFromSection(adminID, teacherID, sectionID);
         teacher.getSections().remove(sectionService.getSectionByID(sectionID).getName());
-        ClassNames className = findSection(sectionID).getName();
+        String className = findSection(sectionID).getName();
         Section section = findSection(sectionID);
 
 
@@ -275,7 +275,7 @@ public class AdminOperationService {
         }
         //remove student from old section
         sectionService
-                .getSectionByID(student.getSection().name()).getStudents().remove(studentID, student);
+                .getSectionByID(student.getSection()).getStudents().remove(studentID, student);
         student.setSection(null);
         return student;
 

@@ -12,7 +12,7 @@ import java.util.UUID;
 public class Student extends Person {
 
 
-    private ClassNames section;
+    private String section;
 
 
     //new variables
@@ -51,14 +51,6 @@ public class Student extends Person {
     private String phoneNumber;
     private String whatsappNumber;
 
-    @ElementCollection
-    @CollectionTable(
-            name = "homework_points",
-            joinColumns = @JoinColumn(name = "personID")
-    )
-    @MapKeyColumn(name = "week")
-    @Column(name = "points")
-    private Map<LocalDate, Integer> homeworkPointsPerWeek = new HashMap<>();
 
     public Student(String firstName,
                    String lastName,
@@ -77,9 +69,9 @@ public class Student extends Person {
                    String pathToConsentForm,
                    String pathToPhoto){
         //TODO: add pathTo variables in the form!
-        super(firstName,lastName, "NKS"+ClassNames.UNASSIGNED.toString().substring(0,1).toUpperCase()+"_"+ UUID.randomUUID(),city,pinCode, country,fullPostalAddress
+        super(firstName,lastName, "NKS"+"UNASSIGNED".substring(0,1).toUpperCase()+"_"+ UUID.randomUUID(),city,pinCode, country,fullPostalAddress
         ,LocalDateTime.now(),LocalDateTime.of(LocalDateTime.now().getYear(),9,1,8,30),true);
-        this.section = ClassNames.UNASSIGNED;
+        this.section = "UNASSIGNED";
         this.amountOfTextbooks = 0;
         this.feesPaid = 0;
         this.pendingFees = 0;
@@ -96,7 +88,6 @@ public class Student extends Person {
         this.attendance = new HashMap<>();
         this.phoneNumber = phoneNumber;
         this.whatsappNumber = whatsappNumber;
-        this.homeworkPointsPerWeek = new HashMap<>();
 
     }
 
@@ -110,7 +101,7 @@ public class Student extends Person {
                    LocalDateTime dateOfRegistration,
                    LocalDateTime dateOfClassStart,
                    boolean activeStatus,
-                   ClassNames section,
+                   String section,
                    int amountOfTextbooks,
                    int feesPaid,
                    int pendingFees,
@@ -128,7 +119,6 @@ public class Student extends Person {
                    String phoneNumber,
                    String whatsappNumber) {
         //TODO:decide on which constructor to use for the form
-        //TODO:add a field in the manual student form where you can
 
         super(firstName, lastName, personID,
                 city, pinCode, country, fullPostalAddress,
@@ -151,13 +141,13 @@ public class Student extends Person {
         this.attendance = attendancePercentage;
         this.phoneNumber = phoneNumber;
         this.whatsappNumber = whatsappNumber;
-        this.homeworkPointsPerWeek = new HashMap<>();
+        //this.homeworkPointsPerWeek = new HashMap<>();
     }
 
     public Student() {
         super();
-        this.personID = "NKS"+section.toString().substring(0,1).toUpperCase()+"_"+ UUID.randomUUID();
-        this.section = ClassNames.UNASSIGNED;
+        this.personID = "NKS"+section.substring(0,1).toUpperCase()+"_"+ UUID.randomUUID();
+        this.section = "UNASSIGNED";
         this.amountOfTextbooks = 0;
         this.feesPaid = 0;
         this.pendingFees = 0;
@@ -174,15 +164,15 @@ public class Student extends Person {
         this.attendance = new HashMap<>();
         this.phoneNumber = "";
         this.whatsappNumber = "";
-        this.homeworkPointsPerWeek = new HashMap<>();
+       // this.homeworkPointsPerWeek = new HashMap<>();
     }
 
 
-    public ClassNames getSection() {
+    public String getSection() {
         return section;
     }
 
-    public void setSection(ClassNames section) {
+    public void setSection(String section) {
         this.section = section;
     }
 
@@ -315,11 +305,4 @@ public class Student extends Person {
         this.whatsappNumber = whatsappNumber;
     }
 
-    public Map<LocalDate, Integer> getHomeworkPointsPerWeek() {
-        return homeworkPointsPerWeek;
-    }
-
-    public void setHomeworkPointsPerWeek(Map<LocalDate, Integer> homeworkPointsPerWeek) {
-        this.homeworkPointsPerWeek = homeworkPointsPerWeek;
-    }
 }

@@ -1,6 +1,7 @@
 package koodali.controller;
 
 import koodali.model.Section;
+import koodali.model.Student;
 import koodali.service.SectionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -76,55 +77,21 @@ public class SectionController {
     /**
      * -------------------- POST Mappings -------------------------------
      * */
+    @PostMapping("/sections")
+    public ResponseEntity<Section> createSection(@RequestBody Section newSection) {
+        return new ResponseEntity<>(sectionService.createSection(newSection), HttpStatus.CREATED);
+    }
 
     /**
      * -------------------- PUT Mappings -------------------------------
      * */
+    @PutMapping("/sections")
+    public ResponseEntity<Section> updateSection(@RequestBody Section updatedSection) {
+        return new ResponseEntity<>(sectionService.updateSection(updatedSection), HttpStatus.OK);
+    }
 
     /**
      * -------------------- DELETE Mappings -------------------------------
      * */
 
-    /*	@GetMapping("/cars")
-	public ResponseEntity<List<Car>> getAllCars() {
-		return new ResponseEntity<>(ModelStorage.getAllCars(), HttpStatus.OK);
-	}
-
-	@GetMapping("/cars/{id}")
-	public ResponseEntity<Car> getCarById(@PathVariable String id) {
-		Car car = ModelStorage.getCarById(id);
-
-		if (car != null) {
-			return new ResponseEntity<>(car, HttpStatus.OK);
-		} else {
-			throw new CarNotFoundException();
-		}
-	}
-
-	@PostMapping("/cars")
-	public ResponseEntity<Car> createCar(@RequestBody Car newCar) {
-		newCar.setId(ModelStorage.createRandomId());
-		ModelStorage.saveCar(newCar);
-
-		return new ResponseEntity<>(newCar, HttpStatus.CREATED);
-	}
-
-	@PutMapping("/cars")
-	public ResponseEntity<Car> updateCar(@RequestBody Car updatedCar) {
-		Car oldCar = ModelStorage.getCarById(updatedCar.getId());
-
-		oldCar.setRentalCostPerDay(updatedCar.getRentalCostPerDay());
-		oldCar.setColor(updatedCar.getColor());
-		oldCar.setBrand(updatedCar.getBrand());
-
-		return new ResponseEntity<>(oldCar, HttpStatus.OK);
-	}
-
-	@DeleteMapping("/cars/{id}")
-	public ResponseEntity<Car> deleteCar(@PathVariable String id) {
-		Car car = ModelStorage.getCarById(id);
-		ModelStorage.deleteCar(car);
-
-		return new ResponseEntity<>(car, HttpStatus.OK);
-	}*/
 }

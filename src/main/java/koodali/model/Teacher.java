@@ -21,12 +21,12 @@ public class Teacher extends Person {
             joinColumns = @JoinColumn(name = "teacher_id")
     )
     @Column(name = "section")
-    private List<ClassNames> sections;
+    private List<String> sections;
     private int amountOfTextbooks = 0;
 
     private LocalDate joinDate;
 
-    public Teacher(String personID, String firstName, String lastName, List<ClassNames> sections) {
+    public Teacher(String personID, String firstName, String lastName, List<String> sections) {
         super(personID, firstName, lastName);
         this.sections = sections;
     }
@@ -43,11 +43,11 @@ public class Teacher extends Person {
 
     }
 
-    public List<ClassNames> getSections() {
+    public List<String> getSections() {
         return sections;
     }
 
-    public void setSections(List<ClassNames> section) {
+    public void setSections(List<String> section) {
         this.sections = section;
     }
 

@@ -152,7 +152,7 @@ public abstract class Person {
       full postal adress : String
 
       ST
-      section : ClassNames
+      section : ClassNames_DEPR
       amount of textbooks : int
 
       S

@@ -3,59 +3,63 @@ package koodali.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 @Entity
 public class Section {
-    private ClassNames name;
+    private String name;
     @OneToMany
     @JoinColumn(name = "id")
     private HashMap<String, Student> students;
     @OneToMany
     @JoinColumn(name = "id")
     private HashMap<String, Teacher> teachers;
+
+    public Section(String name, HashMap<String, Student> students, HashMap<String, Teacher> teachers, List<LocalDateTime> classSchedule) {
+        this.name = name;
+        this.students = students;
+        this.teachers = teachers;
+        this.classSchedule = classSchedule;
+    }
+
     @ElementCollection
     @CollectionTable(
             name = "classSchedule",
             joinColumns = @JoinColumn(name = "id")
     )
-    @MapKeyColumn(name = "week")
     @Column(name = "class")
-    //TODO:make this a list
-    private HashMap<LocalDate, Boolean> classSchedule;
+      private List<LocalDateTime> classSchedule;
     @Id
     @GeneratedValue
     private String id;
 
-    public Section(ClassNames name) {
+    public Section(String name) {
         this.name = name;
         this.students = new HashMap<>();
         this.teachers = new HashMap<>();
-        this.classSchedule = new HashMap<>();
-        //TODO 5 : you should be able to add and change things in the class schedule
+        this.classSchedule = new ArrayList<>();
     }
 
     public Section() {
 
     }
 
-    public String getID() {
-        return this.name.toString();
-    }
-
-    public HashMap<LocalDate, Boolean> getClassSchedule() {
+    public List<LocalDateTime> getClassSchedule() {
         return classSchedule;
     }
 
-    public void setClassSchedule(HashMap<LocalDate, Boolean> classSchedule) {
+    public void setClassSchedule(List<LocalDateTime> classSchedule) {
         this.classSchedule = classSchedule;
     }
 
-    public ClassNames getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(ClassNames name) {
+    public void setName(String name) {
         this.name = name;
     }
 
