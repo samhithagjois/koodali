@@ -131,7 +131,7 @@ public class AdminController {
      */
     @PutMapping("admin/sections")
     public ResponseEntity<Section> updateSection(@RequestBody Section updatedSection) {
-        Section oldSection = sectionService.getSectionByID(updatedSection.getName().toString());
+        Section oldSection = sectionService.getSectionByID(updatedSection.getName());
         oldSection.setName(updatedSection.getName());
         oldSection.setStudents(updatedSection.getStudents());
         oldSection.setTeachers(updatedSection.getTeachers());

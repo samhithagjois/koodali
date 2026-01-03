@@ -2,22 +2,36 @@
 
 <form (ngSubmit)="onSubmit()" #userForm="ngForm">
 
+  <p>Enter information</p>
   <input type="text" name="firstName" [(ngModel)]="user.firstName" placeholder="First Name" required />
-  <br /><br />
+
 
   <input type="text" name="lastName" [(ngModel)]="user.lastName" placeholder="Last Name" required />
   <br /><br />
 
   <input type="text" name="city" [(ngModel)]="user.city" placeholder="City" required />
-  <br /><br />
 
   <input type="text" name="pinCode" [(ngModel)]="user.pinCode" placeholder="pin Code" required />
   <br /><br />
 
   <input type="text" name="country" [(ngModel)]="user.country" placeholder="Country" required/>
-  <br /><br />
   <input type="text" name="fullPostalAddress" [(ngModel)]="user.fullPostalAddress" placeholder="full Postal Address" required />
   <br /><br />
+  Select the Shaale location the student is most likely to join:
+  <p>
+  <select
+    name="nearest Location"
+    [(ngModel)]="user.nearestShaaleLocation" required>
+      <option value="" disabled>Select a location</option>
+
+      @for (location of locations; track location){
+    <option [value]="location">
+      {{location}}
+      </option>
+    }
+  </select>
+  </p>
+  Date of Birth:
   <input type="date" name="dateOfBirth" [(ngModel)]="user.dateOfBirth" placeholder="date of Birth" required/>
   <br /><br />
   <input type="text" name="mothersName" [(ngModel)]="user.mothersName" placeholder="mothers Name" required/>
@@ -36,4 +50,5 @@
   <br /><br />
 
   <button type="submit">Submit</button>
+  <button routerLink=".."> Back</button>
 </form>

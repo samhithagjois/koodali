@@ -8,11 +8,8 @@ import koodali.service.exceptions.InvalidSectionNameException;
 import koodali.service.exceptions.SectionNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class SectionService {
@@ -57,6 +54,8 @@ public class SectionService {
 
     public Section createSection(Section section){
         if (validateName(section.getName())){
+
+           // section.setLinkOrAddress("");
             return sectionRepository.save(section);
         }else{
             throw new InvalidSectionNameException();
@@ -64,7 +63,11 @@ public class SectionService {
 
     }
 
-    public Section createSection(String name, List<Student> students, List<Teacher> teachers, List<LocalDateTime> schedule){
+    public Section createSection(String name,
+                                 List<Student> students,
+                                 List<Teacher> teachers,
+                                 String linkOrAddress,
+                                 List<LocalDateTime> schedule){
         if (!validateName(name)){
             throw new InvalidSectionNameException();
         }
@@ -73,7 +76,7 @@ public class SectionService {
 
         HashMap<String,Teacher> t = new HashMap<>();
         teachers.forEach(teacher -> t.put(teacher.getID(),teacher));
-        return sectionRepository.save(new Section(name,s,t,schedule));
+        return sectionRepository.save(new Section(name,s,t, linkOrAddress, schedule));
     }
 
     /**

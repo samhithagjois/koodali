@@ -66,7 +66,7 @@ public class StudentService extends PersonService<Student> {
                                  String lastName,
                                  String sectionID,
                                  String city, String pinCode, String country,
-                                 String fullPostalAdress, LocalDateTime dateOfRegistration,
+                                 String fullPostalAddress, String nearestShaaleLocation, LocalDateTime dateOfRegistration,
                                  LocalDateTime dateOfClassStart, boolean activeStatus,
                                  int amountOfTextbooks, int feesPaid, int pendingFees, int homeworkLeaderBoardScore,
                                  LocalDate dateOfBirth,
@@ -77,7 +77,7 @@ public class StudentService extends PersonService<Student> {
 
         Section section = sectionService.getSectionByID(sectionID);
         Student student = new Student(
-                firstName, lastName, studentId, city, pinCode, country, fullPostalAdress,
+                firstName, lastName, studentId, city, pinCode, country, fullPostalAddress,nearestShaaleLocation,
                 dateOfRegistration, dateOfClassStart, activeStatus, sectionID,
                 amountOfTextbooks, feesPaid, pendingFees, homeworkLeaderBoardScore,
                 dateOfBirth, dateOfFirstClass,pathToPhoto, pathToConsentForm,mothersName, fathersName, fathersEmailID,

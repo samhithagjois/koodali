@@ -2,49 +2,60 @@ package koodali.model;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 public class Section {
     private String name;
     @OneToMany
     @JoinColumn(name = "id")
-    private HashMap<String, Student> students;
+    private Map<String, Student> students = new HashMap<>();
     @OneToMany
     @JoinColumn(name = "id")
-    private HashMap<String, Teacher> teachers;
-
-    public Section(String name, HashMap<String, Student> students, HashMap<String, Teacher> teachers, List<LocalDateTime> classSchedule) {
-        this.name = name;
-        this.students = students;
-        this.teachers = teachers;
-        this.classSchedule = classSchedule;
-    }
-
+    private Map<String, Teacher> teachers = new HashMap<>();
+    private String linkOrAddress;
     @ElementCollection
     @CollectionTable(
             name = "classSchedule",
             joinColumns = @JoinColumn(name = "id")
     )
     @Column(name = "class")
-      private List<LocalDateTime> classSchedule;
+    private List<LocalDateTime> classSchedule;
     @Id
     @GeneratedValue
-    private String id;
+    private int id;
+
+    public Section(String name, HashMap<String, Student> students, HashMap<String, Teacher> teachers, String linkOrAddress, List<LocalDateTime> classSchedule) {
+        this.name = name;
+        this.students = students;
+        this.teachers = teachers;
+        this.linkOrAddress = linkOrAddress;
+        this.classSchedule = classSchedule;
+    }
 
     public Section(String name) {
         this.name = name;
-        this.students = new HashMap<>();
-        this.teachers = new HashMap<>();
-        this.classSchedule = new ArrayList<>();
+        this.linkOrAddress = "";
+    }
+    public Section(String name, String linkOrAddress) {
+        this.name = name;
+
+        this.linkOrAddress = linkOrAddress;
     }
 
     public Section() {
 
+    }
+
+    public String getLinkOrAddress() {
+        return linkOrAddress;
+    }
+
+    public void setLinkOrAddress(String linkOrAddress) {
+        this.linkOrAddress = linkOrAddress;
     }
 
     public List<LocalDateTime> getClassSchedule() {
@@ -63,27 +74,27 @@ public class Section {
         this.name = name;
     }
 
-    public HashMap<String, Student> getStudents() {
+    public Map<String, Student> getStudents() {
         return students;
     }
 
-    public void setStudents(HashMap<String, Student> students) {
+    public void setStudents(Map<String, Student> students) {
         this.students = students;
     }
 
-    public HashMap<String, Teacher> getTeachers() {
+    public Map<String, Teacher> getTeachers() {
         return teachers;
     }
 
-    public void setTeachers(HashMap<String, Teacher> teachers) {
+    public void setTeachers(Map<String, Teacher> teachers) {
         this.teachers = teachers;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public int getId() {
+        return id;
     }
 
-    public String getId() {
-        return id;
+    public void setId(int id) {
+        this.id = id;
     }
 }

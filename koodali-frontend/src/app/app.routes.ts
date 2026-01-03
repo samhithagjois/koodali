@@ -8,6 +8,7 @@ import {AdminTeacherOverview} from './features/admin/admin-teacher-overview/teac
 import {Leaderboard} from './features/leaderboard/leaderboard';
 import {AdminStudentOverview} from './features/admin/admin-student-overview/student-overview';
 import {TeacherForm} from './features/teacher/teacher-form/teacher-form';
+import {AddSectionForm} from './features/admin/section-overview/add-section-form/add-section-form';
 
 export const routes: Routes = [
   {
@@ -46,6 +47,9 @@ export const routes: Routes = [
   },
   {
     path: 'teacher/edit-teacher-profile', component: TeacherForm
+  },
+  {
+    path: 'admin/section-overview/add-section-form', component: AddSectionForm
   },
   //admin -> (Sections Overview) button -> sectionOverview -> edit Section -> button -> EditSectionView
   //admin -> (Student Overview) button -> studentOverview -> edit Student -> button -> EditStudentView (Student registration)

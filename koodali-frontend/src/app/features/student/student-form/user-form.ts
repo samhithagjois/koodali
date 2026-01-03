@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-user-form',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './user-form.html'
 })
 export class UserForm {
@@ -18,6 +19,7 @@ export class UserForm {
     city: '',
     pinCode: '',
     fullPostalAddress: '',
+    nearestShaaleLocation:'',
     country: '',
     dateOfBirth: '',
     mothersName: '',
@@ -28,6 +30,12 @@ export class UserForm {
     phoneNumber: '',
     whatsappNumber: '',
   };
+  locations = [
+    "Erlangen- In-person Shaale"
+    , "DE-Online Shaale",
+    "Ingolstadt-In Person Shaale",
+    "EU-Online Shaale",
+    "Munich-In-person Shaale","Unsure"];
 
   constructor(private http: HttpClient) {}
 

@@ -33,6 +33,10 @@ public class Student extends Person {
     //      photo of child : Multipart file
     //      consent form  : Multipart file
     private int amountOfTextbooks, feesPaid, pendingFees, homeworkLeaderBoardScore;
+
+
+
+    private String nearestShaaleLocation;
     private String pathToPhoto;
     private String pathToConsentForm;
     private LocalDate dateOfBirth;
@@ -47,7 +51,7 @@ public class Student extends Person {
     )
     @MapKeyColumn(name = "week")
     @Column(name = "present")
-    private Map<LocalDate, Boolean> attendance = new HashMap<>();
+    private Map<LocalDate, Boolean> attendance;
     private String phoneNumber;
     private String whatsappNumber;
 
@@ -57,6 +61,8 @@ public class Student extends Person {
                    String city,
                    String pinCode,
                    String country,
+                   //TODO:add in dropdown menu "nearest school" so we can give the kid the section properly
+                   String nearestShaaleLocation,
                    String fullPostalAddress,
                    LocalDate dateOfBirth,
                    String mothersName,
@@ -68,10 +74,10 @@ public class Student extends Person {
                    String whatsappNumber,
                    String pathToConsentForm,
                    String pathToPhoto){
-        //TODO: add pathTo variables in the form!
-        super(firstName,lastName, "NKS"+"UNASSIGNED".substring(0,1).toUpperCase()+"_"+ UUID.randomUUID(),city,pinCode, country,fullPostalAddress
+        super(firstName,lastName, "NKS_"+ UUID.randomUUID(),city,pinCode, country,fullPostalAddress
         ,LocalDateTime.now(),LocalDateTime.of(LocalDateTime.now().getYear(),9,1,8,30),true);
         this.section = "UNASSIGNED";
+        this.nearestShaaleLocation = nearestShaaleLocation;
         this.amountOfTextbooks = 0;
         this.feesPaid = 0;
         this.pendingFees = 0;
@@ -98,6 +104,7 @@ public class Student extends Person {
                    String pinCode,
                    String country,
                    String fullPostalAddress,
+                   String nearestShaaleLocation,
                    LocalDateTime dateOfRegistration,
                    LocalDateTime dateOfClassStart,
                    boolean activeStatus,
@@ -124,6 +131,7 @@ public class Student extends Person {
                 city, pinCode, country, fullPostalAddress,
                 dateOfRegistration, dateOfClassStart,
                 activeStatus);
+        this.nearestShaaleLocation = nearestShaaleLocation;
         this.section = section;
         this.amountOfTextbooks = amountOfTextbooks;
         this.feesPaid = feesPaid;
@@ -141,13 +149,13 @@ public class Student extends Person {
         this.attendance = attendancePercentage;
         this.phoneNumber = phoneNumber;
         this.whatsappNumber = whatsappNumber;
-        //this.homeworkPointsPerWeek = new HashMap<>();
     }
 
     public Student() {
         super();
-        this.personID = "NKS"+section.substring(0,1).toUpperCase()+"_"+ UUID.randomUUID();
+        this.personID = "NKS_"+ UUID.randomUUID();
         this.section = "UNASSIGNED";
+        this.nearestShaaleLocation = "";
         this.amountOfTextbooks = 0;
         this.feesPaid = 0;
         this.pendingFees = 0;
@@ -164,7 +172,6 @@ public class Student extends Person {
         this.attendance = new HashMap<>();
         this.phoneNumber = "";
         this.whatsappNumber = "";
-       // this.homeworkPointsPerWeek = new HashMap<>();
     }
 
 
