@@ -1,8 +1,39 @@
 <h2>Student Overview</h2>
 
 
+<div>
+  <table class="tg"><thead>
+  <tr>
+    <th >Student ID</th>
+    <th>Student Name</th>
+    <th >Section</th>
+    <th>Attendance</th>
+    <th>Fees status</th>
+  </tr></thead>
+    <tbody>
+    @for (student of students; track student.id){
+    <tr>
+      <td> {{student.id}} </td>
+    <td>{{student.firstName}} </td>
+    <td>{{student.section.name}} </td>
+    <td>student.getAttendance </td>
+    <td>student.getPendingFees </td>
+
+
+
+    <!--TODO: add a hyperlink to the students of this class!-->
+  </tr>
+}
+</tbody>
+</table>
+
+
+</div>
+
+
 <button routerLink="edit-profile">Manually register student</button>
 <button routerLink=".."> Back</button>
+
 <!-- TODO:do a similar student overview like with sections! -->
 <!-- TODO: just make sure that when adding to the repository +
 +you're not adding a duplicate.

@@ -6,7 +6,7 @@ import {StudentOverview} from './features/student/student-overview';
 import {TeacherOverview} from './features/teacher/teacher-overview';
 import {AdminTeacherOverview} from './features/admin/admin-teacher-overview/teacher-overview';
 import {Leaderboard} from './features/leaderboard/leaderboard';
-import {AdminStudentOverview} from './features/admin/admin-student-overview/student-overview';
+import {AdminStudentOverview} from './features/admin/admin-student-fees-overview/student-overview';
 import {TeacherForm} from './features/teacher/teacher-form/teacher-form';
 import {AddSectionForm} from './features/admin/section-overview/add-section-form/add-section-form';
 

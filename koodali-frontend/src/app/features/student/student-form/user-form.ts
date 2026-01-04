@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
@@ -10,7 +10,7 @@ import {RouterLink} from '@angular/router';
   imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './user-form.html'
 })
-export class UserForm {
+export class UserForm implements OnInit{
   //code taken from https://engineerscodinghub.com/form-handling-in-angular-and-spring-boot/
 
   user = {
@@ -19,7 +19,7 @@ export class UserForm {
     city: '',
     pinCode: '',
     fullPostalAddress: '',
-    nearestShaaleLocation:'',
+    section:'',
     country: '',
     dateOfBirth: '',
     mothersName: '',
@@ -30,14 +30,18 @@ export class UserForm {
     phoneNumber: '',
     whatsappNumber: '',
   };
-  locations = [
-    "Erlangen- In-person Shaale"
-    , "DE-Online Shaale",
-    "Ingolstadt-In Person Shaale",
-    "EU-Online Shaale",
-    "Munich-In-person Shaale","Unsure"];
+  sections : any[] = []
 
   constructor(private http: HttpClient) {}
+  ngOnInit() {
+    this.loadSections();
+  }
+  loadSections() {
+    this.http.get<any[]>('http://localhost:8080/api/sections')
+      .subscribe(data => {
+        this.sections = data;
+      });
+  }
 
   onSubmit() {
     this.http.post('http://localhost:8080/api/students', this.user)

@@ -16,17 +16,16 @@
 
   <input type="text" name="country" [(ngModel)]="user.country" placeholder="Country" required/>
   <input type="text" name="fullPostalAddress" [(ngModel)]="user.fullPostalAddress" placeholder="full Postal Address" required />
-  <br /><br />
-  Select the Shaale location the student is most likely to join:
-  <p>
+  <br />
+   <p>
   <select
-    name="nearest Location"
-    [(ngModel)]="user.nearestShaaleLocation" required>
-      <option value="" disabled>Select a location</option>
+    name="section"
+    [(ngModel)]="user.section" required>
+      <option value="" disabled>Select a section</option>
 
-      @for (location of locations; track location){
-    <option [value]="location">
-      {{location}}
+      @for (section of sections; track section.id){
+    <option [value]="section">
+      {{section.name}}
       </option>
     }
   </select>

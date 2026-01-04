@@ -4,7 +4,7 @@ import koodali.model.Section;
 import koodali.model.Student;
 import koodali.model.Teacher;
 import koodali.repository.SectionRepository;
-import koodali.service.exceptions.InvalidSectionNameException;
+import koodali.service.exceptions.InvalidSectionException;
 import koodali.service.exceptions.SectionNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -49,16 +49,15 @@ public class SectionService {
     }
 
     private boolean validateName(String sectionName){
-        return sectionName.matches("[A-Z][A-Z]_[BIA][END]T*([GV]|[_0-9])*");
+        return sectionName.matches("[A-Z][A-Z]_[BIA][END]T*([GV]|[_0-9])*")
+                && sectionRepository.findAll().stream().noneMatch(s -> s.getName().equals(sectionName));
     }
 
     public Section createSection(Section section){
         if (validateName(section.getName())){
-
-           // section.setLinkOrAddress("");
             return sectionRepository.save(section);
         }else{
-            throw new InvalidSectionNameException();
+            throw new InvalidSectionException();
         }
 
     }
@@ -69,7 +68,7 @@ public class SectionService {
                                  String linkOrAddress,
                                  List<LocalDateTime> schedule){
         if (!validateName(name)){
-            throw new InvalidSectionNameException();
+            throw new InvalidSectionException();
         }
         HashMap<String,Student> s = new HashMap<>();
         students.forEach(student -> s.put(student.getID(),student));

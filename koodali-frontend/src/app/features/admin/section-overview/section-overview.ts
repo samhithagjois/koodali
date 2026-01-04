@@ -24,11 +24,12 @@ import {HttpClient} from '@angular/common/http';
 
         @for (section of sections; track section.id){
         <tr>
-          <td>{{ section.name }}</td>
-        <td>{{ section.linkOrAddress }}</td>
+          <td> section.name </td>
+        <td>section.linkOrAddress </td>
         <!--TODO: add a hyperlink to the students of this class!-->
       </tr>
         }
+
         </tbody>
       </table>
 
