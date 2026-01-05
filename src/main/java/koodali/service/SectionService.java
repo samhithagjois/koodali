@@ -62,22 +62,6 @@ public class SectionService {
 
     }
 
-    public Section createSection(String name,
-                                 List<Student> students,
-                                 List<Teacher> teachers,
-                                 String linkOrAddress,
-                                 List<LocalDateTime> schedule){
-        if (!validateName(name)){
-            throw new InvalidSectionException();
-        }
-        HashMap<String,Student> s = new HashMap<>();
-        students.forEach(student -> s.put(student.getID(),student));
-
-        HashMap<String,Teacher> t = new HashMap<>();
-        teachers.forEach(teacher -> t.put(teacher.getID(),teacher));
-        return sectionRepository.save(new Section(name,s,t, linkOrAddress, schedule));
-    }
-
     /**
      * deletes a Section from the koodali.repository, for example if two sections get merged
      * does NOT delete the enum entry, that has to be done manually!
