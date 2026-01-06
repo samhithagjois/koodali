@@ -9,6 +9,12 @@ import {Leaderboard} from './features/leaderboard/leaderboard';
 import {AdminStudentOverview} from './features/admin/admin-student-fees-overview/student-overview';
 import {TeacherForm} from './features/teacher/teacher-form/teacher-form';
 import {AddSectionForm} from './features/admin/section-overview/add-section-form/add-section-form';
+import {
+  SectionStudentOverview
+} from './features/admin/section-overview/section-student-overview/section-student-overview';
+import {
+  SectionTeacherOverview
+} from './features/admin/section-overview/section-teacher-overview/section-teacher-overview';
 
 export const routes: Routes = [
   {
@@ -33,8 +39,9 @@ export const routes: Routes = [
   {
     path: 'student/edit-profile', component: UserForm
   },
+
   {
-    path: 'admin/section-overview', component: SectionOverview
+    path: 'admin/sections', component: SectionOverview
   },
   {
     path: 'admin/teacher-overview', component: AdminTeacherOverview
@@ -49,7 +56,16 @@ export const routes: Routes = [
     path: 'teacher/edit-teacher-profile', component: TeacherForm
   },
   {
-    path: 'admin/section-overview/add-section-form', component: AddSectionForm
+    path: 'admin/sections/new', component: AddSectionForm
+  },
+  {
+    path: 'admin/sections/:id/edit', component: AddSectionForm
+  },
+  {
+    path: 'admin/sections/:id/students', component: SectionStudentOverview
+  },
+  {
+    path: 'admins/sections/:id/teachers', component: SectionTeacherOverview
   },
   //admin -> (Sections Overview) button -> sectionOverview -> edit Section -> button -> EditSectionView
   //admin -> (Student Overview) button -> studentOverview -> edit Student -> button -> EditStudentView (Student registration)

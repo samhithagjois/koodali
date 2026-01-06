@@ -1,5 +1,4 @@
-<h2>Manual Section Registration Form</h2>
-
+<h2>{{ isEditMode ? 'Edit Section' : 'Add Section' }}</h2>
 
 <form (ngSubmit)="onSubmit()" #userForm="ngForm">
 
@@ -10,5 +9,6 @@
   <br /><br />
 
 
-  <button type="submit">Submit</button>
+  <button type="submit" >{{ isEditMode ? 'Edit Section' : 'Add Section' }}</button>
+  <button routerLink="..">Back</button>
 </form>

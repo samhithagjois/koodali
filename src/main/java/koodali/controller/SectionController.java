@@ -43,7 +43,7 @@ public class SectionController {
         return new ResponseEntity<>(sectionService.getSectionByID(id), HttpStatus.OK);
     }
 
-    @GetMapping("/sections/{classId}/students")
+   /* @GetMapping("/sections/{classId}/students")
     public ResponseEntity<List<String>> showInfoStudentsOfSection(@PathVariable String classId) {
         List<String> names = sectionService.getSectionByID(classId)
                 .getStudents()
@@ -72,7 +72,7 @@ public class SectionController {
                 ).toList();
 
         return new ResponseEntity<>(names, HttpStatus.OK);
-    }
+    }*/
 
     /**
      * -------------------- POST Mappings -------------------------------
@@ -87,6 +87,17 @@ public class SectionController {
      * */
     @PutMapping("/sections")
     public ResponseEntity<Section> updateSection(@RequestBody Section updatedSection) {
+        return new ResponseEntity<>(sectionService.updateSection(updatedSection), HttpStatus.OK);
+    }
+
+    @PutMapping("/sections/{id}")
+    public ResponseEntity<Section> updateSectionById(@PathVariable String id, @RequestBody Section updatedSection) {
+        Section section = sectionService.getSectionByID(id);
+        section.setId(updatedSection.getId());
+        section.setLinkOrAddress(updatedSection.getLinkOrAddress());
+        section.setTeachers(updatedSection.getTeachers());
+        section.setStudents(updatedSection.getStudents());
+        section.setClassSchedule(updatedSection.getClassSchedule());
         return new ResponseEntity<>(sectionService.updateSection(updatedSection), HttpStatus.OK);
     }
 
