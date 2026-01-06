@@ -24,9 +24,13 @@ export class AddSectionForm implements OnInit{
 
   private route = inject(ActivatedRoute);
   private router = inject(Router);
-
+  isEditMode = false;
+  sectionId?: string | null;
 
   ngOnInit() {
+
+
+
     this.sectionId = this.route.snapshot.paramMap.get('id');
 
     if (this.sectionId) {
@@ -34,8 +38,6 @@ export class AddSectionForm implements OnInit{
       this.loadSection(this.sectionId);
     }
   }
-  isEditMode = false;
-  sectionId?: string | null;
 
 
   constructor(private http: HttpClient) {}
@@ -48,10 +50,10 @@ export class AddSectionForm implements OnInit{
   }
 
   createSection(){
-    this.http.post(`http://localhost:8080/api/admin/sections`, this.section)
+    this.http.post(`http://localhost:8080/api/sections`, this.section)
       .subscribe(() => {
         {
-          this.router.navigate(['/admin/sections'],{ relativeTo: this.route });
+          this.router.navigate(['/admin/sections']);
         }
       });
   }
@@ -60,7 +62,7 @@ export class AddSectionForm implements OnInit{
     this.http.put(`http://localhost:8080/api/sections/${this.sectionId}`, this.section)
       .subscribe(() => {
         {
-          this.router.navigate(['/admin/sections'],{ relativeTo: this.route });
+          this.router.navigate(['/admin/sections']);
         }
       });
   }

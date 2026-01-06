@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-section-overview',
   standalone : true,
@@ -10,29 +9,30 @@ import { ActivatedRoute } from '@angular/router';
   ],
   template: `
     <h3>Section Overview for Administration</h3>
-
     <div>
       <table class="tg"><thead>
+
       <tr>
         <th >Section Name</th>
         <th>Section Link or Address</th>
         <th >Teacher(s)</th>
         <th >Students</th>
+        <th >Schedule</th>
+        <th > </th>
       </tr></thead>
         <tbody>
-
         @for (section of sections; track section.id){
         <tr>
           <td> {{section.name }}</td>
         <td>{{section.linkOrAddress}} </td>
-
         <td>
-        <a [routerLink]="['/sections',section.id,'teachers']" routerLinkActive="$router_link-active$" >
+        <a [routerLink]="['/admin/sections',section.id,'teachers']" routerLinkActive="$router_link-active$" >
         Teachers
         </a>
         </td>
-        <td> <a [routerLink]="['/sections',section.id,'students']" routerLinkActive="$router_link-active$" > Students </a> </td>
-        <td> <button routerLink="/sections/:id/edit">Edit section</button> </td>
+        <td> <a [routerLink]="['/admin/sections',section.id,'students']" routerLinkActive="$router_link-active$" > Students </a> </td>
+        <td> </td>
+        <td> <button [routerLink]="['/admin/sections',section.id,'edit']">Edit section</button> </td>
       </tr>
         }
         </tbody>
@@ -46,35 +46,14 @@ import { ActivatedRoute } from '@angular/router';
 export class SectionOverview implements OnInit {
 
   sections: any[] = [];
-  students : any[] = [];
-  teachers : any[] = [];
 
-  constructor(private http: HttpClient,
-  private route: ActivatedRoute) {}
+  constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    this.classId = this.route.snapshot.paramMap.get('id')!;
+
     this.loadSections();
-    this.loadStudents();
-    this.loadTeachers();
 
   }
-
-  classId!:string;
-
-  loadTeachers(){
-    this.http.get<any[]>(`http://localhost:8080/api/admin/sections/${this.classId}/teachers`)
-      .subscribe(data => {
-        this.teachers = data;
-      });
-  }
-  loadStudents(){
-    this.http.get<any[]>(`http://localhost:8080/api/admin/sections/${this.classId}/students`)
-      .subscribe(data => {
-        this.students = data;
-      });
-  }
-
   loadSections() {
     this.http.get<any[]>(`http://localhost:8080/api/sections`)
       .subscribe(data => {

@@ -39,10 +39,6 @@ export const routes: Routes = [
   {
     path: 'student/edit-profile', component: UserForm
   },
-
-  {
-    path: 'admin/sections', component: SectionOverview
-  },
   {
     path: 'admin/teacher-overview', component: AdminTeacherOverview
   },
@@ -55,6 +51,10 @@ export const routes: Routes = [
   {
     path: 'teacher/edit-teacher-profile', component: TeacherForm
   },
+
+  {
+    path: 'admin/sections', component: SectionOverview
+  },
   {
     path: 'admin/sections/new', component: AddSectionForm
   },
@@ -65,7 +65,7 @@ export const routes: Routes = [
     path: 'admin/sections/:id/students', component: SectionStudentOverview
   },
   {
-    path: 'admins/sections/:id/teachers', component: SectionTeacherOverview
+    path: 'admin/sections/:id/teachers', component: SectionTeacherOverview
   },
   //admin -> (Sections Overview) button -> sectionOverview -> edit Section -> button -> EditSectionView
   //admin -> (Student Overview) button -> studentOverview -> edit Student -> button -> EditStudentView (Student registration)
