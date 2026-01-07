@@ -31,12 +31,6 @@ public class Teacher extends Person {
         this.sections = sections;
     }
 
-    public Teacher (String firstName, String lastName, String city, String pinCode,
-                    String country, String fullPostalAddress,
-                    LocalDateTime dateOfRegistration, LocalDateTime dateOfClassStart, boolean activeStatus){
-
-    }
-
     public Teacher(){
         super();
         this.personID = "NKS_T_"+ UUID.randomUUID();

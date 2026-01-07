@@ -35,8 +35,6 @@ public class Student extends Person {
     private int amountOfTextbooks, feesPaid, pendingFees, homeworkLeaderBoardScore;
 
 
-
-    private String nearestShaaleLocation;
     private String pathToPhoto;
     private String pathToConsentForm;
     private LocalDate dateOfBirth;
@@ -44,58 +42,10 @@ public class Student extends Person {
     private LocalDate dateOfFirstClass;
 
     private String mothersName, fathersName, fathersEmailID, mothersEmailID, childEmailID;
-    @ElementCollection
-    @CollectionTable(
-            name = "student_attendance",
-            joinColumns = @JoinColumn(name = "personID")
-    )
-    @MapKeyColumn(name = "week")
-    @Column(name = "present")
-    private Map<LocalDate, Boolean> attendance;
+
+    private double attendance;
     private String phoneNumber;
     private String whatsappNumber;
-
-
-    public Student(String firstName,
-                   String lastName,
-                   String city,
-                   String pinCode,
-                   String country,
-                   //TODO:add in dropdown menu "nearest school" so we can give the kid the section properly
-                   String nearestShaaleLocation,
-                   String fullPostalAddress,
-                   LocalDate dateOfBirth,
-                   String mothersName,
-                   String fathersName,
-                   String fathersEmailID,
-                   String mothersEmailID,
-                   String childEmailID,
-                   String phoneNumber,
-                   String whatsappNumber,
-                   String pathToConsentForm,
-                   String pathToPhoto){
-        super(firstName,lastName, "NKS_"+ UUID.randomUUID(),city,pinCode, country,fullPostalAddress
-        ,LocalDateTime.now(),LocalDateTime.of(LocalDateTime.now().getYear(),9,1,8,30),true);
-        this.section = "UNASSIGNED";
-        this.nearestShaaleLocation = nearestShaaleLocation;
-        this.amountOfTextbooks = 0;
-        this.feesPaid = 0;
-        this.pendingFees = 0;
-        this.homeworkLeaderBoardScore = 0;
-        this.pathToPhoto = pathToPhoto;
-        this.pathToConsentForm = pathToConsentForm;
-        this.dateOfBirth = dateOfBirth;
-        this.dateOfFirstClass = null;
-        this.mothersName = mothersName;
-        this.fathersName = fathersName;
-        this.fathersEmailID = fathersEmailID;
-        this.mothersEmailID = mothersEmailID;
-        this.childEmailID = childEmailID;
-        this.attendance = new HashMap<>();
-        this.phoneNumber = phoneNumber;
-        this.whatsappNumber = whatsappNumber;
-
-    }
 
     public Student(String firstName,
                    String lastName,
@@ -104,7 +54,6 @@ public class Student extends Person {
                    String pinCode,
                    String country,
                    String fullPostalAddress,
-                   String nearestShaaleLocation,
                    LocalDateTime dateOfRegistration,
                    LocalDateTime dateOfClassStart,
                    boolean activeStatus,
@@ -122,16 +71,14 @@ public class Student extends Person {
                    String fathersEmailID,
                    String mothersEmailID,
                    String childEmailID,
-                   Map<LocalDate, Boolean> attendancePercentage,
+                   double attendancePercentage,
                    String phoneNumber,
                    String whatsappNumber) {
-        //TODO:decide on which constructor to use for the form
 
         super(firstName, lastName, personID,
                 city, pinCode, country, fullPostalAddress,
                 dateOfRegistration, dateOfClassStart,
                 activeStatus);
-        this.nearestShaaleLocation = nearestShaaleLocation;
         this.section = section;
         this.amountOfTextbooks = amountOfTextbooks;
         this.feesPaid = feesPaid;
@@ -155,7 +102,6 @@ public class Student extends Person {
         super();
         this.personID = "NKS_"+ UUID.randomUUID();
         this.section = "UNASSIGNED";
-        this.nearestShaaleLocation = "";
         this.amountOfTextbooks = 0;
         this.feesPaid = 0;
         this.pendingFees = 0;
@@ -169,7 +115,7 @@ public class Student extends Person {
         this.fathersEmailID = "";
         this.mothersEmailID = "";
         this.childEmailID = "";
-        this.attendance = new HashMap<>();
+        this.attendance = 0.0;
         this.phoneNumber = "";
         this.whatsappNumber = "";
     }
@@ -288,11 +234,11 @@ public class Student extends Person {
         this.mothersEmailID = mothersEmailID;
     }
 
-    public Map<LocalDate, Boolean> getAttendance() {
+    public double getAttendance() {
         return attendance;
     }
 
-    public void setAttendance(Map<LocalDate, Boolean> attendance) {
+    public void setAttendance(double attendance) {
         this.attendance = attendance;
     }
 

@@ -1,14 +1,13 @@
 package koodali.controller;
 
 import koodali.model.Section;
-import koodali.model.Student;
+import koodali.model.dto.SectionDTO;
 import koodali.service.SectionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RestController
@@ -25,79 +24,57 @@ public class SectionController {
 
     /**
      *--------------------- GET Mappings------------------------------------
+     * GetMapping("/sections")
+     *     public ResponseEntity<List<Section>> getAllSections() {
+     *         return new ResponseEntity<>(sectionService.getAllSections(), HttpStatus.OK);
+     *     }
      * */
 
     /**
      * gets all sections and returns them as a List
-     * */
+     */
+
+
     @GetMapping("/sections")
-    public ResponseEntity<List<Section>> getAllSections() {
-        return new ResponseEntity<>(sectionService.getAllSections(), HttpStatus.OK);
+    public ResponseEntity<List<SectionDTO>> getAllSections() {
+        return new ResponseEntity<>(sectionService.getAllSectionsDTO(), HttpStatus.OK);
     }
 
     /**
      * gets a specified Section. Can throw SectionNotFoundException
-     * */
+     */
     @GetMapping("/sections/{id}")
-    public ResponseEntity<Section> getSection(@PathVariable String id){
-        return new ResponseEntity<>(sectionService.getSectionByID(id), HttpStatus.OK);
+    public ResponseEntity<SectionDTO> getSection(@PathVariable String id) {
+        return new ResponseEntity<>(sectionService.getSectionDTOByID(id), HttpStatus.OK);
     }
 
-   /* @GetMapping("/sections/{classId}/students")
-    public ResponseEntity<List<String>> showInfoStudentsOfSection(@PathVariable String classId) {
-        List<String> names = sectionService.getSectionByID(classId)
-                .getStudents()
-                .values()
-                .stream()
-                .map(
-                        student -> student.getFirstName() + " " + student.getLastName()
-                                + " from " + student.getCity() + " , " + student.getCountry() + " , Section :"
-                                + classId
 
-                ).toList();
-
-        return new ResponseEntity<>(names, HttpStatus.OK);
-    }
-
-    @GetMapping("/sections/{classId}/teachers")
-    public ResponseEntity<List<String>> showInfoTeachersOfSection(@PathVariable String classId) {
-        List<String> names = sectionService.getSectionByID(classId)
-                .getTeachers()
-                .values()
-                .stream()
-                .map(
-                        teacher -> teacher.getFirstName() + " " + teacher.getLastName()
-                                + " , teaching class " + classId + " since "+teacher.getDateOfClassStart().format(DateTimeFormatter.ISO_DATE)
-
-                ).toList();
-
-        return new ResponseEntity<>(names, HttpStatus.OK);
-    }*/
 
     /**
      * -------------------- POST Mappings -------------------------------
-     * */
+     * PostMapping("/sections")
+     * public ResponseEntity<Section> createSection(@RequestBody Section newSection) {
+     * return new ResponseEntity<>(sectionService.createSection(newSection), HttpStatus.CREATED);
+     * }
+     */
+
+
     @PostMapping("/sections")
-    public ResponseEntity<Section> createSection(@RequestBody Section newSection) {
+    public ResponseEntity<SectionDTO> createSection(@RequestBody SectionDTO newSection) {
         return new ResponseEntity<>(sectionService.createSection(newSection), HttpStatus.CREATED);
     }
 
     /**
      * -------------------- PUT Mappings -------------------------------
-     * */
-    @PutMapping("/sections")
-    public ResponseEntity<Section> updateSection(@RequestBody Section updatedSection) {
-        return new ResponseEntity<>(sectionService.updateSection(updatedSection), HttpStatus.OK);
-    }
+     * PutMapping("/sections")
+     * public ResponseEntity<Section> updateSection(@RequestBody Section updatedSection) {
+     * return new ResponseEntity<>(sectionService.updateSection(updatedSection), HttpStatus.OK);
+     * }
+     */
 
-    @PutMapping("/sections/{id}")
-    public ResponseEntity<Section> updateSectionById(@PathVariable String id, @RequestBody Section updatedSection) {
-        Section section = sectionService.getSectionByID(id);
-        section.setId(updatedSection.getId());
-        section.setLinkOrAddress(updatedSection.getLinkOrAddress());
-        section.setTeachers(updatedSection.getTeachers());
-        section.setStudents(updatedSection.getStudents());
-        section.setClassSchedule(updatedSection.getClassSchedule());
+
+    @PutMapping("/sections")
+    public ResponseEntity<SectionDTO> updateSection(@RequestBody SectionDTO updatedSection) {
         return new ResponseEntity<>(sectionService.updateSection(updatedSection), HttpStatus.OK);
     }
 

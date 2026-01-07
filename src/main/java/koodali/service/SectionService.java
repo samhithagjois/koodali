@@ -1,14 +1,12 @@
 package koodali.service;
 
 import koodali.model.Section;
-import koodali.model.Student;
-import koodali.model.Teacher;
+import koodali.model.dto.SectionDTO;
 import koodali.repository.SectionRepository;
 import koodali.service.exceptions.InvalidSectionException;
 import koodali.service.exceptions.SectionNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.*;
 
 @Service
@@ -29,8 +27,8 @@ public class SectionService {
         return sectionRepository.findAll();
     }
 
-    public SectionRepository getSectionRepository() {
-        return sectionRepository;
+    public List<SectionDTO> getAllSectionsDTO() {
+        return sectionRepository.findAll().stream().map(this::SectionToDTO).toList();
     }
 
     /**
@@ -44,8 +42,21 @@ public class SectionService {
       return  Optional.of(sectionRepository.getReferenceById(classId)).orElseThrow(SectionNotFoundException::new);
     }
 
-    public Section updateSection(Section section) {
-        return sectionRepository.save(section);
+    public SectionDTO getSectionDTOByID(String classId) {
+
+        return  Optional.of(SectionToDTO(sectionRepository.getReferenceById(classId))).orElseThrow(SectionNotFoundException::new);
+    }
+
+    public void updateSection(Section section) {
+        sectionRepository.save(section);
+    }
+
+    public SectionDTO updateSection(SectionDTO sectionDTO) {
+        Section s = sectionRepository.getReferenceById(sectionDTO.name());
+        s.setId(sectionDTO.id());
+        s.setLinkOrAddress(sectionDTO.linkOrAddress());
+        s.setName(sectionDTO.name());
+        return sectionDTO;
     }
 
     private boolean validateName(String sectionName){
@@ -53,30 +64,38 @@ public class SectionService {
                 && sectionRepository.findAll().stream().noneMatch(s -> s.getName().equals(sectionName));
     }
 
-    public Section createSection(Section section){
-        if (validateName(section.getName())){
-            return sectionRepository.save(section);
+
+
+    public SectionDTO createSection(SectionDTO sectionDTO){
+
+        if (validateName(sectionDTO.name())){
+            sectionRepository.save(sectionRepository.getReferenceById(sectionDTO.name()));
+            return sectionDTO;
         }else{
             throw new InvalidSectionException();
         }
 
     }
 
-    /**
-     * deletes a Section from the koodali.repository, for example if two sections get merged
-     * does NOT delete the enum entry, that has to be done manually!
-     */
-    public Section deleteSection(Section section) {
+    private SectionDTO SectionToDTO(Section section) {
+        if(section == null){
+            throw new SectionNotFoundException();
+        }
 
-        return deleteSectionbyId(section.getName());
-
+        return new SectionDTO(section.getId()
+                ,section.getName()
+                ,section.getLinkOrAddress());
     }
 
-    private Section deleteSectionbyId(String sectionName) {
+    private Section DTOToSection(SectionDTO dto){
+        return new Section(dto.name(),dto.linkOrAddress());
+    }
+
+    public SectionDTO deleteSectionbyId(String sectionName) {
         if (sectionRepository.existsById(sectionName)) {
             Section s = sectionRepository.getReferenceById(sectionName);
             sectionRepository.delete(s);
-            return s;
+            return SectionToDTO(s);
 
         } else {
             throw new SectionNotFoundException();
