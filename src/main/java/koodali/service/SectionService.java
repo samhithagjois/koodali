@@ -69,8 +69,8 @@ public class SectionService {
     public SectionDTO createSection(SectionDTO sectionDTO){
 
         if (validateName(sectionDTO.name())){
-            sectionRepository.save(sectionRepository.getReferenceById(sectionDTO.name()));
-            return sectionDTO;
+           Section s = sectionRepository.save(DTOToSection(sectionDTO));
+            return SectionToDTO(s);
         }else{
             throw new InvalidSectionException();
         }
