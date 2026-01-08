@@ -1,6 +1,7 @@
 package koodali.controller;
 
 import koodali.model.Student;
+import koodali.model.dto.studentDTO.CreateStudentDTO;
 import koodali.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,8 +25,8 @@ public class StudentController {
     }
 
     /*
-    * ----------------------------------GET MAPPINGS----------------------------------
-    */
+     * ----------------------------------GET MAPPINGS----------------------------------
+     */
     @GetMapping("/students")
     public ResponseEntity<List<Student>> getAllStudents() {
         return new ResponseEntity<>(studentService.getAll(), HttpStatus.OK);
@@ -35,21 +36,23 @@ public class StudentController {
     public ResponseEntity<Student> getStudent(@PathVariable String id) {
         return new ResponseEntity<>(studentService.findByID(id), HttpStatus.OK);
     }
+
     /*
      * ----------------------------------PUT MAPPINGS----------------------------------
      */
     @PutMapping("/students")
     public ResponseEntity<Student> updateStudent(@RequestBody Student updatedStudent) {
-         return new ResponseEntity<>(studentService.update(updatedStudent), HttpStatus.OK);
+        return new ResponseEntity<>(studentService.update(updatedStudent), HttpStatus.OK);
     }
 
     /*
      * ----------------------------------POST MAPPINGS----------------------------------
      */
     @PostMapping("/students")
-    public ResponseEntity<Student> createStudent(@RequestBody Student newStudent) {
+    public ResponseEntity<CreateStudentDTO> createStudent(@RequestBody CreateStudentDTO newStudent) {
         return new ResponseEntity<>(studentService.createStudent(newStudent), HttpStatus.CREATED);
     }
+
     /*
      * ----------------------------------DELETE MAPPINGS----------------------------------
      */

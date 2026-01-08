@@ -25,7 +25,7 @@ public class Administrator extends Person {
 
     public Administrator() {
         super();
-        this.personID = "NKS"+"_A_"+ UUID.randomUUID();
+        this.personID = "NKS" + "_A_" + UUID.randomUUID();
     }
 
     /**

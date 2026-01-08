@@ -1,7 +1,5 @@
 package koodali.model.dto.teacherDTO;
 
-import java.time.LocalDate;
-
 public record CreateTeacherDTO(String firstName,
                                String lastName,
                                String city,

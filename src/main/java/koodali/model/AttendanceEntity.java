@@ -8,8 +8,7 @@ import java.time.LocalDate;
 @Entity
 public class AttendanceEntity {
 
-    @Id
-    private int id;
+
 
     public int getId() {
         return id;
@@ -50,7 +49,8 @@ public class AttendanceEntity {
     public void setAttended(boolean attended) {
         this.attended = attended;
     }
-
+    @Id
+    private int id;
     private String studentID;
     private String name;
     private LocalDate week;

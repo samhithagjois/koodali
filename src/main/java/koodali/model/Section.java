@@ -40,6 +40,7 @@ public class Section {
         this.name = name;
         this.linkOrAddress = "";
     }
+
     public Section(String name, String linkOrAddress) {
         this.name = name;
 

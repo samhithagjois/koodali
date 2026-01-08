@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.HexFormat;
 import java.util.Map;
 import java.util.UUID;
 
@@ -41,7 +42,14 @@ public class Student extends Person {
     private LocalDateTime dateOfRegistration;
     private LocalDate dateOfFirstClass;
 
-    private String mothersName, fathersName, fathersEmailID, mothersEmailID, childEmailID;
+    private String mothersName;
+    private String fathersName;
+    private String fathersEmailID;
+    private String mothersEmailID;
+
+
+
+    private String childEmailID;
 
     private double attendance;
     private String phoneNumber;
@@ -100,7 +108,7 @@ public class Student extends Person {
 
     public Student() {
         super();
-        this.personID = "NKS_"+ UUID.randomUUID();
+        this.personID = "NKS_"+ (UUID.randomUUID().toString().substring(0,2));
         this.section = "UNASSIGNED";
         this.amountOfTextbooks = 0;
         this.feesPaid = 0;
@@ -256,6 +264,14 @@ public class Student extends Person {
 
     public void setWhatsappNumber(String whatsappNumber) {
         this.whatsappNumber = whatsappNumber;
+    }
+
+    public String getChildEmailID() {
+        return childEmailID;
+    }
+
+    public void setChildEmailID(String childEmailID) {
+        this.childEmailID = childEmailID;
     }
 
 }

@@ -3,7 +3,6 @@ package koodali.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -31,9 +30,9 @@ public class Teacher extends Person {
         this.sections = sections;
     }
 
-    public Teacher(){
+    public Teacher() {
         super();
-        this.personID = "NKS_T_"+ UUID.randomUUID();
+        this.personID = "NKS_T_" + UUID.randomUUID();
 
     }
 

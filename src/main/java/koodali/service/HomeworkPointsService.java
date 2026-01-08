@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -23,7 +22,6 @@ public class HomeworkPointsService {
     private final TeacherService teacherService;
 
 
-
     public HomeworkPointsService(HomeworkPointsRepository homeworkPointsRepository,
                                  HomeworkPointsExcelService homeworkPointsExcelService,
                                  SectionService sectionService,
@@ -35,20 +33,21 @@ public class HomeworkPointsService {
         this.teacherService = teacherService;
     }
 
-    public List<HomeworkPointsEntity> getListForSection(String sectionID){
+    public List<HomeworkPointsEntity> getListForSection(String sectionID) {
         List<HomeworkPointsEntity> result = new ArrayList<>();
 
         for (HomeworkPointsEntity entity : homeworkPointsRepository.findAll()) {
 
-            String section = sectionService.getSectionByID(sectionID).getName();
-            if(section.equalsIgnoreCase(sectionID)){
+            String section = sectionService.getSectionByName(sectionID).getName();
+            if (section.equalsIgnoreCase(sectionID)) {
                 result.add(entity);
             }
 
         }
         return result;
     }
-    public HomeworkPointsEntity updateCell(String studentID, LocalDate week, int points){
+
+    public HomeworkPointsEntity updateCell(String studentID, LocalDate week, int points) {
         HomeworkPointsEntity entity = homeworkPointsRepository
                 .findAll()
                 .stream()
@@ -62,10 +61,10 @@ public class HomeworkPointsService {
         return entity;
     }
 
-    public List<HomeworkPointsEntity> getListForAllSectionsOfTeacher(String teacherID){
+    public List<HomeworkPointsEntity> getListForAllSectionsOfTeacher(String teacherID) {
         List<HomeworkPointsEntity> result = new ArrayList<>();
         Teacher teacher = teacherService.findByID(teacherID);
-        for (String section:teacher.getSections()) {
+        for (String section : teacher.getSections()) {
             result.addAll(getListForSection(section));
 
         }
@@ -80,8 +79,6 @@ public class HomeworkPointsService {
     // 3. getListForAllSectionsOfTeacher(String teacherID)
     // 4. clearCell(HomeworkPointsEntity entity)
     // 5. ...
-
-
 
 
 }

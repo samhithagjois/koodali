@@ -30,13 +30,13 @@ public class TeacherService extends PersonService<Teacher> {
     }
 
 
-    public Teacher findTeacherbyName(String firstName,String lastName) {
+    public Teacher findTeacherbyName(String firstName, String lastName) {
         return teacherRepo
-                .findByFirstNameIgnoreCaseOrLastNameIgnoreCase(firstName,lastName)
+                .findByFirstNameIgnoreCaseOrLastNameIgnoreCase(firstName, lastName)
                 .orElseThrow(TeacherNotFoundException::new);
     }
 
-    public Teacher createTeacher(Teacher teacher){
+    public Teacher createTeacher(Teacher teacher) {
         return teacherRepo.save(teacher);
     }
 
@@ -44,8 +44,8 @@ public class TeacherService extends PersonService<Teacher> {
     public Teacher createTeacher(String teacherId, String firstName, String lastName, List<String> sectionIDs) {
 
         List<String> teacherClasses = new ArrayList<>();
-        for (String s:sectionIDs) {
-            Section sectionByID = sectionService.getSectionByID(s);
+        for (String s : sectionIDs) {
+            Section sectionByID = sectionService.getSectionByName(s);
             teacherClasses.add(sectionByID.getName());
 
         }
@@ -53,8 +53,8 @@ public class TeacherService extends PersonService<Teacher> {
 
         Teacher teacher = new Teacher(teacherId, firstName, lastName, teacherClasses);
 
-        for (String name:teacherClasses ) {
-            sectionService.getSectionByID(name).getTeachers().put(teacher.getID(),teacher);
+        for (String name : teacherClasses) {
+            sectionService.getSectionByName(name).getTeachers().put(teacher.getID(), teacher);
         }
 
         return teacherRepo.save(teacher);
@@ -80,7 +80,7 @@ public class TeacherService extends PersonService<Teacher> {
 
     public List<Teacher> listTeachersInSection(String sectionID) {
 
-        Section section = sectionService.getSectionByID(sectionID);
+        Section section = sectionService.getSectionByName(sectionID);
         return section.getTeachers().values().stream().toList();
 
     }

@@ -44,7 +44,7 @@ public abstract class PersonService<T extends Person> {
         return personRepo.findAll().contains(p);
     }
 
-    public void clear(){
+    public void clear() {
         personRepo.deleteAll();
     }
 

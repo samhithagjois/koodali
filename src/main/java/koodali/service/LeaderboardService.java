@@ -21,29 +21,28 @@ public class LeaderboardService {
         this.studentService = studentService;
     }
 
-    public List<Student> fetchAllStudentsByIDs(){
+    public List<Student> fetchAllStudentsByIDs() {
         List<Student> result = new ArrayList<>();
         List<String> ids = leaderboardRepository.findAll().stream().map(Student::getID).toList();
-        for (String id: ids) {
+        for (String id : ids) {
             result.add(studentService.findByID(id));
         }
         return result;
     }
 
-    public List<Student> sortBy(LeaderboardOption option){
+    public List<Student> sortBy(LeaderboardOption option) {
 
         return List.of();
     }
 
-    public List<Student> filterBy(LeaderboardOption option){
+    public List<Student> filterBy(LeaderboardOption option) {
 
         return List.of();
     }
 
-    public void updateLeaderboard(){
+    public void updateLeaderboard() {
 
     }
-
 
 
 }

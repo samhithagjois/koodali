@@ -43,7 +43,7 @@ public class AdminOperationService {
      * @throws IllegalAdminActionException if for example a Munich admin tries changing Ingolstadt
      */
     public boolean checkPermissionToModify(Administrator admin, Section section) throws IllegalAdminActionException {
-        String area = section.getName().toString().substring(0, 2);
+        String area = section.getName().substring(0, 2);
         for (AdminPermissions permission : admin.getPermissions()) {
             if (!permission.toString().equals(area)) {
                 throw new IllegalAdminActionException();
@@ -69,7 +69,7 @@ public class AdminOperationService {
     }
 
     private Section findSection(String sectionName) {
-        return sectionService.getSectionByID(sectionName);
+        return sectionService.getSectionByName(sectionName);
     }
 
     /**
@@ -78,7 +78,7 @@ public class AdminOperationService {
      * @param person either the Student, Admin or Teacher to be added to the system
      * @return the person added
      * @throws DuplicatePersonException if the person has already been added
-     * */
+     */
     public Person addPersonToSystem(Person person) {
         if (person instanceof Student s) {
             if (studentService.contains(s)) {
@@ -105,6 +105,7 @@ public class AdminOperationService {
 
     /**
      * adds a List of person(s) to the System.
+     *
      * @param personList a List of people
      * @return the list of people added.
      */
@@ -128,9 +129,9 @@ public class AdminOperationService {
      * @param studentID students ID
      * @param sectionID as String! eventhough in Student we have ClassNames_DEPR, we have to find and validate the section
      *                  In our case, sectionID is simply the name of the section
-     * @throws SectionNotFoundException if Section was not found (wich means the id is wrong!)
-     * @throws StudentNotFoundException if the student was not found
-     * @throws AdminNotFoundException if the admin ID is wrong
+     * @throws SectionNotFoundException    if Section was not found (wich means the id is wrong!)
+     * @throws StudentNotFoundException    if the student was not found
+     * @throws AdminNotFoundException      if the admin ID is wrong
      * @throws IllegalAdminActionException because all of this can happen
      */
     public Student addStudentToSection(String adminID, String studentID, String sectionID) {
@@ -207,7 +208,7 @@ public class AdminOperationService {
             //find student object
             Student student = findStudent(id);
             //delete student from section
-            deleteStudentFromSection(adminID, id, student.getSection().toString());
+            deleteStudentFromSection(adminID, id, student.getSection());
             //add section to student
             student.setSection(section.getName());
             //add student to new class
@@ -222,11 +223,9 @@ public class AdminOperationService {
 
     public Teacher reassignTeacherToSection(String adminID, String teacherID, String oldSectionID, String sectionID) {
         Teacher teacher = deleteTeacherFromSection(adminID, teacherID, sectionID);
-        teacher.getSections().remove(sectionService.getSectionByID(sectionID).getName());
+        teacher.getSections().remove(sectionService.getSectionByName(sectionID).getName());
         String className = findSection(sectionID).getName();
         Section section = findSection(sectionID);
-
-
 
         section.getTeachers().put(teacherID, teacher);
 
@@ -275,7 +274,7 @@ public class AdminOperationService {
         }
         //remove student from old section
         sectionService
-                .getSectionByID(student.getSection()).getStudents().remove(studentID, student);
+                .getSectionByName(student.getSection()).getStudents().remove(studentID, student);
         student.setSection(null);
         return student;
 
@@ -294,7 +293,7 @@ public class AdminOperationService {
         }
         //remove student from old section
         sectionService
-                .getSectionByID(teacher.getSections().toString()).getTeachers().remove(teacherID, teacher);
+                .getSectionByName(teacher.getSections().toString()).getTeachers().remove(teacherID, teacher);
         teacher.setSections(null);
         return teacher;
 

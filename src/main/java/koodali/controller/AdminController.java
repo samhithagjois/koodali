@@ -1,8 +1,7 @@
 package koodali.controller;
 
-import koodali.model.Section;
 import koodali.model.Student;
-import koodali.model.Teacher;
+import koodali.model.dto.SectionDTO;
 import koodali.service.*;
 import koodali.service.exceptions.StudentNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,8 +46,8 @@ public class AdminController {
      * this method gets all sections and displays them in a List
      */
     @GetMapping("admin/sections")
-    public ResponseEntity<List<Section>> manageSections() {
-        return new ResponseEntity<>(sectionService.getAllSections(), HttpStatus.OK);
+    public ResponseEntity<List<SectionDTO>> manageSections() {
+        return new ResponseEntity<>(sectionService.getAllSectionsDTO(), HttpStatus.OK);
     }
 
     /**
@@ -58,32 +57,12 @@ public class AdminController {
      * @return Section
      */
     @GetMapping("admin/sections/{classId}")
-    public ResponseEntity<Section> selectSection(@PathVariable String classId) {
+    public ResponseEntity<SectionDTO> selectSection(@PathVariable String classId) {
 
-        return new ResponseEntity<>(sectionService.getSectionByID(classId), HttpStatus.OK);
-
-    }
-
-    /**
-     * this method lists out all the students of a certain section
-     *
-     * @param classId section name
-     */
-    @GetMapping("admin/sections/{classId}/students")
-    public ResponseEntity<List<Student>> getStudentsOfSection(@PathVariable String classId) {
-        return new ResponseEntity<>(studentService.listStudentsInSection(classId), HttpStatus.OK);
-    }
-
-    /**
-     * this method lists out all teachers of a section
-     *
-     * @param classId section name
-     */
-    @GetMapping("admin/sections/{classId}/teachers")
-    public List<Teacher> getTeachersOfSection(@PathVariable String classId) {
-        return sectionService.getSectionByID(classId).getTeachers().values().stream().toList();
+        return new ResponseEntity<>(sectionService.getSectionDTOByName(classId), HttpStatus.OK);
 
     }
+
 
     /**
      * this method selects a Student from the section
@@ -116,10 +95,9 @@ public class AdminController {
      * @param classId class name
      */
     @DeleteMapping("admin/sections/{classId}")
-    public ResponseEntity<Section> removeSection(@PathVariable String classId) {
-        Section section = sectionService.getSectionByID(classId);
-        sectionService.deleteSection(section);
-        return new ResponseEntity<>(sectionService.deleteSection(section), HttpStatus.OK);
+    public ResponseEntity<SectionDTO> removeSection(@PathVariable String classId) {
+
+        return new ResponseEntity<>(sectionService.deleteSectionbyId(classId), HttpStatus.OK);
     }
 
 //-------------
@@ -130,13 +108,11 @@ public class AdminController {
      * @param updatedSection Section object that is updated
      */
     @PutMapping("admin/sections")
-    public ResponseEntity<Section> updateSection(@RequestBody Section updatedSection) {
-        Section oldSection = sectionService.getSectionByID(updatedSection.getName());
-        oldSection.setName(updatedSection.getName());
-        oldSection.setStudents(updatedSection.getStudents());
-        oldSection.setTeachers(updatedSection.getTeachers());
-        return new ResponseEntity<>(oldSection, HttpStatus.OK);
+    public ResponseEntity<SectionDTO> updateSection(@RequestBody SectionDTO updatedSection) {
+
+        return new ResponseEntity<>(sectionService.updateSection(updatedSection), HttpStatus.OK);
     }
+
 
     /**
      * reassigns a student to the new section.

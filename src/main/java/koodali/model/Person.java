@@ -1,8 +1,11 @@
 package koodali.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
 
 import java.time.LocalDateTime;
+
 @MappedSuperclass
 public abstract class Person {
     protected String firstName;
@@ -37,7 +40,7 @@ public abstract class Person {
         this.activeStatus = activeStatus;
     }
 
-    public Person (){
+    public Person() {
         this.firstName = "";
         this.lastName = "";
         this.personID = "";
@@ -46,7 +49,7 @@ public abstract class Person {
         this.country = "";
         this.fullPostalAdress = "";
         this.dateOfRegistration = LocalDateTime.now();
-        this.dateOfClassStart =  LocalDateTime.now();
+        this.dateOfClassStart = LocalDateTime.now();
         this.activeStatus = true;
     }
 

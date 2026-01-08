@@ -7,7 +7,8 @@ import koodali.service.exceptions.InvalidSectionException;
 import koodali.service.exceptions.SectionNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SectionService {
@@ -38,13 +39,17 @@ public class SectionService {
      * @return Section
      * @throws SectionNotFoundException "didn't find section"
      */
-    public Section getSectionByID(String classId) {
-      return  Optional.of(sectionRepository.getReferenceById(classId)).orElseThrow(SectionNotFoundException::new);
+    public Section getSectionByName(String classId) {
+        return Optional.of(sectionRepository.getReferenceById(classId)).orElseThrow(SectionNotFoundException::new);
     }
 
-    public SectionDTO getSectionDTOByID(String classId) {
+    public SectionDTO getSectionDTOByName(String classId) {
 
-        return  Optional.of(SectionToDTO(sectionRepository.getReferenceById(classId))).orElseThrow(SectionNotFoundException::new);
+        return Optional.of(SectionToDTO(sectionRepository.getReferenceById(classId))).orElseThrow(SectionNotFoundException::new);
+    }
+
+    public Section getSectionByID(int classId) {
+        return sectionRepository.findAll().stream().filter(s -> s.getId() == classId).findFirst().orElseThrow(SectionNotFoundException::new);
     }
 
     public void updateSection(Section section) {
@@ -59,36 +64,35 @@ public class SectionService {
         return sectionDTO;
     }
 
-    private boolean validateName(String sectionName){
+    private boolean validateName(String sectionName) {
         return sectionName.matches("[A-Z][A-Z]_[BIA][END]T*([GV]|[_0-9])*")
                 && sectionRepository.findAll().stream().noneMatch(s -> s.getName().equals(sectionName));
     }
 
 
+    public SectionDTO createSection(SectionDTO sectionDTO) {
 
-    public SectionDTO createSection(SectionDTO sectionDTO){
-
-        if (validateName(sectionDTO.name())){
-           Section s = sectionRepository.save(DTOToSection(sectionDTO));
+        if (validateName(sectionDTO.name())) {
+            Section s = sectionRepository.save(DTOToSection(sectionDTO));
             return SectionToDTO(s);
-        }else{
+        } else {
             throw new InvalidSectionException();
         }
 
     }
 
     private SectionDTO SectionToDTO(Section section) {
-        if(section == null){
+        if (section == null) {
             throw new SectionNotFoundException();
         }
 
         return new SectionDTO(section.getId()
-                ,section.getName()
-                ,section.getLinkOrAddress());
+                , section.getName()
+                , section.getLinkOrAddress());
     }
 
-    private Section DTOToSection(SectionDTO dto){
-        return new Section(dto.name(),dto.linkOrAddress());
+    private Section DTOToSection(SectionDTO dto) {
+        return new Section(dto.name(), dto.linkOrAddress());
     }
 
     public SectionDTO deleteSectionbyId(String sectionName) {

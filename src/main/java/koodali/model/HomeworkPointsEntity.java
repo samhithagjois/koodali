@@ -28,17 +28,16 @@ public class HomeworkPointsEntity {
     public HomeworkPointsEntity() {
         this.studentID = "";
         this.name = "";
-        this.week = LocalDate.of(1970,1,1);
+        this.week = LocalDate.of(1970, 1, 1);
         this.points = 0;
-    }
-
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getStudentID() {

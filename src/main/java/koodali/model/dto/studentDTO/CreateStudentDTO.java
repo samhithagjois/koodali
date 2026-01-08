@@ -5,6 +5,7 @@ import java.time.LocalDate;
 public record CreateStudentDTO(
         String firstName,
         String lastName,
+        int sectionID,
         String city,
         String pinCode,
         String fullPostalAddress,
@@ -14,10 +15,11 @@ public record CreateStudentDTO(
         String fathersName,
         String mothersEmailID,
         String fathersEmailID,
-
+        String childsEmailID,
         String phoneNumber,
         String whatsappNumber,
-        int sectionID
+        String pathToPhoto,
+        String pathToConsentForm
 
 
 ) {

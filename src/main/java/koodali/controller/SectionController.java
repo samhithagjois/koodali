@@ -1,6 +1,5 @@
 package koodali.controller;
 
-import koodali.model.Section;
 import koodali.model.dto.SectionDTO;
 import koodali.service.SectionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +44,7 @@ public class SectionController {
      */
     @GetMapping("/sections/{id}")
     public ResponseEntity<SectionDTO> getSection(@PathVariable String id) {
-        return new ResponseEntity<>(sectionService.getSectionDTOByID(id), HttpStatus.OK);
+        return new ResponseEntity<>(sectionService.getSectionDTOByName(id), HttpStatus.OK);
     }
 
 
