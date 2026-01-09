@@ -40,6 +40,7 @@ import {HttpClient} from '@angular/common/http';
     </div>
     <button routerLink="new"> Add a section</button>
     <button routerLink=".."> Back</button>
+    <button type="button"> Export to Excel</button>
   `,
   styleUrl: './section-overview.css',
 })
