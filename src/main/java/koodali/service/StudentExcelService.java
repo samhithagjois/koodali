@@ -45,7 +45,7 @@ public class StudentExcelService {
             cs2.setFillForegroundColor((short) 0xA);
             cs2.setFont(f2);
 
-            wb.setSheetName(0, "Students overview");
+            wb.setSheetName(0, "Homework points overview for Section"+section.getName());
 
             int rownum;
             sheet.createRow(0).createCell(0).setCellValue(new HSSFRichTextString("Export"));
@@ -54,7 +54,7 @@ public class StudentExcelService {
                 HSSFRow r = sheet.createRow(rownum);
                 r.setHeight((short) 0x249);
             }
-
+            //here comes more
 
             wb.write(out);
         }*/

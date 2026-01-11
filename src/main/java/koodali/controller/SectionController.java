@@ -23,10 +23,7 @@ public class SectionController {
 
     /**
      *--------------------- GET Mappings------------------------------------
-     * GetMapping("/sections")
-     *     public ResponseEntity<List<Section>> getAllSections() {
-     *         return new ResponseEntity<>(sectionService.getAllSections(), HttpStatus.OK);
-     *     }
+     *
      * */
 
     /**
@@ -72,9 +69,9 @@ public class SectionController {
      */
 
 
-    @PutMapping("/sections")
-    public ResponseEntity<SectionDTO> updateSection(@RequestBody SectionDTO updatedSection) {
-        return new ResponseEntity<>(sectionService.updateSection(updatedSection), HttpStatus.OK);
+    @PutMapping("/sections/{id}")
+    public ResponseEntity<SectionDTO> updateSection(@PathVariable int id,@RequestBody SectionDTO updatedSection) {
+        return new ResponseEntity<>(sectionService.updateSection(updatedSection,id), HttpStatus.OK);
     }
 
     /**

@@ -2,8 +2,9 @@ package koodali.controller;
 
 import koodali.model.Student;
 import koodali.model.dto.SectionDTO;
+import koodali.model.dto.studentDTO.SectionStudentOverviewDTO;
+import koodali.model.dto.studentDTO.StudentOverviewDTO;
 import koodali.service.*;
-import koodali.service.exceptions.StudentNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -64,6 +65,14 @@ public class AdminController {
     }
 
 
+    @GetMapping("admin/sections/{classId}/students")
+    public ResponseEntity<List<SectionStudentOverviewDTO>> listStudentsOfSection(@PathVariable String classId) {
+
+        return new ResponseEntity<>(studentService.listStudentsInSection(classId), HttpStatus.OK);
+
+    }
+
+
     /**
      * this method selects a Student from the section
      *
@@ -71,19 +80,9 @@ public class AdminController {
      * @param studentId student ID
      */
     @GetMapping("admin/section/{classId}/students/{studentId}")
-    public ResponseEntity<Student> selectStudentFromSection(@PathVariable String classId, @PathVariable String studentId) {
+    public ResponseEntity<SectionStudentOverviewDTO> selectStudentFromSection(@PathVariable String classId, @PathVariable String studentId) {
 
-        Student s = studentService
-                .listStudentsInSection(classId)
-                .stream()
-                .filter(student -> student
-                        .getID()
-                        .equals(studentId))
-                .findFirst()
-                .orElseThrow(StudentNotFoundException::new);
-
-
-        return new ResponseEntity<>(s, HttpStatus.OK);
+        return new ResponseEntity<>(studentService.findStudentOfSection(classId, studentId), HttpStatus.OK);
 
     }
 
@@ -97,7 +96,7 @@ public class AdminController {
     @DeleteMapping("admin/sections/{classId}")
     public ResponseEntity<SectionDTO> removeSection(@PathVariable String classId) {
 
-        return new ResponseEntity<>(sectionService.deleteSectionbyId(classId), HttpStatus.OK);
+        return new ResponseEntity<>(sectionService.deleteSectionbyName(classId), HttpStatus.OK);
     }
 
 //-------------
@@ -107,10 +106,10 @@ public class AdminController {
      *
      * @param updatedSection Section object that is updated
      */
-    @PutMapping("admin/sections")
-    public ResponseEntity<SectionDTO> updateSection(@RequestBody SectionDTO updatedSection) {
+    @PutMapping("admin/sections/{id}")
+    public ResponseEntity<SectionDTO> updateSection(@PathVariable int id,@RequestBody SectionDTO updatedSection) {
 
-        return new ResponseEntity<>(sectionService.updateSection(updatedSection), HttpStatus.OK);
+        return new ResponseEntity<>(sectionService.updateSection(updatedSection,id), HttpStatus.OK);
     }
 
 
@@ -122,15 +121,15 @@ public class AdminController {
      * @param studentId ID of the student
      */
     @PutMapping("admin/sections/{sectionId}/students/{studentId}")
-    ResponseEntity<Student> reassignStudent(String adminId, @PathVariable String sectionId, @PathVariable String studentId) {
-        Student s = adminOperationService.reassignStudentToSection(adminId, studentId, sectionId);
+    ResponseEntity<SectionStudentOverviewDTO> reassignStudent(String adminId, @PathVariable String sectionId, @PathVariable String studentId) {
+        SectionStudentOverviewDTO s = studentService.StudentToSectionStudentOverviewDTO(adminOperationService.reassignStudentToSection(adminId, studentId, sectionId));
         //TODO 6: Security Context!
         return new ResponseEntity<>(s, HttpStatus.OK);
     }
 
     @PutMapping("admin/sections/{sectionId}/students")
-    ResponseEntity<Student> addStudentToSection(@PathVariable String sectionId, String studentId, String adminId) {
-        Student s = adminOperationService.addStudentToSection(adminId, studentId, sectionId);
+    ResponseEntity<SectionStudentOverviewDTO> addStudentToSection(@PathVariable String sectionId, String studentId, String adminId) {
+        SectionStudentOverviewDTO s = studentService.StudentToSectionStudentOverviewDTO(adminOperationService.addStudentToSection(adminId, studentId, sectionId));
         //TODO 6: Security Context!
         return new ResponseEntity<>(s, HttpStatus.OK);
     }
@@ -147,25 +146,6 @@ public class AdminController {
     /**
      * getters
      */
-    public AdminOperationService getAdminOperationService() {
-        return adminOperationService;
-    }
-
-    public AdministratorService getAdminService() {
-        return adminService;
-    }
-
-    public StudentService getStudentService() {
-        return studentService;
-    }
-
-    public SectionService getSectionService() {
-        return sectionService;
-    }
-
-    public TeacherService getTeacherService() {
-        return teacherService;
-    }
 
 
     // logic :

@@ -58,9 +58,7 @@ public class StudentService extends PersonService<Student> {
         return new Student(dto.firstName(),
                 dto.lastName(),
                 "NKS_" + (UUID.randomUUID().toString().substring(0, 2)),
-                dto.city(),
-                dto.pinCode(),
-                dto.country(), dto.fullPostalAddress(), LocalDateTime.now(), LocalDateTime.now(), false, sectionService.getSectionByID(dto.sectionID()).getName(),
+                dto.city(), dto.pinCode(), dto.country(), dto.fullPostalAddress(), LocalDateTime.now(), LocalDateTime.now(), true, sectionService.getSectionByID(dto.sectionID()).getName(),
                 0, 0, 0, 0, dto.dateOfBirth(), LocalDate.now(), dto.pathToPhoto(), dto.pathToConsentForm(), dto.mothersName(), dto.fathersName(), dto.fathersEmailID(),
                 dto.mothersEmailID(), dto.childsEmailID(), 0.0, dto.phoneNumber(), dto.whatsappNumber());
     }
@@ -97,7 +95,7 @@ public class StudentService extends PersonService<Student> {
         );
     }
 
-    private SectionStudentOverviewDTO StudentToSectionStudentOverviewDTO(Student student) {
+    public SectionStudentOverviewDTO StudentToSectionStudentOverviewDTO(Student student) {
 
         return new SectionStudentOverviewDTO(
                 student.getID(),
@@ -119,10 +117,17 @@ public class StudentService extends PersonService<Student> {
         );
     }
 
+    public List<StudentOverviewDTO> getAllStudentDTOs(){
+        return studentRepo.findAll().stream().map(this::StudentToStudentOverviewDTO).toList();
+    }
     public Student findByID(String studentID) {
         return studentRepo
                 .findById(studentID)
                 .orElseThrow(StudentNotFoundException::new);
+    }
+
+    public StudentOverviewDTO findDTOByID(String studentID) {
+        return StudentToStudentOverviewDTO(findByID(studentID));
     }
 
     public Student findStudentbyName(String firstName, String lastName) {
@@ -131,21 +136,99 @@ public class StudentService extends PersonService<Student> {
                 .orElseThrow(StudentNotFoundException::new);
     }
 
+    public SectionStudentOverviewDTO findStudentOfSection(String sectionID, String studentID){
+
+        Student s = findByID(studentID);
+        if(s.getSection().equals(sectionID)){
+            return StudentToSectionStudentOverviewDTO(s);
+        }else{
+            throw new StudentNotFoundException();
+        }
+    }
 
     public CreateStudentDTO createStudent(CreateStudentDTO student) {
-
 
         return StudentToCreateStudentDTO(studentRepo.save(CreateStudentDTOToStudent(student)));
     }
 
-    public CreateStudentDTO updateStudent(CreateStudentDTO student) {
-        Student s = findStudentbyName(student.firstName(), student.lastName());
-        //TODO:alllllllllllll thissssssssss
-        return student;
+    public CreateStudentDTO updateStudent(CreateStudentDTO dto) {
+
+        Student s = findStudentbyName(dto.firstName(), dto.lastName());
+        s.setFirstName(dto.firstName());
+        s.setLastName(dto.lastName());
+        s.setSection(sectionService.getSectionByID(dto.sectionID()).getName());
+
+        s.setCity(dto.city());
+        s.setCountry(dto.country());
+        s.setPinCode(dto.pinCode());
+        s.setFullPostalAdress(dto.fullPostalAddress());
+
+        s.setDateOfBirth(dto.dateOfBirth());
+
+        s.setFathersName(dto.fathersName());
+        s.setMothersName(dto.mothersName());
+        s.setFathersEmailID(dto.fathersEmailID());
+        s.setMothersEmailID(dto.mothersEmailID());
+        s.setChildEmailID(dto.childsEmailID());
+
+        s.setWhatsappNumber(dto.whatsappNumber());
+        s.setPhoneNumber(dto.phoneNumber());
+
+        s.setPathToPhoto(dto.pathToPhoto());
+        s.setPathToConsentForm(dto.pathToConsentForm());
+
+        return dto;
 
 
     }
 
+    public StudentOverviewDTO updateStudent(StudentOverviewDTO dto) {
+        /*   boolean activeStatus,
+
+        LocalDateTime dateOfRegistration,
+        LocalDateTime dateOfClassStart,
+        String sectionId,
+        int amountOfTextbooks,
+        int feesPaid,
+        int pendingFees,
+        int homeworkLeaderBoardScore,
+        LocalDate dateOfFirstClass,
+        */
+
+        Student s = findByID(dto.personID());
+        s.setFirstName(dto.firstName());
+        s.setLastName(dto.lastName());
+        s.setSection(dto.sectionId());
+
+        s.setCity(dto.city());
+        s.setActiveStatus(dto.activeStatus());
+        s.setCountry(dto.country());
+        s.setHomeworkLeaderBoardScore(dto.homeworkLeaderBoardScore());
+        s.setPinCode(dto.pinCode());
+        s.setFeesPaid(dto.feesPaid());
+        s.setFullPostalAdress(dto.fullPostalAddress());
+        s.setDateOfRegistration(dto.dateOfRegistration());
+        s.setDateOfBirth(dto.dateOfBirth());
+        s.setDateOfFirstClass(dto.dateOfFirstClass());
+        s.setFathersName(dto.fathersName());
+        s.setPendingFees(dto.pendingFees());
+        s.setMothersName(dto.mothersName());
+        s.setAmountOfTextbooks(dto.amountOfTextbooks());
+        s.setFathersEmailID(dto.fathersEmailID());
+        s.setMothersEmailID(dto.mothersEmailID());
+        s.setDateOfClassStart(dto.dateOfClassStart());
+        s.setChildEmailID(dto.childEmailID());
+
+        s.setWhatsappNumber(dto.whatsappNumber());
+        s.setPhoneNumber(dto.phoneNumber());
+
+        s.setPathToPhoto(dto.pathToPhoto());
+        s.setPathToConsentForm(dto.pathToConsentForm());
+
+        return dto;
+
+
+    }
 
     public Student createStudent(String studentId,
                                  String firstName,
@@ -198,19 +281,25 @@ public class StudentService extends PersonService<Student> {
 
     }
 
-    public int getTotalPoints(String studentID) {
+    public int getTotalHomeworkPoints(String studentID) {
         Student student = findByID(studentID);
         return student.getHomeworkLeaderBoardScore();
     }
 
 
-    public List<Student> listStudentsInSection(String sectionID) {
+    public List<SectionStudentOverviewDTO> listStudentsInSection(String sectionID) {
         try {
             Section section = sectionService.getSectionByName(sectionID);
-            return section.getStudents().values().stream().toList();
+            return section.getStudents().values().stream().map(this::StudentToSectionStudentOverviewDTO).toList();
         } catch (SectionNotFoundException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public StudentOverviewDTO deleteById(String studentID){
+        Student s = findByID(studentID);
+        studentRepo.deleteById(studentID);
+        return StudentToStudentOverviewDTO(s);
     }
 
 

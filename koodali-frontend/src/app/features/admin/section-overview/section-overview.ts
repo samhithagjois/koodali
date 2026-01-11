@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {RouterLink} from '@angular/router';
+import {NavigationEnd, RouterLink, Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
+
 @Component({
   selector: 'app-section-overview',
   standalone : true,
@@ -9,9 +10,9 @@ import {HttpClient} from '@angular/common/http';
   ],
   template: `
     <h3>Section Overview for Administration</h3>
+
     <div>
       <table class="tg"><thead>
-
       <tr>
         <th >Section Name</th>
         <th>Section Link or Address</th>
@@ -38,6 +39,7 @@ import {HttpClient} from '@angular/common/http';
         </tbody>
       </table>
     </div>
+    <button routerLink="."> Reload</button>
     <button routerLink="new"> Add a section</button>
     <button routerLink=".."> Back</button>
     <button type="button"> Export to Excel</button>
@@ -48,18 +50,25 @@ export class SectionOverview implements OnInit {
 
   sections: any[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit() {
 
     this.loadSections();
-
   }
+
+
   loadSections() {
     this.http.get<any[]>(`http://localhost:8080/api/sections`)
       .subscribe(data => {
         this.sections = data;
       });
+  }
+  reloadPage() {
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.router.navigate([this.router.url]);
+      window.location.reload();
+    });
   }
 
 }

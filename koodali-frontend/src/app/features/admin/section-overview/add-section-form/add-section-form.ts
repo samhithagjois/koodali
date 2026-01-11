@@ -1,12 +1,13 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-import {Router, ActivatedRoute, RouterLink} from '@angular/router';
+import {HttpClient} from '@angular/common/http';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
+
 
 
 @Component({
   selector: 'app-add-section-form',
-  standalone:true,
+  standalone: true,
   imports: [
     FormsModule,
     ReactiveFormsModule,
@@ -15,11 +16,11 @@ import {Router, ActivatedRoute, RouterLink} from '@angular/router';
   templateUrl: './add-section-form.html',
   styleUrl: './add-section-form.css',
 })
-export class AddSectionForm implements OnInit{
+export class AddSectionForm implements OnInit {
 
-  section={
-    name:'',
-    linkOrAddress:''
+  section = {
+    name: '',
+    linkOrAddress: ''
   }
 
   private route = inject(ActivatedRoute);
@@ -27,8 +28,8 @@ export class AddSectionForm implements OnInit{
   isEditMode = false;
   sectionId?: string | null;
 
-  ngOnInit() {
 
+  ngOnInit() {
 
 
     this.sectionId = this.route.snapshot.paramMap.get('id');
@@ -40,29 +41,36 @@ export class AddSectionForm implements OnInit{
   }
 
 
-  constructor(private http: HttpClient) {}
-  onSubmit() {
-      if (this.isEditMode) {
-        this.updateSection();
-      } else {
-        this.createSection();
-      }
+  constructor(private http: HttpClient) {
   }
 
-  createSection(){
+  onSubmit() {
+    if (this.isEditMode) {
+      this.updateSection();
+    } else {
+      this.createSection();
+    }
+  }
+
+  createSection() {
     this.http.post(`http://localhost:8080/api/sections`, this.section)
       .subscribe(() => {
         {
-          this.router.navigate(['/admin/sections']);
+          this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+            this.router.navigate(['/admin/sections']);
+          });
+
         }
       });
   }
 
-  updateSection(){
+  updateSection() {
     this.http.put(`http://localhost:8080/api/sections/${this.sectionId}`, this.section)
       .subscribe(() => {
         {
-          this.router.navigate(['/admin/sections']);
+          this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+            this.router.navigate(['/admin/sections']);
+          });
         }
       });
   }

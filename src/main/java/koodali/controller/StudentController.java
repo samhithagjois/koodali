@@ -2,6 +2,7 @@ package koodali.controller;
 
 import koodali.model.Student;
 import koodali.model.dto.studentDTO.CreateStudentDTO;
+import koodali.model.dto.studentDTO.StudentOverviewDTO;
 import koodali.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,21 +29,21 @@ public class StudentController {
      * ----------------------------------GET MAPPINGS----------------------------------
      */
     @GetMapping("/students")
-    public ResponseEntity<List<Student>> getAllStudents() {
-        return new ResponseEntity<>(studentService.getAll(), HttpStatus.OK);
+    public ResponseEntity<List<StudentOverviewDTO>> getAllStudents() {
+        return new ResponseEntity<>(studentService.getAllStudentDTOs(), HttpStatus.OK);
     }
 
     @GetMapping("/students/{id}")
-    public ResponseEntity<Student> getStudent(@PathVariable String id) {
-        return new ResponseEntity<>(studentService.findByID(id), HttpStatus.OK);
+    public ResponseEntity<StudentOverviewDTO> getStudent(@PathVariable String id) {
+        return new ResponseEntity<>(studentService.findDTOByID(id), HttpStatus.OK);
     }
 
     /*
      * ----------------------------------PUT MAPPINGS----------------------------------
      */
     @PutMapping("/students")
-    public ResponseEntity<Student> updateStudent(@RequestBody Student updatedStudent) {
-        return new ResponseEntity<>(studentService.update(updatedStudent), HttpStatus.OK);
+    public ResponseEntity<StudentOverviewDTO> updateStudent(@RequestBody StudentOverviewDTO updatedStudent) {
+        return new ResponseEntity<>(studentService.updateStudent(updatedStudent), HttpStatus.OK);
     }
 
     /*
@@ -57,7 +58,7 @@ public class StudentController {
      * ----------------------------------DELETE MAPPINGS----------------------------------
      */
     @DeleteMapping("/students/{id}")
-    public ResponseEntity<Student> deleteStudent(@PathVariable String id) {
-        return new ResponseEntity<>(studentService.delete(id), HttpStatus.NO_CONTENT);
+    public ResponseEntity<StudentOverviewDTO> deleteStudent(@PathVariable String id) {
+        return new ResponseEntity<>(studentService.deleteById(id), HttpStatus.NO_CONTENT);
     }
 }

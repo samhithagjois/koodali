@@ -35,17 +35,17 @@ public class SectionService {
     /**
      * gets section by its id and throws a SectionNotFoundException if it doesn't work
      *
-     * @param classId class ID
+     * @param className class ID
      * @return Section
      * @throws SectionNotFoundException "didn't find section"
      */
-    public Section getSectionByName(String classId) {
-        return Optional.of(sectionRepository.getReferenceById(classId)).orElseThrow(SectionNotFoundException::new);
+    public Section getSectionByName(String className) {
+        return Optional.of(sectionRepository.getReferenceById(className)).orElseThrow(SectionNotFoundException::new);
     }
 
-    public SectionDTO getSectionDTOByName(String classId) {
+    public SectionDTO getSectionDTOByName(String className) {
 
-        return Optional.of(SectionToDTO(sectionRepository.getReferenceById(classId))).orElseThrow(SectionNotFoundException::new);
+        return Optional.of(SectionToDTO(sectionRepository.getReferenceById(className))).orElseThrow(SectionNotFoundException::new);
     }
 
     public Section getSectionByID(int classId) {
@@ -56,12 +56,12 @@ public class SectionService {
         sectionRepository.save(section);
     }
 
-    public SectionDTO updateSection(SectionDTO sectionDTO) {
-        Section s = sectionRepository.getReferenceById(sectionDTO.name());
-        s.setId(sectionDTO.id());
+    public SectionDTO updateSection(SectionDTO sectionDTO, int id) {
+        Section s = getSectionByID(id);
         s.setLinkOrAddress(sectionDTO.linkOrAddress());
         s.setName(sectionDTO.name());
-        return sectionDTO;
+       return SectionToDTO(sectionRepository.save(s));
+
     }
 
     private boolean validateName(String sectionName) {
@@ -95,7 +95,7 @@ public class SectionService {
         return new Section(dto.name(), dto.linkOrAddress());
     }
 
-    public SectionDTO deleteSectionbyId(String sectionName) {
+    public SectionDTO deleteSectionbyName(String sectionName) {
         if (sectionRepository.existsById(sectionName)) {
             Section s = sectionRepository.getReferenceById(sectionName);
             sectionRepository.delete(s);
