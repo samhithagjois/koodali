@@ -41,9 +41,16 @@ public class StudentController {
     /*
      * ----------------------------------PUT MAPPINGS----------------------------------
      */
-    @PutMapping("/students")
+
+    /*    @PutMapping("/students")
     public ResponseEntity<StudentOverviewDTO> updateStudent(@RequestBody StudentOverviewDTO updatedStudent) {
         return new ResponseEntity<>(studentService.updateStudent(updatedStudent), HttpStatus.OK);
+    }*/
+
+
+    @PutMapping("/students/{id}")
+    public ResponseEntity<StudentOverviewDTO> updateStudent(@PathVariable String id,@RequestBody StudentOverviewDTO updatedStudent) {
+        return new ResponseEntity<>(studentService.updateStudent(id,updatedStudent), HttpStatus.OK);
     }
 
     /*

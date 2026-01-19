@@ -1,5 +1,7 @@
 import koodali.model.*;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -8,13 +10,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@ExtendWith(MockitoExtension.class)
 public class ServiceTest {
-
+//TODO!
     static List<LocalDateTime> schedule = new ArrayList<>();
     static Administrator samhitha = new Administrator("NKS_AD_001", "Samhitha", "Jois");
     static Administrator vinayak = new Administrator("NKS_AD_002", "Vinayak", "Belavadi");
-   // private final AdminOperationService adminOperationService = new AdminOperationService(null);
-    //TODO 1 : Mock!
+
     Student sushruth = new Student();
 
     Student riddhi = new Student();

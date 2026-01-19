@@ -1,6 +1,7 @@
 package koodali.service;
 
 import koodali.model.AttendanceEntity;
+import koodali.model.dto.AttendanceDTO;
 import koodali.repository.AttendanceRepository;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +12,12 @@ import java.util.List;
 public class AttendanceService {
     private final AttendanceRepository attendanceRepository;
 
+    private final StudentService studentService;
 
-    public AttendanceService(AttendanceRepository attendanceRepository) {
+
+    public AttendanceService(AttendanceRepository attendanceRepository, StudentService studentService) {
         this.attendanceRepository = attendanceRepository;
+        this.studentService = studentService;
     }
 
     public double calculateAttendanceForStudent(String studentID) {
@@ -31,7 +35,33 @@ public class AttendanceService {
                 .filter(AttendanceEntity::isAttended)
                 .count();
 
-        return Math.floorDiv(count, dates.size());
+        double attendance =  Math.floorDiv(count, dates.size());
+        studentService.findByID(studentID).setAttendance(attendance);
+
+
+        return attendance;
     }
+
+    public AttendanceDTO updateAttendance(String studentID,LocalDate week, boolean attended){
+        AttendanceEntity entity =
+                attendanceRepository.findAll()
+                        .stream()
+                        .filter(e -> e.getStudentID().equals(studentID) && e.getWeek().isEqual(week))
+                        .findFirst()
+                        .orElseThrow();
+        entity.setAttended(attended);
+        return new AttendanceDTO(entity.getId(),entity.getStudentID(), entity.getName(), entity.getWeek(),entity.isAttended());
+
+
+    }
+
+
+    public List<AttendanceDTO> getAllAttendances(){
+        return attendanceRepository.findAll().stream().map(e -> new AttendanceDTO(e.getId(),e.getStudentID(), e.getName(), e.getWeek(),e.isAttended())).toList();
+    }
+
+
+
+
 }
 

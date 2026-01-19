@@ -15,6 +15,7 @@ import {
 import {
   SectionTeacherOverview
 } from './features/admin/section-overview/section-teacher-overview/section-teacher-overview';
+import {AttendanceOverview} from './features/teacher/attendance-overview/attendance-overview';
 
 export const routes: Routes = [
   {
@@ -51,7 +52,9 @@ export const routes: Routes = [
   {
     path: 'teacher/edit-teacher-profile', component: TeacherForm
   },
-
+  {
+    path: 'teacher/attendance', component: AttendanceOverview
+  },
   {
     path: 'admin/sections', component: SectionOverview
   },

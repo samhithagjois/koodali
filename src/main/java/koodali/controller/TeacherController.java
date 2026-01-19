@@ -1,6 +1,8 @@
 package koodali.controller;
 
 import koodali.model.Teacher;
+import koodali.model.dto.AttendanceDTO;
+import koodali.service.AttendanceService;
 import koodali.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,9 +19,12 @@ public class TeacherController {
 
     private final TeacherService teacherService;
 
+    private final AttendanceService attendanceService;
+
     @Autowired
-    public TeacherController(TeacherService teacherService) {
+    public TeacherController(TeacherService teacherService, AttendanceService attendanceService) {
         this.teacherService = teacherService;
+        this.attendanceService = attendanceService;
     }
 
     @GetMapping("/teachers")
@@ -48,11 +53,16 @@ public class TeacherController {
         return new ResponseEntity<>(teacherService.delete(id), HttpStatus.NO_CONTENT);
     }
 
-    /*TeacherController
-  → HomeworkExcelImportService
-      → HomeworkResult list
+    @GetMapping("/teachers/attendance")
+    public ResponseEntity<List<AttendanceDTO>> getAllAttendances(){
+        return new ResponseEntity<>(attendanceService.getAllAttendances(),HttpStatus.OK);
+    }
 
-  → LeaderboardService
-      → update leaderboard koodali.repository
-*/
+
+    @PatchMapping("/teachers/attendance")
+    public void updateAttendance(@RequestBody AttendanceDTO dto) {
+        attendanceService.updateAttendance(dto.studentId(), dto.date(), dto.present());
+    }
+
+    /*GetPercentageForStudent --> AttendanceService*/
 }

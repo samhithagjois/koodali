@@ -182,7 +182,7 @@ public class StudentService extends PersonService<Student> {
 
     }
 
-    public StudentOverviewDTO updateStudent(StudentOverviewDTO dto) {
+    public StudentOverviewDTO updateStudent(String id, StudentOverviewDTO dto) {
         /*   boolean activeStatus,
 
         LocalDateTime dateOfRegistration,
@@ -195,7 +195,7 @@ public class StudentService extends PersonService<Student> {
         LocalDate dateOfFirstClass,
         */
 
-        Student s = findByID(dto.personID());
+        Student s = findByID(id);
         s.setFirstName(dto.firstName());
         s.setLastName(dto.lastName());
         s.setSection(dto.sectionId());
