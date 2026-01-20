@@ -148,7 +148,9 @@ public class StudentService extends PersonService<Student> {
 
     public CreateStudentDTO createStudent(CreateStudentDTO student) {
 
-        return StudentToCreateStudentDTO(studentRepo.save(CreateStudentDTOToStudent(student)));
+        return StudentToCreateStudentDTO(
+                studentRepo.save(
+                        CreateStudentDTOToStudent(student)));
     }
 
     public CreateStudentDTO updateStudent(CreateStudentDTO dto) {

@@ -39,7 +39,7 @@ import {HttpClient} from '@angular/common/http';
         </tbody>
       </table>
     </div>
-    <button routerLink="."> Reload</button>
+    <button routerLink="."> Display</button>
     <button routerLink="new"> Add a section</button>
     <button routerLink=".."> Back</button>
     <button type="button"> Export to Excel</button>

@@ -20,10 +20,13 @@ export class AttendanceOverview implements OnInit {
   row: any;
   col: any;
 
+  sections : any[] = [];
+
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
     this.loadAttendances();
+    this.loadSections();
   }
 /*this whole part is by chatgpt. I have to check this and understand it*/
   loadAttendances() {
@@ -33,6 +36,12 @@ export class AttendanceOverview implements OnInit {
       });
   }
 
+  loadSections() {
+    this.http.get<any[]>('http://localhost:8080/api/sections')
+      .subscribe(data => {
+        this.sections = data;
+      });
+  }
   initializeTable(data: any[]) {
     const columnSet = new Set<string>();
     const rowMap = new Map<string, any>();
