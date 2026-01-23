@@ -42,6 +42,7 @@ public class AttendanceService {
         return attendance;
     }
 
+
     public AttendanceDTO updateAttendance(String studentID,LocalDate week, boolean attended){
         AttendanceEntity entity =
                 attendanceRepository.findAll()
@@ -53,6 +54,10 @@ public class AttendanceService {
         return new AttendanceDTO(entity.getId(),entity.getStudentID(), entity.getName(), entity.getWeek(),entity.isAttended());
 
 
+    }
+
+    public static AttendanceDTO entityToDTO(AttendanceEntity entity){
+        return new AttendanceDTO(entity.getId(),entity.getStudentID(),entity.getName(),entity.getWeek(), entity.isAttended());
     }
 
 

@@ -1,12 +1,13 @@
 <h2>Attendance table for Section</h2>
 Load for Section :
 <br><br>
-<select>
-  <option value="Select A Section " disabled>Select a section</option>
+<label>Select section:</label>
+<select (change)="onSectionChange($any($event.target).value)">
+  <option value="">-- choose section --</option>
 
-  @for (section of sections; track section.id){
-  <option [value]="section">
-  {{section.name}}
+  @for (section of sections; track section.id) {
+  <option [value]="section.id">
+  {{ section.name }}
   </option>
   }
 </select>

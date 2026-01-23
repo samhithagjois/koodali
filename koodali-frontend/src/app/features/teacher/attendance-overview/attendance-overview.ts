@@ -1,4 +1,4 @@
-import {booleanAttribute, Component, OnInit} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import {RouterLink} from '@angular/router';
@@ -14,7 +14,7 @@ import {RouterLink} from '@angular/router';
   styleUrl: './attendance-overview.css',
 })
 export class AttendanceOverview implements OnInit {
-
+  selectedSectionId: string | null = null;
   rows: any[] = [];
   columns: any[] = [];
   row: any;
@@ -40,6 +40,16 @@ export class AttendanceOverview implements OnInit {
     this.http.get<any[]>('http://localhost:8080/api/sections')
       .subscribe(data => {
         this.sections = data;
+      });
+  }
+
+  onSectionChange(sectionId: string) {
+    this.selectedSectionId = sectionId;
+
+    this.http
+      .get<any[]>(`http://localhost:8080/api/sections/${sectionId}/attendance`)
+      .subscribe(data => {
+        this.initializeTable(data);
       });
   }
   initializeTable(data: any[]) {
@@ -79,17 +89,28 @@ export class AttendanceOverview implements OnInit {
   }
 
   addColumn() {
-    const index = this.columns.length + 1;
-    const key = `w${index}`;
+    const nextDate = this.getNextWeekDate();
+    const key = nextDate.toISOString().slice(0, 10);
 
     this.columns.push({
       key,
-      label: `W${index}`
+      label: key,
+      date: nextDate
     });
 
-    // initialize column for all rows
     this.rows.forEach(r => r.attendance[key] = false);
   }
+
+  getNextWeekDate(): Date {
+    if (this.columns.length === 0) {
+      return new Date();
+    }
+
+    const last = new Date(this.columns[this.columns.length - 1].key);
+    last.setDate(last.getDate() + 7);
+    return last;
+  }
+
 
   toggleAttendance(row: any, columnKey: string) {
     row.attendance[columnKey] = !row.attendance[columnKey];
@@ -103,4 +124,5 @@ export class AttendanceOverview implements OnInit {
       }
     ).subscribe();
   }
+
 }

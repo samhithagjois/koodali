@@ -1,5 +1,6 @@
 package koodali.controller;
 
+import koodali.model.dto.AttendanceDTO;
 import koodali.model.dto.SectionDTO;
 import koodali.service.SectionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,12 @@ public class SectionController {
     @GetMapping("/sections/{id}")
     public ResponseEntity<SectionDTO> getSection(@PathVariable String id) {
         return new ResponseEntity<>(sectionService.getSectionDTOByName(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/sections/{id}/attendance")
+    public ResponseEntity<List<AttendanceDTO>> getAllAttendancesForSection(@PathVariable int id){
+
+        return new ResponseEntity<>(sectionService.getAttendancesOfSectionStudents(id),HttpStatus.OK);
     }
 
 

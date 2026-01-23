@@ -24,7 +24,7 @@
       <option value="" disabled>Select a section</option>
 
       @for (section of sections; track section.id){
-    <option [value]="section">
+    <option [value]="section.id">
       {{section.name}}
       </option>
     }

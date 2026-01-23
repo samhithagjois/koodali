@@ -1,7 +1,11 @@
 package koodali.service;
 
+import koodali.model.AttendanceEntity;
 import koodali.model.Section;
+import koodali.model.Student;
+import koodali.model.dto.AttendanceDTO;
 import koodali.model.dto.SectionDTO;
+import koodali.repository.AttendanceRepository;
 import koodali.repository.SectionRepository;
 import koodali.service.exceptions.InvalidSectionException;
 import koodali.service.exceptions.SectionNotFoundException;
@@ -15,9 +19,16 @@ public class SectionService {
 
     private final SectionRepository sectionRepository;
 
-    public SectionService(SectionRepository sectionRepository) {
+    private final AttendanceRepository attendanceRepository;
+
+
+
+
+
+    public SectionService(SectionRepository sectionRepository, AttendanceRepository attendanceRepository) {
 
         this.sectionRepository = sectionRepository;
+        this.attendanceRepository = attendanceRepository;
     }
 
     /**
@@ -104,6 +115,18 @@ public class SectionService {
         } else {
             throw new SectionNotFoundException();
         }
+
+    }
+
+    public List<AttendanceDTO> getAttendancesOfSectionStudents(int id){
+        Section section = getSectionByID(id);
+        List<AttendanceEntity> entities = attendanceRepository.findAll();
+        return entities
+                .stream()
+                .filter(e -> section
+                        .getStudents()
+                        .containsKey(e.getStudentID()))
+                .map(AttendanceService::entityToDTO).toList();
 
     }
 
