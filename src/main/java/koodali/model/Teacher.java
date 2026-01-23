@@ -30,6 +30,11 @@ public class Teacher extends Person {
         this.sections = sections;
     }
 
+    public Teacher( String firstName, String lastName) {
+        super("NKS_"+ (UUID.randomUUID().toString().substring(0,2)), firstName, lastName);
+        this.sections = List.of();
+    }
+
     public Teacher() {
         super();
         this.personID = "NKS_T_" + UUID.randomUUID();

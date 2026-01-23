@@ -2,6 +2,9 @@ package koodali.service;
 
 import koodali.model.Section;
 import koodali.model.Teacher;
+import koodali.model.dto.teacherDTO.CreateTeacherDTO;
+import koodali.model.dto.teacherDTO.SectionTeacherOverviewDTO;
+import koodali.model.dto.teacherDTO.TeacherOverviewDTO;
 import koodali.repository.TeacherRepository;
 import koodali.service.exceptions.TeacherNotFoundException;
 import org.springframework.stereotype.Service;
@@ -23,6 +26,10 @@ public class TeacherService extends PersonService<Teacher> {
         this.sectionService = sectionService;
     }
 
+private SectionTeacherOverviewDTO teacherToSectionTeacherOverviewDTO(Teacher teacher){
+        return new SectionTeacherOverviewDTO(teacher.getID(),teacher.getFirstName()+teacher.getLastName(),teacher.getJoinDate());
+}
+
     public Teacher findByID(String teacherID) {
         return teacherRepo
                 .findById(teacherID)
@@ -38,6 +45,15 @@ public class TeacherService extends PersonService<Teacher> {
 
     public Teacher createTeacher(Teacher teacher) {
         return teacherRepo.save(teacher);
+    }
+
+    public Teacher createTeacherfromCreateTeacherDTO(CreateTeacherDTO dto) {
+        return teacherRepo.save(new Teacher(dto.firstName(),dto.lastName()));
+    }
+
+    public TeacherOverviewDTO teacherToTeacherOverDTO(Teacher teacher){
+        String sectionsOfTeacher = teacher.getSections().stream().reduce(String::concat).orElseThrow();
+        return new TeacherOverviewDTO(teacher.getID(),teacher.getFirstName(), teacher.getLastName(), teacher.getJoinDate(),sectionsOfTeacher);
     }
 
 
@@ -78,10 +94,10 @@ public class TeacherService extends PersonService<Teacher> {
     }
 
 
-    public List<Teacher> listTeachersInSection(String sectionID) {
+    public List<SectionTeacherOverviewDTO> listTeachersInSection(String sectionID) {
 
         Section section = sectionService.getSectionByName(sectionID);
-        return section.getTeachers().values().stream().toList();
+        return section.getTeachers().values().stream().map(this::teacherToSectionTeacherOverviewDTO).toList();
 
     }
 

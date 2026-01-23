@@ -4,6 +4,7 @@ import koodali.model.Student;
 import koodali.model.dto.SectionDTO;
 import koodali.model.dto.studentDTO.SectionStudentOverviewDTO;
 import koodali.model.dto.studentDTO.StudentOverviewDTO;
+import koodali.model.dto.teacherDTO.SectionTeacherOverviewDTO;
 import koodali.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -69,6 +70,13 @@ public class AdminController {
     public ResponseEntity<List<SectionStudentOverviewDTO>> listStudentsOfSection(@PathVariable String classId) {
 
         return new ResponseEntity<>(studentService.listStudentsInSection(classId), HttpStatus.OK);
+
+    }
+
+    @GetMapping("admin/sections/{classId}/teachers")
+    public ResponseEntity<List<SectionTeacherOverviewDTO>> listTeachersOfSection(@PathVariable String classId) {
+
+        return new ResponseEntity<>(teacherService.listTeachersInSection(classId), HttpStatus.OK);
 
     }
 
