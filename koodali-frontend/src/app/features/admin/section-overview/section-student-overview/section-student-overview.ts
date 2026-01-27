@@ -13,6 +13,15 @@ import {HttpClient} from '@angular/common/http';
 })
 export class SectionStudentOverview implements OnInit{
   classId!:string;
+
+
+  student : any = {
+    personID :'',
+    firstName :'',
+    lastName :'',
+    homeworkPoints:'',
+    attendancePercentage:''
+  }
   students : any[] = [];
   constructor(private http: HttpClient,
               private route: ActivatedRoute) {}

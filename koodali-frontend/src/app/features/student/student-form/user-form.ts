@@ -16,10 +16,10 @@ export class UserForm implements OnInit{
   user = {
     firstName: '',
     lastName: '',
+    section: null as number | null,
     city: '',
     pinCode: '',
     fullPostalAddress: '',
-    section:'',
     country: '',
     dateOfBirth: '',
     mothersName: '',
@@ -29,6 +29,8 @@ export class UserForm implements OnInit{
     childEmailID: '',
     phoneNumber: '',
     whatsappNumber: '',
+    pathToPhoto:'',
+    pathToConsentForm:''
   };
   sections : any[] = []
 
@@ -48,5 +50,36 @@ export class UserForm implements OnInit{
       .subscribe(() => {
         alert('Form submitted successfully!');
       });
+  }
+
+  onPathToPhotoFileSelected(event : any) {
+
+    const file:File = event.target.files[0];
+
+    if (file) {
+
+      this.user.pathToPhoto = file.name;
+
+      const formData = new FormData();
+
+      formData.append("thumbnail", file);
+
+    }
+  }
+
+  onPathToConsentFormFileSelected(event : any) {
+
+    const file:File = event.target.files[0];
+    //TODO:fix these methods
+
+    if (file) {
+
+      this.user.pathToConsentForm = file.name;
+
+      const formData = new FormData();
+
+      formData.append("thumbnail", file);
+
+    }
   }
 }

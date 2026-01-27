@@ -30,7 +30,7 @@ public class StudentController {
      */
     @GetMapping("/students")
     public ResponseEntity<List<StudentOverviewDTO>> getAllStudents() {
-        return new ResponseEntity<>(studentService.getAllStudentDTOs(), HttpStatus.OK);
+        return new ResponseEntity<>(studentService.getAllStudentOverviewDTOs(), HttpStatus.OK);
     }
 
     @GetMapping("/students/{id}")
@@ -57,7 +57,7 @@ public class StudentController {
      * ----------------------------------POST MAPPINGS----------------------------------
      */
     @PostMapping("/students")
-    public ResponseEntity<CreateStudentDTO> createStudent(@RequestBody CreateStudentDTO newStudent) {
+    public ResponseEntity<StudentOverviewDTO> createStudent(@RequestBody CreateStudentDTO newStudent) {
         return new ResponseEntity<>(studentService.createStudent(newStudent), HttpStatus.CREATED);
     }
 

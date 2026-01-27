@@ -11,5 +11,7 @@ import {RouterLink} from "@angular/router";
   styleUrl: './student-overview.css',
 })
 export class AdminStudentOverview {
+  //THIS IS FOR FEES
+  //TODO:add Controller methods for fees in admin
 
 }

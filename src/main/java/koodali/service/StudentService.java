@@ -60,7 +60,7 @@ public class StudentService extends PersonService<Student> {
                 "NKS_" + (UUID.randomUUID().toString().substring(0, 2)),
                 dto.city(), dto.pinCode(), dto.country(), dto.fullPostalAddress(), LocalDateTime.now(), LocalDateTime.now(), true, sectionService.getSectionByID(dto.sectionID()).getName(),
                 0, 0, 0, 0, dto.dateOfBirth(), LocalDate.now(), dto.pathToPhoto(), dto.pathToConsentForm(), dto.mothersName(), dto.fathersName(), dto.fathersEmailID(),
-                dto.mothersEmailID(), dto.childsEmailID(), 0.0, dto.phoneNumber(), dto.whatsappNumber());
+                dto.mothersEmailID(), dto.childEmailID(), 0.0, dto.phoneNumber(), dto.whatsappNumber());
     }
 
     private StudentOverviewDTO StudentToStudentOverviewDTO(Student student) {
@@ -117,8 +117,14 @@ public class StudentService extends PersonService<Student> {
         );
     }
 
-    public List<StudentOverviewDTO> getAllStudentDTOs(){
+    public List<StudentOverviewDTO> getAllStudentOverviewDTOs(){
         return studentRepo.findAll().stream().map(this::StudentToStudentOverviewDTO).toList();
+    }
+    public List<SectionStudentOverviewDTO> getAllSectionStudentDTOs(){
+        return studentRepo.findAll().stream().map(this::StudentToSectionStudentOverviewDTO).toList();
+    }
+    public List<StudentFeesDTO> getAllStudentFeesDTOs(){
+        return studentRepo.findAll().stream().map(this::StudentToStudentFeeDTO).toList();
     }
     public Student findByID(String studentID) {
         return studentRepo
@@ -146,9 +152,9 @@ public class StudentService extends PersonService<Student> {
         }
     }
 
-    public CreateStudentDTO createStudent(CreateStudentDTO student) {
+    public StudentOverviewDTO createStudent(CreateStudentDTO student) {
 
-        return StudentToCreateStudentDTO(
+        return StudentToStudentOverviewDTO(
                 studentRepo.save(
                         CreateStudentDTOToStudent(student)));
     }
@@ -171,7 +177,7 @@ public class StudentService extends PersonService<Student> {
         s.setMothersName(dto.mothersName());
         s.setFathersEmailID(dto.fathersEmailID());
         s.setMothersEmailID(dto.mothersEmailID());
-        s.setChildEmailID(dto.childsEmailID());
+        s.setChildEmailID(dto.childEmailID());
 
         s.setWhatsappNumber(dto.whatsappNumber());
         s.setPhoneNumber(dto.phoneNumber());

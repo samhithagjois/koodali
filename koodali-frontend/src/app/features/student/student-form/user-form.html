@@ -21,10 +21,10 @@
   <select
     name="section"
     [(ngModel)]="user.section" required>
-      <option value="" disabled>Select a section</option>
+      <option [ngValue]="" disabled>Select a section</option>
 
       @for (section of sections; track section.id){
-    <option [value]="section.id">
+    <option [ngValue]="section.id">
       {{section.name}}
       </option>
     }
@@ -47,7 +47,14 @@
   <br /><br />
   <input type="text" name="whatsappNumber" [(ngModel)]="user.whatsappNumber" placeholder="whatsapp Number" required/>
   <br /><br />
+  Upload the child's photo:
+  <input type="file" class="file-upload"  (change)="onPathToPhotoFileSelected($event)" accept="image/*" placeholder="path to photo" required >
+  <br /><br />
+  Upload the consent form:
+  <input type="file" class="file-upload" (change)="onPathToConsentFormFileSelected($event)" accept=".pdf, .txt" placeholder="path to consent form" required >
+  <br /><br />
 
+ <!--<button routerLink="."> Reload</button>> -->
   <button type="submit">Submit</button>
   <button routerLink=".."> Back</button>
 </form>

@@ -15,12 +15,10 @@ public record CreateStudentDTO(
         String fathersName,
         String mothersEmailID,
         String fathersEmailID,
-        String childsEmailID,
+        String childEmailID,
         String phoneNumber,
         String whatsappNumber,
         String pathToPhoto,
         String pathToConsentForm
-
-
 ) {
 }
