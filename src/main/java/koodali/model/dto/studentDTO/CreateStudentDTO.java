@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public record CreateStudentDTO(
         String firstName,
         String lastName,
-        int sectionID,
+        String sectionName,
         String city,
         String pinCode,
         String fullPostalAddress,

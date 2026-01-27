@@ -9,6 +9,8 @@ import {HttpClient} from '@angular/common/http';
     RouterLink
   ],
   template: `
+
+    <button routerLink=".."> Back</button>
     <h3>Section Overview for Administration</h3>
 
     <div>
@@ -41,7 +43,7 @@ import {HttpClient} from '@angular/common/http';
     </div>
     <button routerLink="."> Display</button>
     <button routerLink="new"> Add a section</button>
-    <button routerLink=".."> Back</button>
+
     <button type="button"> Export to Excel</button>
   `,
   styleUrl: './section-overview.css',

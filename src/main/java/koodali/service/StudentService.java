@@ -36,7 +36,7 @@ public class StudentService extends PersonService<Student> {
         return new CreateStudentDTO(
                 student.getFirstName(),
                 student.getLastName(),
-                0,
+                student.getSection(),
                 student.getCity(),
                 student.getPinCode(),
                 student.getFullPostalAdress(),
@@ -58,7 +58,8 @@ public class StudentService extends PersonService<Student> {
         return new Student(dto.firstName(),
                 dto.lastName(),
                 "NKS_" + (UUID.randomUUID().toString().substring(0, 2)),
-                dto.city(), dto.pinCode(), dto.country(), dto.fullPostalAddress(), LocalDateTime.now(), LocalDateTime.now(), true, sectionService.getSectionByID(dto.sectionID()).getName(),
+                dto.city(), dto.pinCode(), dto.country(), dto.fullPostalAddress(), LocalDateTime.now(), LocalDateTime.now(), true,
+                sectionService.returnSectionNameIfValid(dto.sectionName()),
                 0, 0, 0, 0, dto.dateOfBirth(), LocalDate.now(), dto.pathToPhoto(), dto.pathToConsentForm(), dto.mothersName(), dto.fathersName(), dto.fathersEmailID(),
                 dto.mothersEmailID(), dto.childEmailID(), 0.0, dto.phoneNumber(), dto.whatsappNumber());
     }
@@ -164,7 +165,7 @@ public class StudentService extends PersonService<Student> {
         Student s = findStudentbyName(dto.firstName(), dto.lastName());
         s.setFirstName(dto.firstName());
         s.setLastName(dto.lastName());
-        s.setSection(sectionService.getSectionByID(dto.sectionID()).getName());
+        s.setSection(sectionService.getSectionByName(dto.sectionName()).getName());
 
         s.setCity(dto.city());
         s.setCountry(dto.country());

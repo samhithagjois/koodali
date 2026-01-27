@@ -16,7 +16,7 @@ export class UserForm implements OnInit{
   user = {
     firstName: '',
     lastName: '',
-    section: null as number | null,
+    section: '',
     city: '',
     pinCode: '',
     fullPostalAddress: '',

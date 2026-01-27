@@ -18,13 +18,14 @@
   <input type="text" name="fullPostalAddress" [(ngModel)]="user.fullPostalAddress" placeholder="full Postal Address" required />
   <br />
    <p>
+     Select a section :
   <select
     name="section"
     [(ngModel)]="user.section" required>
-      <option [ngValue]="" disabled>Select a section</option>
+      <option [value]="" disabled>Select a section</option>
 
       @for (section of sections; track section.id){
-    <option [ngValue]="section.id">
+    <option [value]="section.name">
       {{section.name}}
       </option>
     }

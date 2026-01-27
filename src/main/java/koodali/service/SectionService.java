@@ -7,6 +7,7 @@ import koodali.model.dto.AttendanceDTO;
 import koodali.model.dto.SectionDTO;
 import koodali.repository.AttendanceRepository;
 import koodali.repository.SectionRepository;
+import koodali.service.exceptions.DuplicateSectionException;
 import koodali.service.exceptions.InvalidSectionException;
 import koodali.service.exceptions.SectionNotFoundException;
 import org.springframework.stereotype.Service;
@@ -59,7 +60,7 @@ public class SectionService {
         return Optional.of(SectionToDTO(sectionRepository.getReferenceById(className))).orElseThrow(SectionNotFoundException::new);
     }
 
-    public Section getSectionByID(int classId) {
+    public Section getSectionByNumericID(int classId) {
         return sectionRepository.findAll().stream().filter(s -> s.getId() == classId).findFirst().orElseThrow(SectionNotFoundException::new);
     }
 
@@ -68,7 +69,7 @@ public class SectionService {
     }
 
     public SectionDTO updateSection(SectionDTO sectionDTO, int id) {
-        Section s = getSectionByID(id);
+        Section s = getSectionByNumericID(id);
         s.setLinkOrAddress(sectionDTO.linkOrAddress());
         s.setName(sectionDTO.name());
        return SectionToDTO(sectionRepository.save(s));
@@ -76,16 +77,37 @@ public class SectionService {
     }
 
     private boolean validateName(String sectionName) {
-        return sectionName.matches("[A-Z][A-Z]_[BIA][END]T*([GV]|[_0-9])*")
-                && sectionRepository.findAll().stream().noneMatch(s -> s.getName().equals(sectionName));
+        return sectionName.matches("[A-Z][A-Z]_[BIA][END]T*([GV]|[_0-9])*");
+    }
+
+    private boolean checkForDuplicate(String sectionName){
+        return  sectionRepository.findAll().stream().noneMatch(s -> s.getName().equals(sectionName));
+    }
+
+    public String returnSectionNameIfValid(String sectionName){
+        if (validateName(sectionName)) {
+            if(checkForDuplicate(sectionName)){
+                return  sectionName;
+            }else{
+                throw new DuplicateSectionException();
+            }
+
+        } else {
+            throw new InvalidSectionException();
+        }
     }
 
 
     public SectionDTO createSection(SectionDTO sectionDTO) {
 
         if (validateName(sectionDTO.name())) {
-            Section s = sectionRepository.save(DTOToSection(sectionDTO));
-            return SectionToDTO(s);
+            if(checkForDuplicate(sectionDTO.name())){
+                Section s = sectionRepository.save(DTOToSection(sectionDTO));
+                return SectionToDTO(s);
+            }else{
+                throw new DuplicateSectionException();
+            }
+
         } else {
             throw new InvalidSectionException();
         }
@@ -119,7 +141,7 @@ public class SectionService {
     }
 
     public List<AttendanceDTO> getAttendancesOfSectionStudents(int id){
-        Section section = getSectionByID(id);
+        Section section = getSectionByNumericID(id);
         List<AttendanceEntity> entities = attendanceRepository.findAll();
         return entities
                 .stream()
