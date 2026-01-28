@@ -59,7 +59,7 @@ public class StudentService extends PersonService<Student> {
                 dto.lastName(),
                 "NKS_" + (UUID.randomUUID().toString().substring(0, 2)),
                 dto.city(), dto.pinCode(), dto.country(), dto.fullPostalAddress(), LocalDateTime.now(), LocalDateTime.now(), true,
-                sectionService.returnSectionNameIfValid(dto.sectionName()),
+                sectionService.returnSectionNameIfValid(dto.sectionName()), //here
                 0, 0, 0, 0, dto.dateOfBirth(), LocalDate.now(), dto.pathToPhoto(), dto.pathToConsentForm(), dto.mothersName(), dto.fathersName(), dto.fathersEmailID(),
                 dto.mothersEmailID(), dto.childEmailID(), 0.0, dto.phoneNumber(), dto.whatsappNumber());
     }
@@ -78,7 +78,7 @@ public class StudentService extends PersonService<Student> {
                 student.getFullPostalAdress(),
                 student.getDateOfRegistration(),
                 student.getDateOfClassStart(),
-                student.getSection(),
+                student.getSection(), //here
                 student.getAmountOfTextbooks(),
                 student.getFeesPaid(),
                 student.getPendingFees(),
@@ -154,7 +154,7 @@ public class StudentService extends PersonService<Student> {
     }
 
     public StudentOverviewDTO createStudent(CreateStudentDTO student) {
-
+        System.out.println(student);
         return StudentToStudentOverviewDTO(
                 studentRepo.save(
                         CreateStudentDTOToStudent(student)));

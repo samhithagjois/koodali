@@ -1,3 +1,5 @@
+<button routerLink="/admin/sections">Back</button>
+
 <h2>{{ isEditMode ? 'Edit Section' : 'Add Section' }}</h2>
 
 <form (ngSubmit)="onSubmit()" #userForm="ngForm">
@@ -10,5 +12,5 @@
 
 
   <button type="submit" >{{ isEditMode ? 'Edit Section' : 'Add Section' }}</button>
-  <button routerLink="/admin/sections">Back</button>
+
 </form>

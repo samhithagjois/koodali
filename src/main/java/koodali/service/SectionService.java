@@ -86,11 +86,7 @@ public class SectionService {
 
     public String returnSectionNameIfValid(String sectionName){
         if (validateName(sectionName)) {
-            if(checkForDuplicate(sectionName)){
-                return  sectionName;
-            }else{
-                throw new DuplicateSectionException();
-            }
+            return  sectionName;
 
         } else {
             throw new InvalidSectionException();

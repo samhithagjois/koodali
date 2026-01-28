@@ -16,7 +16,7 @@ export class UserForm implements OnInit{
   user = {
     firstName: '',
     lastName: '',
-    section: '',
+    sectionName: '',
     city: '',
     pinCode: '',
     fullPostalAddress: '',
@@ -46,9 +46,11 @@ export class UserForm implements OnInit{
   }
 
   onSubmit() {
+    console.log("Submitted : ",this.user);
     this.http.post('http://localhost:8080/api/students', this.user)
       .subscribe(() => {
         alert('Form submitted successfully!');
+
       });
   }
 
