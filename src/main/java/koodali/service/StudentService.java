@@ -31,29 +31,6 @@ public class StudentService extends PersonService<Student> {
         this.sectionService = sectionService;
     }
 
-    private CreateStudentDTO StudentToCreateStudentDTO(Student student) {
-
-        return new CreateStudentDTO(
-                student.getFirstName(),
-                student.getLastName(),
-                student.getSection(),
-                student.getCity(),
-                student.getPinCode(),
-                student.getFullPostalAdress(),
-                student.getCountry(),
-                student.getDateOfBirth(),
-                student.getMothersName(),
-                student.getFathersName(),
-                student.getMothersEmailID(),
-                student.getFathersEmailID(),
-                student.getChildEmailID(),
-                student.getPhoneNumber(),
-                student.getWhatsappNumber(),
-                student.getPathToPhoto(),
-                student.getPathToPhoto()
-        );
-    }
-
     private Student CreateStudentDTOToStudent(CreateStudentDTO dto) {
         return new Student(dto.firstName(),
                 dto.lastName(),
@@ -154,8 +131,7 @@ public class StudentService extends PersonService<Student> {
     }
 
     public StudentOverviewDTO createStudent(CreateStudentDTO student) {
-        System.out.println(student);
-        return StudentToStudentOverviewDTO(
+           return StudentToStudentOverviewDTO(
                 studentRepo.save(
                         CreateStudentDTOToStudent(student)));
     }

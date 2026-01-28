@@ -58,8 +58,7 @@ public class StudentController {
      */
     @PostMapping("/students")
     public ResponseEntity<StudentOverviewDTO> createStudent( @RequestBody CreateStudentDTO newStudent) {
-        System.out.println(newStudent);
-        return new ResponseEntity<>(studentService.createStudent(newStudent), HttpStatus.CREATED);
+              return new ResponseEntity<>(studentService.createStudent(newStudent), HttpStatus.CREATED);
     }
 
     /*
