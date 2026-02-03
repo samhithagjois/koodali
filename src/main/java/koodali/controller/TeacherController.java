@@ -58,6 +58,11 @@ public class TeacherController {
         return new ResponseEntity<>(attendanceService.getAllAttendances(),HttpStatus.OK);
     }
 
+    @GetMapping("/teachers/attendance/{classid}")
+    public ResponseEntity<List<AttendanceDTO>> getAttendancesForSection(@PathVariable String classid){
+        return new ResponseEntity<>(attendanceService.getAttendancesPerSection(classid),HttpStatus.OK);
+    }
+
 
     @PatchMapping("/teachers/attendance")
     public void updateAttendance(@RequestBody AttendanceDTO dto) {

@@ -7,14 +7,14 @@ button {
   text-align: center;
   text-decoration: none;
   color: white;
-  background-color: #af2424;
+  background-color: midnightblue;
   border: none;
   border-radius: 20px;
-  box-shadow: 0 6px #d5d33a;
+  box-shadow: 0 6px cornflowerblue;
 }
 
 button:active {
-  box-shadow: 0 5px #666;
+  box-shadow: 0 5px #1a626d;
   transform: translateY(4px);
 }
 

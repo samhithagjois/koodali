@@ -1,6 +1,7 @@
 package koodali.service;
 
 import koodali.model.AttendanceEntity;
+import koodali.model.Student;
 import koodali.model.dto.AttendanceDTO;
 import koodali.repository.AttendanceRepository;
 import org.springframework.stereotype.Service;
@@ -56,7 +57,25 @@ public class AttendanceService {
 
     }
 
-    public static AttendanceDTO entityToDTO(AttendanceEntity entity){
+    public List<AttendanceDTO> getAttendancesPerSection(String sectionName){
+        List<String> studentIDsOfSection = studentService
+                .getAll()
+                .stream()
+                .filter(s -> s
+                        .getSection()
+                        .equals(sectionName))
+                .map(Student::getID).toList();
+
+        return attendanceRepository
+                .findAll()
+                .stream()
+                .filter(a -> studentIDsOfSection
+                        .contains(a.getStudentID()))
+                .map(this::entityToDTO)
+                .toList();
+    }
+
+    public AttendanceDTO entityToDTO(AttendanceEntity entity){
         return new AttendanceDTO(entity.getId(),entity.getStudentID(),entity.getName(),entity.getWeek(), entity.isAttended());
     }
 

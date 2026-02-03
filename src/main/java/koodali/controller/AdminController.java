@@ -124,21 +124,18 @@ public class AdminController {
     /**
      * reassigns a student to the new section.
      *
-     * @param adminId   ID of the admin
      * @param sectionId name of the new class
      * @param studentId ID of the student
      */
     @PutMapping("admin/sections/{sectionId}/students/{studentId}")
-    ResponseEntity<SectionStudentOverviewDTO> reassignStudent(String adminId, @PathVariable String sectionId, @PathVariable String studentId) {
-        SectionStudentOverviewDTO s = studentService.StudentToSectionStudentOverviewDTO(adminOperationService.reassignStudentToSection(adminId, studentId, sectionId));
-        //TODO 6: Security Context!
+    ResponseEntity<SectionStudentOverviewDTO> reassignStudent(@PathVariable String sectionId, @PathVariable String studentId) {
+        SectionStudentOverviewDTO s = studentService.StudentToSectionStudentOverviewDTO(adminOperationService.reassignStudentToSection(studentId, sectionId));
         return new ResponseEntity<>(s, HttpStatus.OK);
     }
 
     @PutMapping("admin/sections/{sectionId}/students")
-    ResponseEntity<SectionStudentOverviewDTO> addStudentToSection(@PathVariable String sectionId, String studentId, String adminId) {
-        SectionStudentOverviewDTO s = studentService.StudentToSectionStudentOverviewDTO(adminOperationService.addStudentToSection(adminId, studentId, sectionId));
-        //TODO 6: Security Context!
+    ResponseEntity<SectionStudentOverviewDTO> addStudentToSection(@PathVariable String sectionId, String studentId) {
+        SectionStudentOverviewDTO s = studentService.StudentToSectionStudentOverviewDTO(adminOperationService.addStudentToSection(studentId, sectionId));
         return new ResponseEntity<>(s, HttpStatus.OK);
     }
 

@@ -125,25 +125,21 @@ public class AdminOperationService {
      * we then update the repositories.
      * So with a find - check problem - add - update structure we will go through most of this Service
      *
-     * @param adminID   admins ID
+     *
      * @param studentID students ID
      * @param sectionID as String! eventhough in Student we have ClassNames_DEPR, we have to find and validate the section
      *                  In our case, sectionID is simply the name of the section
      * @throws SectionNotFoundException    if Section was not found (wich means the id is wrong!)
      * @throws StudentNotFoundException    if the student was not found
-     * @throws AdminNotFoundException      if the admin ID is wrong
-     * @throws IllegalAdminActionException because all of this can happen
+     *
      */
-    public Student addStudentToSection(String adminID, String studentID, String sectionID) {
+    public Student addStudentToSection(String studentID, String sectionID) {
 
         Student student = findStudent(studentID);
-        Administrator admin = findAdmin(adminID);
+
 
         Section section = findSection(sectionID);
 
-        if (checkPermissionToModify(admin, section)) {
-            throw new IllegalAdminActionException();
-        }
         student.setSection(section.getName());
         section.getStudents().put(student.getID(), student);
         sectionService.updateSection(section);
@@ -155,21 +151,18 @@ public class AdminOperationService {
     /**
      * same game with the teacher, just with a different exception thrown this time!
      */
-    public Teacher addTeacherToSection(String adminID, String teacherID, String sectionID) throws
+    public Teacher addTeacherToSection(String teacherID, String sectionID) throws
             SectionNotFoundException,
             AdminNotFoundException,
             IllegalAdminActionException,
             TeacherNotFoundException {
 
-        Administrator admin = findAdmin(adminID);
+
 
         Section section = findSection(sectionID);
 
         Teacher teacher = findTeacher(teacherID);
 
-        if (checkPermissionToModify(admin, section)) {
-            throw new IllegalAdminActionException();
-        }
         teacher.setSections(List.of(section.getName()));
         section.getTeachers().put(teacher.getID(), teacher);
         sectionService.updateSection(section);
@@ -183,10 +176,10 @@ public class AdminOperationService {
      * The next two methods reassign students/teachers from their old section into the new one
      * also has List methods
      */
-    public Student reassignStudentToSection(String adminID, String studentID, String newSectionID) {
+    public Student reassignStudentToSection(String studentID, String newSectionID) {
 
         Student student = findStudent(studentID);
-        deleteStudentFromSection(adminID, studentID, student.getSection().toString());
+
         Section section = findSection(newSectionID);
         //change the section in the student
         student.setSection(section.getName());
@@ -199,7 +192,7 @@ public class AdminOperationService {
 
     }
 
-    public List<Student> reassignListOfStudentsToSection(String adminID, List<String> studentIDs, String newSectionID) {
+    public List<Student> reassignListOfStudentsToSection( List<String> studentIDs, String newSectionID) {
         //create new list to return
         List<Student> students = new ArrayList<>();
         //find the new section to assign the student to
@@ -208,7 +201,7 @@ public class AdminOperationService {
             //find student object
             Student student = findStudent(id);
             //delete student from section
-            deleteStudentFromSection(adminID, id, student.getSection());
+            deleteStudentFromSection( id, student.getSection());
             //add section to student
             student.setSection(section.getName());
             //add student to new class
@@ -222,7 +215,7 @@ public class AdminOperationService {
 
 
     public Teacher reassignTeacherToSection(String adminID, String teacherID, String oldSectionID, String sectionID) {
-        Teacher teacher = deleteTeacherFromSection(adminID, teacherID, sectionID);
+        Teacher teacher = deleteTeacherFromSection( teacherID, sectionID);
         teacher.getSections().remove(sectionService.getSectionByName(sectionID).getName());
         String className = findSection(sectionID).getName();
         Section section = findSection(sectionID);
@@ -244,7 +237,7 @@ public class AdminOperationService {
 
         Administrator admin = findAdmin(adminID);
         Student student = findStudent(studentID);
-        Section section = findSection(student.getSection().toString());
+        Section section = findSection(student.getSection());
         checkPermissionToModify(admin, section);
 
         return studentService.delete(studentID);
@@ -263,15 +256,13 @@ public class AdminOperationService {
         return teacherService.delete(teacherID);
     }
 
-    public Student deleteStudentFromSection(String adminID, String studentID, String sectionID) {
+    public Student deleteStudentFromSection( String studentID, String sectionID) {
 
         Student student = findStudent(studentID);
-        Administrator admin = findAdmin(adminID);
+
         Section section = findSection(sectionID);
 
-        if (checkPermissionToModify(admin, section)) {
-            throw new IllegalAdminActionException();
-        }
+
         //remove student from old section
         sectionService
                 .getSectionByName(student.getSection()).getStudents().remove(studentID, student);
@@ -282,16 +273,13 @@ public class AdminOperationService {
     }
 
 
-    public Teacher deleteTeacherFromSection(String adminID, String teacherID, String sectionID) {
+    public Teacher deleteTeacherFromSection(String teacherID, String sectionID) {
 
         Teacher teacher = findTeacher(teacherID);
-        Administrator admin = findAdmin(adminID);
+
         Section section = findSection(sectionID);
 
-        if (checkPermissionToModify(admin, section)) {
-            throw new IllegalAdminActionException();
-        }
-        //remove student from old section
+        //remove teacher from old section
         sectionService
                 .getSectionByName(teacher.getSections().toString()).getTeachers().remove(teacherID, teacher);
         teacher.setSections(null);
