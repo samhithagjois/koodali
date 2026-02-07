@@ -51,7 +51,7 @@ public class AttendanceService {
                 .filter(AttendanceEntity::isAttended)
                 .count();
 
-        double attendance =  Math.floorDiv(count, dates.size());
+        double attendance =  Math.floorDiv(count, dates.size()) * 100;
         studentService.findByID(studentID).setAttendance(attendance);
 
 
