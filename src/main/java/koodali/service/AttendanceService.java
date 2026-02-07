@@ -4,7 +4,9 @@ import koodali.model.AttendanceEntity;
 import koodali.model.Section;
 import koodali.model.Student;
 import koodali.model.dto.AttendanceDTO;
+import koodali.model.dto.studentDTO.SectionStudentOverviewDTO;
 import koodali.repository.AttendanceRepository;
+import koodali.service.exceptions.StudentNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -22,7 +24,19 @@ public class AttendanceService {
         this.studentService = studentService;
     }
 
-    public double calculateAttendanceForStudent(String studentID) {
+    public double calculateAttendanceForStudentOfSection(String sectionID, String studentID){
+        studentService
+                .listStudentsInSection(sectionID)
+                .stream().map(SectionStudentOverviewDTO::personID)
+                .filter(s -> s.equals(studentID))
+                .findFirst()
+                .orElseThrow(StudentNotFoundException::new);
+
+        return calculateAttendanceForStudent(studentID);
+
+    }
+
+    private double calculateAttendanceForStudent(String studentID) {
         List<LocalDate> dates = attendanceRepository
                 .findAll()
                 .stream()
@@ -58,7 +72,7 @@ public class AttendanceService {
 
     }
 
-   
+
 
     public List<AttendanceDTO> getAttendancesPerSection(String sectionName){
         List<String> studentIDsOfSection = studentService

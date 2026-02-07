@@ -75,5 +75,8 @@ public class TeacherController {
         return new ResponseEntity<>(attendanceService.getAttendancesPerSection(id),HttpStatus.OK);
     }
 
-    /*GetPercentageForStudent --> AttendanceService*/
+    @GetMapping("/teachers/attendance/{classid}/{studentid}")
+    public ResponseEntity<Double> getAttendanceForStudentOfSection(@PathVariable String classid, @PathVariable String studentid){
+        return new ResponseEntity<>(attendanceService.calculateAttendanceForStudentOfSection(classid, studentid), HttpStatus.OK);
+    }
 }
