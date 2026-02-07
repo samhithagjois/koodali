@@ -69,5 +69,11 @@ public class TeacherController {
         attendanceService.updateAttendance(dto.studentId(), dto.date(), dto.present());
     }
 
+    @GetMapping("/teachers/attendance/{id}")
+    public ResponseEntity<List<AttendanceDTO>> getAllAttendancesForSection(@PathVariable String id){
+
+        return new ResponseEntity<>(attendanceService.getAttendancesPerSection(id),HttpStatus.OK);
+    }
+
     /*GetPercentageForStudent --> AttendanceService*/
 }

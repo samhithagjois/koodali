@@ -45,11 +45,7 @@ public class SectionController {
         return new ResponseEntity<>(sectionService.getSectionDTOByName(id), HttpStatus.OK);
     }
 
-    @GetMapping("/sections/{id}/attendance")
-    public ResponseEntity<List<AttendanceDTO>> getAllAttendancesForSection(@PathVariable int id){
 
-        return new ResponseEntity<>(sectionService.getAttendancesOfSectionStudents(id),HttpStatus.OK);
-    }
 
 
 

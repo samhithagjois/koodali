@@ -1,6 +1,7 @@
 package koodali.service;
 
 import koodali.model.AttendanceEntity;
+import koodali.model.Section;
 import koodali.model.Student;
 import koodali.model.dto.AttendanceDTO;
 import koodali.repository.AttendanceRepository;
@@ -56,6 +57,8 @@ public class AttendanceService {
 
 
     }
+
+   
 
     public List<AttendanceDTO> getAttendancesPerSection(String sectionName){
         List<String> studentIDsOfSection = studentService

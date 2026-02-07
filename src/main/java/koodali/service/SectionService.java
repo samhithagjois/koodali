@@ -136,17 +136,7 @@ public class SectionService {
 
     }
 
-    public List<AttendanceDTO> getAttendancesOfSectionStudents(int id){
-        Section section = getSectionByNumericID(id);
-        List<AttendanceEntity> entities = attendanceRepository.findAll();
-        return entities
-                .stream()
-                .filter(e -> section
-                        .getStudents()
-                        .containsKey(e.getStudentID()))
-                .map(AttendanceService::entityToDTO).toList();
 
-    }
 
     //addStudents
     //removeStudents -> warn when students.amount <=1 that it is better to delete the section
